@@ -1,22 +1,29 @@
+<template>
+  <Milkdown />
+</template>
+
 <script setup lang="ts">
 import { Milkdown, useEditor } from "@milkdown/vue"
 import { Crepe } from "@milkdown/crepe"
+import { listener, listenerCtx } from "@milkdown/kit/plugin/listener"
 
-const markdown = `# Milkdown Vue Crepe
-
-> You're scared of a world where you're needed.
-
-This is a demo for using Crepe with **Vue**.`
+const model = defineModel<string>({ required: true })
 
 useEditor((root) => {
   const crepe = new Crepe({
     root,
-    defaultValue: markdown,
+    defaultValue: model.value,
+  })
+
+  crepe.editor.config((ctx) => {
+    const listener = ctx.get(listenerCtx)
+
+    listener.markdownUpdated((ctx, markdown, prevMarkdown) => {
+      if (markdown !== prevMarkdown) {
+        model.value = markdown
+      }
+    })
   })
   return crepe
 })
 </script>
-
-<template>
-  <Milkdown />
-</template>
