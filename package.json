@@ -10,6 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@milkdown/crepe": "^7.6.2",
+    "@milkdown/kit": "^7.6.2",
+    "@milkdown/theme-nord": "^7.6.2",
+    "@milkdown/vue": "^7.6.2",
+    "@nuxtjs/tailwindcss": "6.13.1",
     "nuxt": "^3.15.4",
     "vue": "latest",
     "vue-router": "latest"
