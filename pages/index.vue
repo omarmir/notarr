@@ -1,9 +1,9 @@
 <template>
-  <MilkdownProvider>
-    <Milkdown v-model="md" />
-  </MilkdownProvider>
-
-  <pre>{{ md }}</pre>
+  <div>
+    <MilkdownProvider>
+      <Milkdown v-model="md" />
+    </MilkdownProvider>
+  </div>
 </template>
 
 <script setup lang="ts">
