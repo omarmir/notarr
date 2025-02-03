@@ -5,13 +5,19 @@
     <div
       class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
       <h3 class="flex flex-col items-start justify-center m-2 ml-0 text-dark">
-        <span class="mr-3 font-medium text-lg">Recent Notes</span>
+        <span class="mr-3 font-medium text-lg">Notebooks</span>
         <span class="mt-1 font-base text-gray-400 text-sm">
-          Notes created or modified recently
+          All notebooks
         </span>
       </h3>
       <div class="relative flex flex-wrap items-center my-2">
-        <!--Possible buttons-->
+        <div class="relative flex flex-wrap items-center my-2">
+          <a
+            href="javascript:void(0)"
+            class="inline-block text-sm font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out shadow-none border-0 py-2 px-5">
+            Add new notebook
+          </a>
+        </div>
       </div>
     </div>
     <!-- end card header -->
@@ -21,10 +27,6 @@
         <table class="w-full my-0 align-middle text-dark border-neutral-200">
           <thead class="align-bottom">
             <tr class="text-[0.95rem] text-secondary-dark">
-              <th
-                class="pb-3 text-start text-gray-400 uppercase text-xs font-medium">
-                Note
-              </th>
               <th
                 class="pb-3 text-start text-gray-400 uppercase text-xs font-medium">
                 Notebook
@@ -41,46 +43,43 @@
                 class="pb-3 text-start text-gray-400 uppercase text-xs font-medium">
                 # of Notes
               </th>
+              <th
+                class="pb-3 text-start text-gray-400 uppercase text-xs font-medium">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b border-dashed last:border-b-0">
-              <td>
-                <div class="flex items-center">
-                  <div class="relative inline-block shrink-0 rounded-2xl me-3">
-                    <img
-                      src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/img-49-new.jpg"
-                      class="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
-                      alt="" />
-                  </div>
-                  <div class="flex flex-col justify-start">
-                    <a
-                      class="mb-1 font-semibold transition-colors duration-200 ease-in-out text-secondary-inverse hover:text-primary text-sm">
-                      Social Media API
-                    </a>
-                  </div>
-                </div>
-              </td>
-              <td>
+            <tr
+              v-for="notebook in notebooks"
+              :key="notebook.name"
+              class="border-b border-neutral-200 border-dashed last:border-b-0">
+              <td class="py-3">
                 <span class="font-medium text-light-inverse text-sm">
-                  Programming
+                  {{ notebook.name }}
                 </span>
               </td>
               <td>
                 <span class="font-medium text-light-inverse text-sm">
-                  2023-08-23
+                  {{ notebook.createdAt }}
                 </span>
               </td>
-              <td>
+              <td class="py-3">
                 <span class="font-medium text-light-inverse text-sm">
-                  2023-08-23
+                  {{ notebook.updatedAt }}
                 </span>
               </td>
-              <td>
+              <td class="py-3">
                 <div
                   class="font-medium text-light-inverse text-sm text-white bg-emerald-600 size-8 text-center rounded-full flex items-center justify-center">
-                  <span>5</span>
+                  <span>{{ notebook.fileCount }}</span>
                 </div>
+              </td>
+              <td>
+                <span class="font-medium text-light-inverse text-sm">
+                  <button>New note</button>
+                  <button>View notes</button>
+                </span>
               </td>
             </tr>
           </tbody>
@@ -89,3 +88,13 @@
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+import type { Notebook } from "~/types/notebook"
+
+const { data: notebooks, execute } = useFetch<Notebook[]>("/api/notebooks", {
+  immediate: false,
+  lazy: true,
+})
+
+await execute()
+</script>

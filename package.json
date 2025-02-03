@@ -15,14 +15,24 @@
     "@milkdown/theme-nord": "^7.6.2",
     "@milkdown/vue": "^7.6.2",
     "@nuxt/fonts": "0.10.3",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "6.13.1",
     "@tailwindcss/vite": "^4.0.3",
     "@vueuse/core": "^12.5.0",
-    "install": "^0.13.0",
     "nuxt": "^3.15.4",
     "tailwindcss": "^4.0.3",
     "vue": "latest",
     "vue-router": "latest"
   },
-  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
+  "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
+  "devDependencies": {
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-tailwindcss": "^4.0.0-alpha.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8",
+    "@nuxt/eslint-config": "^1.0.0"
+  }
 }

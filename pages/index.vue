@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="flex flex-wrap -mx-3 mb-5">
-      <CallToAction></CallToAction>
-      <StatsCard></StatsCard>
-    </div>
-    <RecentNotebooks></RecentNotebooks>
+    <h3 class="font-semibold mb-4 text-xl">Notes and Notebooks</h3>
+    <RecentNotebooks :count="3"></RecentNotebooks>
+    <Suspense>
+      <AllNotebooks></AllNotebooks>
+    </Suspense>
   </div>
 </template>
