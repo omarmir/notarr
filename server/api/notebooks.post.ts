@@ -1,4 +1,4 @@
-import { mkdir, access } from "node:fs/promises"
+import { mkdir, access, constants } from "node:fs/promises"
 import { join } from "node:path"
 import { Notebook } from "~/types/notebook"
 
@@ -29,8 +29,8 @@ export default defineEventHandler(async (event) => {
   const fullPath = join(basePath, folderName)
 
   try {
-    // Check if folder already exists
-    await access(fullPath)
+    // Check if folder already exists and read/write-able
+    await access(fullPath, constants.R_OK | constants.W_OK)
     throw createError({
       statusCode: 409,
       statusMessage: "Conflict",

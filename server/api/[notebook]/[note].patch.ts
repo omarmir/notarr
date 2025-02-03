@@ -1,7 +1,7 @@
 import { writeFile, stat } from "node:fs/promises"
 import { readMultipartFormData } from "h3"
 
-import { defineEventHandlerWithNotebookAndNote } from "~/server/wrapper"
+import { defineEventHandlerWithNotebookAndNote } from "~/server/wrappers/note"
 
 export default defineEventHandlerWithNotebookAndNote(
   async (event, cleanNotebook, cleanNote, fullPath) => {

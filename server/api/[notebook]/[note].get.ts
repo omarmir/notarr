@@ -1,6 +1,6 @@
 import { stat } from "node:fs/promises"
 
-import { defineEventHandlerWithNotebookAndNote } from "~/server/wrapper"
+import { defineEventHandlerWithNotebookAndNote } from "~/server/wrappers/note"
 
 export default defineEventHandlerWithNotebookAndNote(
   async (_event, cleanNotebook, cleanNote, fullPath) => {

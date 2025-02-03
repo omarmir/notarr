@@ -1,6 +1,5 @@
-import type { EventHandlerRequest, H3Event, H3Error } from "h3"
-import { Stats } from "node:fs"
-import { access, stat } from "node:fs/promises"
+import type { EventHandlerRequest, H3Event } from "h3"
+import { access, constants } from "node:fs/promises"
 import { join, resolve } from "node:path"
 
 type EventHandlerWithNotebookAndNote<T extends EventHandlerRequest, D> = (
@@ -52,9 +51,10 @@ export function defineEventHandlerWithNotebookAndNote<
     }
 
     try {
-      // Verify notebook and note exist
-      await access(targetFolder)
-      if (options?.noteCheck) await access(fullPath)
+      // Verify notebook and note exist and is read/write allowed
+      await access(targetFolder, constants.R_OK | constants.W_OK)
+      if (options?.noteCheck)
+        await access(fullPath, constants.R_OK | constants.W_OK)
     } catch (error) {
       const err = error as NodeJS.ErrnoException
       const message =
