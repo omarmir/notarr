@@ -1,14 +1,14 @@
 <template>
-  <h3 class="font-semibold mb-4 text-xl">Notebooks</h3>
+  <h3 class="font-semibold mb-4 text-xl">Notes</h3>
   <div
     class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30 mb-5">
     <!-- card header -->
     <div
       class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
       <h3 class="flex flex-col items-start justify-center m-2 ml-0 text-dark">
-        <span class="mr-3 font-medium text-lg">Recent Notebooks</span>
+        <span class="mr-3 font-medium text-lg">Recent Notes</span>
         <span class="mt-1 font-base text-gray-400 text-sm">
-          Check all courses available
+          Notes created or modified recently
         </span>
       </h3>
       <div class="relative flex flex-wrap items-center my-2">
@@ -22,6 +22,10 @@
         <table class="w-full my-0 align-middle text-dark border-neutral-200">
           <thead class="align-bottom">
             <tr class="text-[0.95rem] text-secondary-dark">
+              <th
+                class="pb-3 text-start text-gray-400 uppercase text-xs font-medium">
+                Note
+              </th>
               <th
                 class="pb-3 text-start text-gray-400 uppercase text-xs font-medium">
                 Notebook
@@ -57,6 +61,11 @@
                     </a>
                   </div>
                 </div>
+              </td>
+              <td>
+                <span class="font-medium text-light-inverse text-sm">
+                  Programming
+                </span>
               </td>
               <td>
                 <span class="font-medium text-light-inverse text-sm">

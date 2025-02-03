@@ -45,7 +45,15 @@
               <NuxtLink
                 to="/"
                 href=""
-                class="flex items-center flex-grow text-base font-semibold dark:text-neutral-400/75 text-muted hover:text-white">
+                class="flex items-center flex-grow text-base font-medium dark:text-neutral-400/75 text-gray-400 text-muted hover:text-white flex-row gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="size-5"
+                  viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75" />
+                </svg>
                 Home
               </NuxtLink>
             </span>
@@ -57,7 +65,15 @@
               <NuxtLink
                 to="/new"
                 href=""
-                class="flex items-center flex-grow text-base font-semibold dark:text-neutral-400/75 text-muted hover:text-white">
+                class="flex items-center flex-grow flex-row gap-2 text-base font-medium dark:text-neutral-400/75 text-gray-400 text-muted hover:text-white">
+                <svg
+                  class="size-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M6 22q-.825 0-1.412-.587T4 20V4q0-.825.588-1.412T6 2h8l6 6v12q0 .825-.587 1.413T18 22zm7-13V4H6v16h12V9zM6 4v5zv16z" />
+                </svg>
                 New Note
               </NuxtLink>
             </span>
@@ -65,11 +81,19 @@
           <div>
             <span
               class="select-none flex items-center px-4 py-3 cursor-pointerrounded-xl">
-              <a
-                href=""
-                class="flex items-center flex-grow text-base font-semibold dark:text-neutral-400/75 text-muted hover:text-white">
+              <NuxtLink
+                to="/"
+                class="flex flex-row gap-2 items-center flex-grow text-base font-medium dark:text-neutral-400/75 text-gray-400 text-muted hover:text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  class="size-5">
+                  <path
+                    fill="currentColor"
+                    d="M4.75 3a.75.75 0 0 0-.75.75v1.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-1.5a.75.75 0 0 0-.75-.75zM5 5V4h5v1zM2 2.75C2 1.784 2.784 1 3.75 1h7.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 11.25 15h-7.5A1.75 1.75 0 0 1 2 13.25zM3.75 2a.75.75 0 0 0-.75.75v10.5c0 .414.336.75.75.75h7.5a.75.75 0 0 0 .75-.75V2.75a.75.75 0 0 0-.75-.75zm10.875 2H14v2h.625A.375.375 0 0 0 15 5.625v-1.25A.375.375 0 0 0 14.625 4M14 7h.625c.207 0 .375.168.375.375v1.25a.375.375 0 0 1-.375.375H14zm.625 3H14v2h.625a.375.375 0 0 0 .375-.375v-1.25a.375.375 0 0 0-.375-.375" />
+                </svg>
                 Notebooks
-              </a>
+              </NuxtLink>
             </span>
           </div>
         </div>
@@ -79,6 +103,7 @@
 </template>
 <script lang="ts" setup>
 const { isSidebarOpen } = useSidebar()
+import { NuxtLink } from "#components"
 import { onClickOutside } from "@vueuse/core"
 const input = useTemplateRef("sidebar")
 
