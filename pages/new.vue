@@ -1,10 +1,12 @@
 <template>
-  <MainPage>
-    <template #heading>Note</template>
-    <MilkdownProvider>
-      <Milkdown v-model="md" />
-    </MilkdownProvider>
-  </MainPage>
+  <div class="flex flex-wrap -mx-3 mb-5">
+    <div class="w-full max-w-full px-3 mb-6 xl:w-8/12 sm:flex-none xl:mb-0">
+      <MilkdownProvider>
+        <Milkdown v-model="md" />
+      </MilkdownProvider>
+    </div>
+    <StatsCard></StatsCard>
+  </div>
 </template>
 
 <script setup lang="ts">

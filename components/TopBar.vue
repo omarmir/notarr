@@ -19,7 +19,7 @@
         </svg>
       </span>
       <input
-        class="block w-full py-3 pl-12 pr-4 text-base font-medium leading-normal bg-white border border-solid outline-none appearance-none placeholder:text-secondary-dark peer text-stone-500 border-stone-200 bg-clip-padding rounded-2xl"
+        class="block w-full py-3 pl-12 pr-4 text-base font-medium leading-normal bg-gray-50 border border-solid outline-none appearance-none placeholder:text-secondary-dark peer text-stone-500 border-stone-200 bg-clip-padding rounded-2xl"
         placeholder="Search..."
         type="text" />
     </div>

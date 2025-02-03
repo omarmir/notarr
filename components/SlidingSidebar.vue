@@ -42,14 +42,26 @@
           <div>
             <span
               class="select-none flex items-center px-4 py-3 cursor-pointer rounded-xl">
-              <a
+              <NuxtLink
+                to="/"
                 href=""
                 class="flex items-center flex-grow text-base font-semibold dark:text-neutral-400/75 text-muted hover:text-white">
                 Home
-              </a>
+              </NuxtLink>
             </span>
           </div>
           <!-- menu item -->
+          <div>
+            <span
+              class="select-none flex items-center px-4 py-3 cursor-pointerrounded-xl">
+              <NuxtLink
+                to="/new"
+                href=""
+                class="flex items-center flex-grow text-base font-semibold dark:text-neutral-400/75 text-muted hover:text-white">
+                New Note
+              </NuxtLink>
+            </span>
+          </div>
           <div>
             <span
               class="select-none flex items-center px-4 py-3 cursor-pointerrounded-xl">

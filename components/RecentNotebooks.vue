@@ -1,5 +1,5 @@
 <template>
-  <h3 class="font-semibold mb-4 text-xl">Courses</h3>
+  <h3 class="font-semibold mb-4 text-xl">Notebooks</h3>
   <div
     class="relative flex flex-col min-w-0 break-words border border-dashed bg-clip-border rounded-2xl border-stone-200 bg-light/30 mb-5">
     <!-- card header -->

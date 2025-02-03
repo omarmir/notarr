@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-full px-3 mb-6 lg:w-8/12 sm:flex-none xl:mb-0">
+  <div class="w-full max-w-full px-3 mb-6 xl:w-8/12 sm:flex-none xl:mb-0">
     <div
       class="relative flex flex-col break-words min-w-0 bg-clip-border rounded-xl bg-neutral-900 mb-5">
       <!-- card body  -->

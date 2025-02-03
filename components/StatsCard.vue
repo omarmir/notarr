@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full max-w-full px-3 mb-6 lg:w-4/12 sm:flex-none xl:mb-0">
+  <div class="w-full max-w-full px-3 mb-6 xl:w-4/12 sm:flex-none xl:mb-0">
     <div
-      class="relative flex flex-col min-w-0 break-words bg-gray-100 border-0 bg-clip-border rounded-2xl mb-5">
+      class="relative flex flex-col min-w-0 break-words bg-zinc-200/50 border-0 bg-clip-border rounded-2xl mb-5">
       <!-- card header -->
       <div
         class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
