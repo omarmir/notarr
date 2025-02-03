@@ -39,48 +39,48 @@
               </th>
               <th
                 class="pb-3 text-start text-gray-400 uppercase text-xs font-medium">
-                # of Notes
+                Size
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr class="border-b border-dashed last:border-b-0">
+            <tr
+              class="border-b border-neutral-200 border-dashed last:border-b-0"
+              v-for="note in notes"
+              :key="note.notebook + note.name">
               <td>
-                <div class="flex items-center">
-                  <div class="relative inline-block shrink-0 rounded-2xl me-3">
-                    <img
-                      src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/img-49-new.jpg"
-                      class="w-[50px] h-[50px] inline-block shrink-0 rounded-2xl"
-                      alt="" />
-                  </div>
+                <div class="flex items-center my-3 flex-row gap-2">
+                  <Avatar
+                    :size="30"
+                    variant="beam"
+                    :name="note.notebook + note.name" />
                   <div class="flex flex-col justify-start">
                     <a
                       class="mb-1 font-semibold transition-colors duration-200 ease-in-out text-secondary-inverse hover:text-primary text-sm">
-                      Social Media API
+                      {{ note.name }}
                     </a>
                   </div>
                 </div>
               </td>
               <td>
                 <span class="font-medium text-light-inverse text-sm">
-                  Programming
+                  {{ note.notebook }}
                 </span>
               </td>
               <td>
                 <span class="font-medium text-light-inverse text-sm">
-                  2023-08-23
+                  {{ note.createdAt }}
                 </span>
               </td>
               <td>
                 <span class="font-medium text-light-inverse text-sm">
-                  2023-08-23
+                  {{ note.updatedAt }}
                 </span>
               </td>
               <td>
-                <div
-                  class="font-medium text-light-inverse text-sm text-white bg-emerald-600 size-8 text-center rounded-full flex items-center justify-center">
-                  <span>5</span>
-                </div>
+                <span class="font-medium text-light-inverse text-sm">
+                  {{ note.size ? note.size / 1000 : 0 }}kb
+                </span>
               </td>
             </tr>
           </tbody>
@@ -89,3 +89,17 @@
     </div>
   </div>
 </template>
+<script lang="ts" setup>
+import Avatar from "vue-boring-avatars"
+const { display } = defineProps<{ display: number }>()
+
+import type { Note } from "~/types/notebook"
+
+const { data: notes, execute } = useFetch<Note[]>("/api/notes", {
+  immediate: false,
+  lazy: true,
+  query: { display },
+})
+
+await execute()
+</script>

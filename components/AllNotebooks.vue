@@ -54,10 +54,16 @@
               v-for="notebook in notebooks"
               :key="notebook.name"
               class="border-b border-neutral-200 border-dashed last:border-b-0">
-              <td class="py-3">
-                <span class="font-medium text-light-inverse text-sm">
-                  {{ notebook.name }}
-                </span>
+              <td>
+                <div class="flex items-center my-3 flex-row gap-2">
+                  <Avatar :size="30" variant="bauhaus" :name="notebook.name" />
+                  <div class="flex flex-col justify-start">
+                    <a
+                      class="mb-1 font-semibold transition-colors duration-200 ease-in-out text-secondary-inverse hover:text-primary text-sm">
+                      {{ notebook.name }}
+                    </a>
+                  </div>
+                </div>
               </td>
               <td>
                 <span class="font-medium text-light-inverse text-sm">
@@ -90,6 +96,7 @@
 </template>
 <script lang="ts" setup>
 import type { Notebook } from "~/types/notebook"
+import Avatar from "vue-boring-avatars"
 
 const { data: notebooks, execute } = useFetch<Notebook[]>("/api/notebooks", {
   immediate: false,
