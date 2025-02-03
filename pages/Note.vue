@@ -1,6 +1,9 @@
 <template>
   <MainPage>
-    <template #heading>Notebooks</template>
+    <template #heading>Note</template>
+    <MilkdownProvider>
+      <Milkdown v-model="md" />
+    </MilkdownProvider>
   </MainPage>
 </template>
 
