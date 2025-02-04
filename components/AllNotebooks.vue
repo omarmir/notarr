@@ -56,7 +56,17 @@
               class="border-b border-neutral-200 border-dashed last:border-b-0">
               <td>
                 <div class="flex items-center my-3 flex-row gap-2">
-                  <Avatar :size="30" variant="bauhaus" :name="notebook.name" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="size-5"
+                    viewBox="0 0 1024 1024">
+                    <path
+                      fill="currentColor"
+                      d="M192 128v768h640V128zm-32-64h704a32 32 0 0 1 32 32v832a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V96a32 32 0 0 1 32-32" />
+                    <path
+                      fill="currentColor"
+                      d="M672 128h64v768h-64zM96 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32" />
+                  </svg>
                   <div class="flex flex-col justify-start">
                     <a
                       class="mb-1 font-semibold transition-colors duration-200 ease-in-out text-secondary-inverse hover:text-primary text-sm">
@@ -96,7 +106,6 @@
 </template>
 <script lang="ts" setup>
 import type { Notebook } from "~/types/notebook"
-import Avatar from "vue-boring-avatars"
 
 const { data: notebooks, execute } = useFetch<Notebook[]>("/api/notebooks", {
   immediate: false,

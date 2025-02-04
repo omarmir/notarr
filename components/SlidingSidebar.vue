@@ -48,7 +48,7 @@
               <NuxtLink
                 to="/"
                 href=""
-                class="flex items-center flex-grow text-base font-medium dark:text-neutral-400/75 text-gray-400 text-muted hover:text-white flex-row gap-2">
+                class="flex items-center flex-grow text-base font-medium text-gray-400 text-muted hover:text-white flex-row gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="size-5"
