@@ -8,17 +8,26 @@ import type { Note } from '~/types/notebook'
 export default defineEventHandlerWithNotebookAndNote(
   async (event, cleanNotebook, cleanNote, fullPath) => {
     let fileContent = Buffer.from('')
-    // let originalFilename = `${cleanNote}.md`
 
     // Parse form data if available
     const formData = await readMultipartFormData(event)
     if (formData) {
       const fileEntry = formData.find((entry) => entry.name === 'file')
       if (fileEntry?.data) {
-        // Convert to proper Buffer instance
         fileContent = Buffer.from(fileEntry.data)
-        // originalFilename = fileEntry.filename || originalFilename
       }
+    }
+
+    // Add OS path length validation
+    const isWindows = process.platform === 'win32'
+    const maxPathLength = isWindows ? 259 : 4095 // Same limits as folder creation
+
+    if (fullPath.length > maxPathLength) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Bad Request',
+        message: `Path exceeds maximum allowed length of ${maxPathLength} characters.`
+      })
     }
 
     try {
@@ -33,18 +42,15 @@ export default defineEventHandlerWithNotebookAndNote(
     }
 
     try {
-      // Write file with either uploaded content or empty buffer
       await writeFile(fullPath, fileContent)
       const stats = await stat(fullPath)
 
       return {
         notebook: cleanNotebook,
         name: cleanNote,
-        // path: fullPath,
         createdAt: stats.birthtime.toISOString(),
         updatedAt: stats.mtime.toISOString(),
         size: stats.size
-        // originalFilename
       } satisfies Note
     } catch (error) {
       console.error('Error creating note:', error)

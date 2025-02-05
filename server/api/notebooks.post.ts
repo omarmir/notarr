@@ -28,6 +28,18 @@ export default defineEventHandler(async (event) => {
 
   const fullPath = join(basePath, folderName)
 
+  // Check OS path length limitations
+  const isWindows = process.platform === 'win32'
+  const maxPathLength = isWindows ? 259 : 4095 // Windows MAX_PATH (260 incl. null) vs Linux/macOS PATH_MAX (4096)
+
+  if (fullPath.length > maxPathLength) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Bad Request',
+      message: `Notebook name is too long. The full path exceeds the maximum allowed length of ${maxPathLength} characters.`
+    })
+  }
+
   try {
     // Check if folder already exists and read/write-able
     await access(fullPath, constants.R_OK | constants.W_OK)
