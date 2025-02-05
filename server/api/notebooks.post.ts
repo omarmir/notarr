@@ -1,9 +1,9 @@
-import { mkdir, access, constants } from "node:fs/promises"
-import { join } from "node:path"
-import { Notebook } from "~/types/notebook"
+import { mkdir, access, constants } from 'node:fs/promises'
+import { join } from 'node:path'
+import type { Notebook } from '~/types/notebook'
 
 export default defineEventHandler(async (event) => {
-  const basePath = join(process.cwd(), "notes")
+  const basePath = join(process.cwd(), 'notes')
 
   // Read and validate request body
   const body = await readBody(event)
@@ -12,8 +12,8 @@ export default defineEventHandler(async (event) => {
   if (!folderName) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Bad Request",
-      message: "Notebook name is required",
+      statusMessage: 'Bad Request',
+      message: 'Notebook name is required'
     })
   }
 
@@ -21,8 +21,8 @@ export default defineEventHandler(async (event) => {
   if (/[\\/:*?"<>|]/.test(folderName)) {
     throw createError({
       statusCode: 400,
-      statusMessage: "Bad Request",
-      message: "Invalid notebook name",
+      statusMessage: 'Bad Request',
+      message: 'Invalid notebook name'
     })
   }
 
@@ -33,12 +33,12 @@ export default defineEventHandler(async (event) => {
     await access(fullPath, constants.R_OK | constants.W_OK)
     throw createError({
       statusCode: 409,
-      statusMessage: "Conflict",
-      message: "Notebook already exists",
+      statusMessage: 'Conflict',
+      message: 'Notebook already exists'
     })
   } catch (error) {
     // Only proceed if error is "not found"
-    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
       throw error
     }
   }
@@ -52,14 +52,14 @@ export default defineEventHandler(async (event) => {
       name: folderName,
       createdAt: new Date().toISOString(),
       updatedAt: null,
-      fileCount: 0,
+      fileCount: 0
     } satisfies Notebook
   } catch (error) {
-    console.error("Error creating notebook:", error)
+    console.error('Error creating notebook:', error)
     throw createError({
       statusCode: 500,
-      statusMessage: "Internal Server Error",
-      message: "Failed to create notebook",
+      statusMessage: 'Internal Server Error',
+      message: 'Failed to create notebook'
     })
   }
 })

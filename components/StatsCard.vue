@@ -1,36 +1,27 @@
 <template>
-  <div class="w-full max-w-full px-3 mb-6 xl:w-4/12 sm:flex-none xl:mb-0">
-    <div
-      class="relative flex flex-col min-w-0 break-words bg-zinc-200/50 border-0 bg-clip-border rounded-2xl mb-5">
+  <div class="mb-6 w-full max-w-full px-3 sm:flex-none xl:mb-0 xl:w-4/12">
+    <div class="relative mb-5 flex min-w-0 flex-col break-words rounded-2xl border-0 bg-zinc-200/50 bg-clip-border">
       <!-- card header -->
-      <div
-        class="px-9 pt-5 flex justify-between items-stretch flex-wrap min-h-[70px] pb-0 bg-transparent">
-        <div
-          class="flex flex-col items-start justify-center m-2 ml-0 font-medium text-xl/normal text-dark">
+      <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
+        <div class="m-2 ml-0 flex flex-col items-start justify-center text-xl/normal font-medium">
           <!--begin::Amount-->
-          <span
-            class="text-dark text-5xl/none font-semibold mr-2 tracking-[-0.115rem]">
-            11
-          </span>
+          <span class="mr-2 text-5xl/none font-semibold tracking-[-0.115rem]">11</span>
           <!--end::Amount-->
           <!--begin::Subtitle-->
-          <span class="pt-1 font-medium text-dark text-lg/normal">
-            Notes Completed
-          </span>
+          <span class="pt-1 text-lg/normal font-medium">Notes Completed</span>
           <!--end::Subtitle-->
         </div>
       </div>
       <!-- card body  -->
-      <div class="flex items-end flex-auto py-8 pt-0 px-9">
+      <div class="flex flex-auto items-end px-9 py-8 pt-0">
         <!--begin::Progress-->
-        <div class="flex flex-col items-center w-full mt-3">
-          <div
-            class="flex justify-between w-full mt-auto mb-2 font-semibold text-dark text-lg/normal">
-            <span class="mr-4 text-dark">15 Pending</span>
+        <div class="mt-3 flex w-full flex-col items-center">
+          <div class="mb-2 mt-auto flex w-full justify-between text-lg/normal font-semibold">
+            <span class="mr-4">15 Pending</span>
             <span>85%</span>
           </div>
-          <div class="mx-3 rounded-2xl h-[8px] w-full bg-white">
-            <div class="rounded-2xl bg-gray-800 w-[85%] h-[8px]"></div>
+          <div class="mx-3 h-[8px] w-full rounded-2xl bg-white">
+            <div class="h-[8px] w-[85%] rounded-2xl bg-gray-800"></div>
           </div>
         </div>
         <!--end::Progress-->

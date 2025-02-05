@@ -1,18 +1,14 @@
 <template>
   <aside
+    id="sidenav-main"
     ref="sidebar"
     :class="{ '-translate-x-full': !isSidebarOpen }"
-    class="flex flex-col [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:bg-neutral-300 [&::-webkit-scrollbar-thumb]:bg-neutral-500 shrink-0 lg:w-[350px] w-[300px] overflow-y-auto transition-all duration-300 ease-in-out lg:translate-x-0 m-0 fixed z-40 inset-y-0 left-0 lg:bg-light/30 bg-light border-r border-r-dashed border-r-neutral-200 sidenav fixed-start"
-    id="sidenav-main">
-    <div class="bg-neutral-900 h-svw">
+    class="fixed inset-y-0 left-0 z-40 m-0 flex h-svw w-[300px] shrink-0 flex-col overflow-y-auto border-r border-r-neutral-200 bg-neutral-900 transition-all duration-300 ease-in-out lg:w-[350px] lg:translate-x-0 [&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:bg-neutral-300 [&::-webkit-scrollbar]:w-1">
+    <div class="">
       <!--logo start-->
       <NuxtLink to="/">
-        <div
-          class="flex shrink-0 px-8 items-center justify-start gap-4 h-[96px]">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="size-10"
-            viewBox="0 0 64 64">
+        <div class="flex h-[96px] shrink-0 items-center justify-start gap-4 px-8">
+          <svg xmlns="http://www.w3.org/2000/svg" class="size-10" viewBox="0 0 64 64">
             <path
               fill="#34484c"
               d="M6.199 57.475s1.827 7.029 13.264 5.23L21.413 58l-3.29-3.576l-9.107-3.004l-2.813 6.055" />
@@ -35,27 +31,21 @@
               fill="#F8B4B4"
               d="M40.62 16.652a.61.61 0 0 1-.349.79l-15.11 5.823a.608.608 0 1 1-.439-1.138l15.113-5.822a.606.606 0 0 1 .786.349m-.001 2.783a.61.61 0 0 1-.349.79l-15.11 5.822a.608.608 0 1 1-.439-1.138l15.113-5.822a.61.61 0 0 1 .786.35m-5.136 4.849c.122.315.047.639-.168.72l-10.318 3.978c-.218.083-.49-.106-.61-.42c-.121-.315-.044-.637.17-.718l10.317-3.98c.216-.08.487.107.61.42" />
           </svg>
-          <h1 class="text-white font-bold text-xl">notarr</h1>
+          <h1 class="text-xl font-bold text-white">notarr</h1>
         </div>
       </NuxtLink>
       <!--logo end-->
       <div class="relative pl-3">
-        <div class="flex flex-col w-full font-medium">
+        <div class="flex w-full flex-col font-medium">
           <!-- menu item -->
           <div>
-            <span
-              class="select-none flex items-center px-4 py-3 cursor-pointer rounded-xl">
+            <span class="flex cursor-pointer select-none items-center rounded-xl px-4 py-3">
               <NuxtLink
                 to="/"
                 href=""
-                class="flex items-center flex-grow text-base font-medium text-gray-400 text-muted hover:text-white flex-row gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="size-5"
-                  viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75" />
+                class="flex flex-grow flex-row items-center gap-2 text-base font-medium text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75" />
                 </svg>
                 Home
               </NuxtLink>
@@ -63,10 +53,7 @@
           </div>
           <!-- menu item -->
           <div>
-            <span
-              class="select-none flex items-center px-4 py-3 cursor-pointerrounded-xl font-medium text-xs text-neutral-200">
-              Notebooks
-            </span>
+            <span class="flex select-none items-center px-4 py-3 text-xs font-medium text-neutral-200">Notebooks</span>
             <Suspense>
               <SidebarNotebooks></SidebarNotebooks>
             </Suspense>
@@ -77,10 +64,10 @@
   </aside>
 </template>
 <script lang="ts" setup>
+import { NuxtLink } from '#components'
+import { onClickOutside } from '@vueuse/core'
 const { isSidebarOpen } = useSidebar()
-import { NuxtLink } from "#components"
-import { onClickOutside } from "@vueuse/core"
-const input = useTemplateRef("sidebar")
+const input = useTemplateRef('sidebar')
 
-onClickOutside(input, (event) => (isSidebarOpen.value = false))
+onClickOutside(input, () => (isSidebarOpen.value = false))
 </script>

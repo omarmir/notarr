@@ -7,7 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "pnpm lint:eslint && yarn lint:prettier",
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier . --check",
+    "lintfix": "eslint . --fix && prettier --write --list-different .",
+    "config-check": "npx @eslint/config-inspector@latest"
   },
   "dependencies": {
     "@milkdown/crepe": "^7.6.2",
@@ -15,24 +20,26 @@
     "@milkdown/theme-nord": "^7.6.2",
     "@milkdown/vue": "^7.6.2",
     "@nuxt/fonts": "0.10.3",
-    "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "6.13.1",
-    "@tailwindcss/vite": "^4.0.3",
     "@vueuse/core": "^12.5.0",
     "nuxt": "^3.15.4",
-    "tailwindcss": "^4.0.3",
+    "pinia": "^2.3.1",
     "vue": "latest",
     "vue-boring-avatars": "^1.4.0",
     "vue-router": "latest"
   },
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0",
   "devDependencies": {
+    "@nuxt/eslint": "^1.0.0",
     "@nuxt/eslint-config": "^1.0.0",
-    "eslint": "^9.11.1",
+    "@nuxtjs/eslint-module": "^4.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.23.0",
+    "@typescript-eslint/parser": "^8.23.0",
+    "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^5.2.1",
-    "eslint-plugin-tailwindcss": "^4.0.0-alpha.0",
+    "eslint-plugin-tailwindcss": "3.18.0",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8"
   }

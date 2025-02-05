@@ -1,15 +1,9 @@
 <template>
-  <form @submit.prevent="addNotebook" class="w-full grow">
-    <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only"
-      >Search</label
-    >
+  <form class="w-full grow" @submit.prevent="addNotebook">
+    <label for="search" class="sr-only mb-2 text-sm font-medium text-gray-900">Search</label>
     <div class="relative">
-      <div
-        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-4 h-4 text-gray-500"
-          viewBox="0 0 1024 1024">
+      <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" viewBox="0 0 1024 1024">
           <path
             fill="currentColor"
             d="M192 128v768h640V128zm-32-64h704a32 32 0 0 1 32 32v832a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V96a32 32 0 0 1 32-32" />
@@ -19,43 +13,43 @@
         </svg>
       </div>
       <input
-        type="text"
         id="name"
         v-model="newBook"
+        type="text"
         name="name"
-        class="block w-full p-2 ps-10 pe-16 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pe-16 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
         placeholder="Notebook name"
         required />
       <button
         type="submit"
-        class="text-gray-900 absolute end-2.5 bottom-1.5 bg-neutral-200 hover:bg-neutral-300 focus:ring-4 focus:outline-none focus:ring-neutral-300 font-medium rounded-lg text-xs px-4 py-1">
+        class="absolute bottom-1.5 end-2.5 rounded-lg bg-neutral-200 px-4 py-1 text-xs font-medium text-gray-900 hover:bg-neutral-300 focus:outline-none focus:ring-4 focus:ring-neutral-300">
         Add
       </button>
     </div>
   </form>
 </template>
 <script lang="ts" setup>
-import type { Notebook } from "~/types/notebook"
-import { FetchError } from "ofetch"
+import type { Notebook } from '~/types/notebook'
+import type { FetchError } from 'ofetch'
 
 const emit = defineEmits<{
-  (e: "added", payload: Notebook): void
-  (e: "error", payload: string): void
+  (e: 'added', payload: Notebook): void
+  (e: 'error', payload: string): void
 }>()
 
-const newBook = ref("")
+const newBook = ref('')
 
-const addNotebook = async (e: any) => {
+const addNotebook = async () => {
   try {
     const name = newBook.value
-    const resp = await $fetch<Notebook>("/api/notebooks", {
-      method: "POST",
-      body: { name },
+    const resp = await $fetch<Notebook>('/api/notebooks', {
+      method: 'POST',
+      body: { name }
     })
-    emit("added", resp)
-    newBook.value = ""
+    emit('added', resp)
+    newBook.value = ''
   } catch (error) {
-    emit("error", (error as FetchError).data.message)
+    emit('error', (error as FetchError).data.message)
   }
 }
 </script>

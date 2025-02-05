@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="font-semibold mb-4 text-xl">Notes and Notebooks</h3>
+    <h3 class="mb-4 text-xl font-semibold">Notes and Notebooks</h3>
     <Suspense>
       <AllNotebooks></AllNotebooks>
     </Suspense>

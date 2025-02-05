@@ -1,5 +1,5 @@
-import { ref } from "vue"
-import type { Ref } from "vue"
+import { ref } from 'vue'
+import type { Ref } from 'vue'
 
 const isSideMenuOpen: Ref<boolean> = ref(false)
 
@@ -20,6 +20,6 @@ export function useSidebar() {
   return {
     toggleSideMenu,
     isSidebarOpen,
-    outsideClick,
+    outsideClick
   }
 }

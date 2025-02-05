@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-wrap -mx-3 mb-5">
-    <div class="w-full max-w-full px-3 mb-6 xl:w-8/12 sm:flex-none xl:mb-0">
+  <div class="-mx-3 mb-5 flex flex-wrap">
+    <div class="mb-6 w-full max-w-full px-3 sm:flex-none xl:mb-0 xl:w-8/12">
       <MilkdownProvider>
         <Milkdown v-model="md" />
       </MilkdownProvider>
@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import Milkdown from "~/components/MilkdownEditor.vue"
-import { MilkdownProvider } from "@milkdown/vue"
-import { watchDebounced } from "@vueuse/core"
+import Milkdown from '~/components/MilkdownEditor.vue'
+import { MilkdownProvider } from '@milkdown/vue'
+import { watchDebounced } from '@vueuse/core'
 
 const md = ref(`# Milkdown Vue Crepe
 
@@ -23,22 +23,22 @@ This is a demo for using Crepe with **Vue**.`)
 watchDebounced(md, () => saveFile(md.value), { debounce: 500, maxWait: 5000 })
 
 const saveFile = (markdownText: string) => {
-  const blob = new Blob([markdownText], { type: "text/markdown" })
+  const blob = new Blob([markdownText], { type: 'text/markdown' })
 
   const formData = new FormData()
-  formData.append("file", blob, "example.md") // The file to upload
-  formData.append("filename", "example.md") // The filename to use when saving
+  formData.append('file', blob, 'example.md') // The file to upload
+  formData.append('filename', 'example.md') // The filename to use when saving
 
-  fetch("/api/save", {
-    method: "POST",
-    body: formData,
+  fetch('/api/save', {
+    method: 'POST',
+    body: formData
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log("File uploaded successfully:", data)
+      console.log('File uploaded successfully:', data)
     })
     .catch((error) => {
-      console.error("Error uploading file:", error)
+      console.error('Error uploading file:', error)
     })
 }
 </script>

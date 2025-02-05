@@ -1,7 +1,7 @@
-import { writeFile, stat, access, constants } from "node:fs/promises"
-import { readMultipartFormData } from "h3"
+import { writeFile, stat, access, constants } from 'node:fs/promises'
+import { readMultipartFormData } from 'h3'
 
-import { defineEventHandlerWithNotebookAndNote } from "~/server/wrappers/note"
+import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
 
 export default defineEventHandlerWithNotebookAndNote(
   async (event, cleanNotebook, cleanNote, fullPath) => {
@@ -10,18 +10,18 @@ export default defineEventHandlerWithNotebookAndNote(
     if (!formData) {
       throw createError({
         statusCode: 400,
-        statusMessage: "Bad Request",
-        message: "Missing form data",
+        statusMessage: 'Bad Request',
+        message: 'Missing form data'
       })
     }
 
     // Find file in form data
-    const fileEntry = formData.find((entry) => entry.name === "file")
+    const fileEntry = formData.find((entry) => entry.name === 'file')
     if (!fileEntry || !fileEntry.data) {
       throw createError({
         statusCode: 400,
-        statusMessage: "Bad Request",
-        message: "No file uploaded",
+        statusMessage: 'Bad Request',
+        message: 'No file uploaded'
       })
     }
 
@@ -29,12 +29,12 @@ export default defineEventHandlerWithNotebookAndNote(
       await access(fullPath, constants.F_OK)
       throw createError({
         statusCode: 400,
-        statusMessage: "Bad Request",
-        message: "File already exists",
+        statusMessage: 'Bad Request',
+        message: 'File already exists'
       })
     } catch (err) {
       // If access fails, file does not exist -> Proceed
-      if ((err as NodeJS.ErrnoException).code !== "ENOENT") throw err // Rethrow unexpected errors
+      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err // Rethrow unexpected errors
     }
 
     try {
@@ -49,18 +49,18 @@ export default defineEventHandlerWithNotebookAndNote(
         createdAt: stats.birthtime.toISOString(),
         updatedAt: stats.mtime.toISOString(),
         size: stats.size,
-        originalFilename: fileEntry.filename || "unknown",
+        originalFilename: fileEntry.filename || 'unknown'
       }
     } catch (error) {
-      console.error("Error creating note:", error)
+      console.error('Error creating note:', error)
       throw createError({
         statusCode: 500,
-        statusMessage: "Internal Server Error",
-        message: "Failed to create note",
+        statusMessage: 'Internal Server Error',
+        message: 'Failed to create note'
       })
     }
   },
   {
-    noteCheck: false,
+    noteCheck: false
   }
 )

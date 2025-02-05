@@ -1,7 +1,6 @@
-@import "tailwindcss";
 html {
   font-family: Inter, Helvetica, sans-serif;
-  @apply text-gray-800 bg-gray-50;
+  @apply bg-gray-50 text-gray-800;
 }
 h1,
 h2,

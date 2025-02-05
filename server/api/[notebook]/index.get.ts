@@ -1,44 +1,38 @@
-import { readdir, stat } from "node:fs/promises"
-import { join } from "node:path"
+import { readdir, stat } from 'node:fs/promises'
+import { join } from 'node:path'
+import { defineEventHandlerWithNotebook } from '~/server/wrappers/notebook'
+import type { Note } from '~/types/notebook'
 
-import { defineEventHandlerWithNotebook } from "~/server/wrappers/notebook"
-import { Note } from "~/types/notebook"
+export default defineEventHandlerWithNotebook(async (_event, cleanNotebook, targetFolder) => {
+  try {
+    // Read directory contents
+    const files = await readdir(targetFolder, { withFileTypes: true })
 
-export default defineEventHandlerWithNotebook(
-  async (_event, cleanNotebook, targetFolder) => {
-    try {
-      // Read directory contents
-      const files = await readdir(targetFolder, { withFileTypes: true })
+    // Process files concurrently
+    const notes = await Promise.all(
+      files.map(async (dirent) => {
+        if (!dirent.isFile() || !dirent.name.endsWith('.md')) return null
 
-      // Process files concurrently
-      const notes = await Promise.all(
-        files.map(async (dirent) => {
-          if (!dirent.isFile() || !dirent.name.endsWith(".md")) return null
+        const filePath = join(targetFolder, dirent.name)
+        const stats = await stat(filePath)
 
-          const filePath = join(targetFolder, dirent.name)
-          const stats = await stat(filePath)
-
-          return {
-            name: dirent.name.replace(/\.md$/, ""),
-            notebook: cleanNotebook,
-            createdAt: stats.birthtime.toISOString(),
-            updatedAt: stats.mtime.toISOString(),
-          } satisfies Note
-        })
-      )
-
-      const filteredNotes = notes.filter((note) => note !== null)
-      return filteredNotes.sort(
-        (a, b) =>
-          new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
-      )
-    } catch (error) {
-      console.error("Error reading notebook:", error)
-      throw createError({
-        statusCode: 500,
-        statusMessage: "Internal Server Error",
-        message: "Failed to retrieve notes",
+        return {
+          name: dirent.name.replace(/\.md$/, ''),
+          notebook: cleanNotebook,
+          createdAt: stats.birthtime.toISOString(),
+          updatedAt: stats.mtime.toISOString()
+        } satisfies Note
       })
-    }
+    )
+
+    const filteredNotes = notes.filter((note) => note !== null)
+    return filteredNotes.sort((a, b) => new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime())
+  } catch (error) {
+    console.error('Error reading notebook:', error)
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      message: 'Failed to retrieve notes'
+    })
   }
-)
+})

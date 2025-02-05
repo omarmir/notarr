@@ -1,9 +1,9 @@
-import { readdir, stat } from "node:fs/promises"
-import { join } from "node:path"
-import { Notebook } from "~/types/notebook"
+import { readdir, stat } from 'node:fs/promises'
+import { join } from 'node:path'
+import type { Notebook } from '~/types/notebook'
 
-export default defineEventHandler(async (event): Promise<Notebook[]> => {
-  const basePath = join(process.cwd(), "notes")
+export default defineEventHandler(async (_event): Promise<Notebook[]> => {
+  const basePath = join(process.cwd(), 'notes')
 
   try {
     const folderEntries = await readdir(basePath, { withFileTypes: true })
@@ -14,10 +14,7 @@ export default defineEventHandler(async (event): Promise<Notebook[]> => {
         const folderPath = join(basePath, dirent.name)
         const folderStats = await stat(folderPath)
 
-        const createdAt =
-          folderStats.birthtime.getTime() !== 0
-            ? folderStats.birthtime
-            : folderStats.ctime
+        const createdAt = folderStats.birthtime.getTime() !== 0 ? folderStats.birthtime : folderStats.ctime
 
         let fileCount = 0
         let lastUpdated: Date | null = null
@@ -31,12 +28,7 @@ export default defineEventHandler(async (event): Promise<Notebook[]> => {
               const filePath = join(folderPath, fileEntry.name)
               const fileStats = await stat(filePath)
 
-              const fileLatest = new Date(
-                Math.max(
-                  fileStats.birthtime.getTime(),
-                  fileStats.mtime.getTime()
-                )
-              )
+              const fileLatest = new Date(Math.max(fileStats.birthtime.getTime(), fileStats.mtime.getTime()))
 
               if (!lastUpdated || fileLatest > lastUpdated) {
                 lastUpdated = fileLatest
@@ -51,18 +43,18 @@ export default defineEventHandler(async (event): Promise<Notebook[]> => {
           name: dirent.name,
           createdAt: createdAt.toISOString(),
           updatedAt: lastUpdated?.toISOString() || null,
-          fileCount: fileCount,
+          fileCount: fileCount
         }
       })
     )
 
     return result
   } catch (error) {
-    console.error("Error reading directory:", error)
+    console.error('Error reading directory:', error)
     throw createError({
       statusCode: 500,
-      statusMessage: "Internal Server Error",
-      message: "Unable to read directory structure",
+      statusMessage: 'Internal Server Error',
+      message: 'Unable to read directory structure'
     })
   }
 })

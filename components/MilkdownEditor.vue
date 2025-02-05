@@ -3,13 +3,13 @@
 </template>
 
 <script setup lang="ts">
-import { Milkdown, useEditor } from "@milkdown/vue"
-import { Crepe } from "@milkdown/crepe"
-import { listener, listenerCtx } from "@milkdown/kit/plugin/listener"
-import { upload } from "@milkdown/kit/plugin/upload"
-import { imageBlockConfig } from "@milkdown/kit/component/image-block"
-import "@milkdown/crepe/theme/common/style.css"
-import "@milkdown/crepe/theme/nord.css"
+import { Milkdown, useEditor } from '@milkdown/vue'
+import { Crepe } from '@milkdown/crepe'
+import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
+import { upload } from '@milkdown/kit/plugin/upload'
+import { imageBlockConfig } from '@milkdown/kit/component/image-block'
+import '@milkdown/crepe/theme/common/style.css'
+import '@milkdown/crepe/theme/nord.css'
 
 const model = defineModel<string>({ required: true })
 
@@ -24,7 +24,7 @@ const toBase64 = (file: Blob): Promise<string> =>
 useEditor((root) => {
   const crepe = new Crepe({
     root,
-    defaultValue: model.value,
+    defaultValue: model.value
   })
 
   crepe.editor
@@ -38,7 +38,7 @@ useEditor((root) => {
 
       ctx.update(imageBlockConfig.key, (defaultConfig) => ({
         ...defaultConfig,
-        onUpload: async (file) => await toBase64(file),
+        onUpload: async (file) => await toBase64(file)
       }))
     })
     .use(listener)
