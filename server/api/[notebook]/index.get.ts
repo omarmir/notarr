@@ -2,7 +2,9 @@ import { readdir, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 import { defineEventHandlerWithNotebook } from '~/server/wrappers/notebook'
 import type { Note } from '~/types/notebook'
-
+/**
+ * Returns list of notes for a specific notebook
+ */
 export default defineEventHandlerWithNotebook(async (_event, cleanNotebook, targetFolder) => {
   try {
     // Read directory contents

@@ -1,6 +1,6 @@
 <template>
   <form class="w-full grow" @submit.prevent="addNotebook">
-    <label for="search" class="sr-only mb-2 text-sm font-medium text-gray-900">Search</label>
+    <label for="search" class="sr-only mb-2 text-sm font-medium text-gray-900">New notebook</label>
     <div class="relative">
       <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" viewBox="0 0 1024 1024">

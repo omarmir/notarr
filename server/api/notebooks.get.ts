@@ -2,17 +2,17 @@ import { readdir, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { Notebook } from '~/types/notebook'
 
-function waitforme(millisec: number) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve('')
-    }, millisec)
-  })
-}
+// function waitforme(millisec: number) {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve('')
+//     }, millisec)
+//   })
+// }
 
 export default defineEventHandler(async (_event): Promise<Notebook[]> => {
   const basePath = join(process.cwd(), 'notes')
-  await waitforme(1000)
+  //await waitforme(1000)
 
   try {
     const folderEntries = await readdir(basePath, { withFileTypes: true })

@@ -1,28 +1,24 @@
 import { writeFile, stat, access, constants } from 'node:fs/promises'
 import { readMultipartFormData } from 'h3'
+import { Buffer } from 'node:buffer'
 
 import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
+import type { Note } from '~/types/notebook'
 
 export default defineEventHandlerWithNotebookAndNote(
   async (event, cleanNotebook, cleanNote, fullPath) => {
-    // Parse form data
-    const formData = await readMultipartFormData(event)
-    if (!formData) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Bad Request',
-        message: 'Missing form data'
-      })
-    }
+    let fileContent = Buffer.from('')
+    // let originalFilename = `${cleanNote}.md`
 
-    // Find file in form data
-    const fileEntry = formData.find((entry) => entry.name === 'file')
-    if (!fileEntry || !fileEntry.data) {
-      throw createError({
-        statusCode: 400,
-        statusMessage: 'Bad Request',
-        message: 'No file uploaded'
-      })
+    // Parse form data if available
+    const formData = await readMultipartFormData(event)
+    if (formData) {
+      const fileEntry = formData.find((entry) => entry.name === 'file')
+      if (fileEntry?.data) {
+        // Convert to proper Buffer instance
+        fileContent = Buffer.from(fileEntry.data)
+        // originalFilename = fileEntry.filename || originalFilename
+      }
     }
 
     try {
@@ -33,24 +29,23 @@ export default defineEventHandlerWithNotebookAndNote(
         message: 'File already exists'
       })
     } catch (err) {
-      // If access fails, file does not exist -> Proceed
-      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err // Rethrow unexpected errors
+      if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err
     }
 
     try {
-      // Write file to filesystem
-      await writeFile(fullPath, fileEntry.data)
+      // Write file with either uploaded content or empty buffer
+      await writeFile(fullPath, fileContent)
       const stats = await stat(fullPath)
 
       return {
         notebook: cleanNotebook,
-        note: cleanNote,
-        path: fullPath,
+        name: cleanNote,
+        // path: fullPath,
         createdAt: stats.birthtime.toISOString(),
         updatedAt: stats.mtime.toISOString(),
-        size: stats.size,
-        originalFilename: fileEntry.filename || 'unknown'
-      }
+        size: stats.size
+        // originalFilename
+      } satisfies Note
     } catch (error) {
       console.error('Error creating note:', error)
       throw createError({
