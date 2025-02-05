@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Bad Request",
-      message: "Folder name is required",
+      message: "Notebook name is required",
     })
   }
 
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: "Bad Request",
-      message: "Invalid folder name",
+      message: "Invalid notebook name",
     })
   }
 
@@ -34,7 +34,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 409,
       statusMessage: "Conflict",
-      message: "Folder already exists",
+      message: "Notebook already exists",
     })
   } catch (error) {
     // Only proceed if error is "not found"
@@ -55,11 +55,11 @@ export default defineEventHandler(async (event) => {
       fileCount: 0,
     } satisfies Notebook
   } catch (error) {
-    console.error("Error creating folder:", error)
+    console.error("Error creating notebook:", error)
     throw createError({
       statusCode: 500,
       statusMessage: "Internal Server Error",
-      message: "Failed to create folder",
+      message: "Failed to create notebook",
     })
   }
 })

@@ -10,18 +10,19 @@
           All notebooks
         </span>
       </h3>
-      <div class="relative flex flex-wrap items-center my-2">
-        <div class="relative flex flex-wrap items-center my-2">
-          <a
-            href="javascript:void(0)"
-            class="inline-block text-sm font-medium leading-normal text-center align-middle cursor-pointer rounded-2xl transition-colors duration-150 ease-in-out shadow-none border-0 py-2 px-5">
-            Add new notebook
-          </a>
+      <div class="relative flex flex-wrap items-center my-2 w-1/3 min-w-xs">
+        <div class="relative flex flex-wrap items-center my-2 w-full">
+          <NewNotebook
+            @added="notebookAdded"
+            @error="notebookAddedError"></NewNotebook>
         </div>
       </div>
     </div>
     <!-- end card header -->
     <!-- card body  -->
+    <DangerAlert v-if="error">
+      {{ error }}
+    </DangerAlert>
     <div class="flex-auto block py-8 pt-6 px-9">
       <div class="overflow-x-auto">
         <table class="w-full my-0 align-middle text-dark border-neutral-200">
@@ -113,4 +114,12 @@ const { data: notebooks, execute } = useFetch<Notebook[]>("/api/notebooks", {
 })
 
 await execute()
+
+const error = ref("")
+
+const notebookAdded = (newBook: Notebook) => {
+  notebooks.value?.push(newBook)
+  error.value = ""
+}
+const notebookAddedError = (addError: string) => (error.value = addError)
 </script>
