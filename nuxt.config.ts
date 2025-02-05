@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-  modules: ['@nuxt/fonts', '@nuxt/eslint', '@nuxtjs/eslint-module', '@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/fonts', '@nuxt/eslint', '@nuxtjs/eslint-module', '@nuxtjs/tailwindcss', '@pinia/nuxt'],
   fonts: {
     families: [
       // do not resolve this font with any provider from `@nuxt/fonts`

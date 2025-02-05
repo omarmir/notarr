@@ -9,7 +9,7 @@
       </h3>
       <div class="min-w-xs relative my-2 flex w-1/3 flex-wrap items-center">
         <div class="relative my-2 flex w-full flex-wrap items-center">
-          <NewNotebook @added="notebookAdded" @error="notebookAddedError"></NewNotebook>
+          <NewNotebook @error="notebookAddedError"></NewNotebook>
         </div>
       </div>
     </div>
@@ -31,8 +31,25 @@
             </tr>
           </thead>
           <tbody>
+            <tr v-if="store.status === 'pending'" class="animate-pulse">
+              <td>
+                <div class="mb-2.5 h-2 w-4/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+              </td>
+              <td>
+                <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+              </td>
+              <td>
+                <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+              </td>
+              <td>
+                <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+              </td>
+              <td>
+                <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+              </td>
+            </tr>
             <tr
-              v-for="notebook in notebooks"
+              v-for="notebook in store.notebooks"
               :key="notebook.name"
               class="border-b border-dashed border-neutral-200 last:border-b-0">
               <td>
@@ -83,20 +100,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import type { Notebook } from '~/types/notebook'
+import { useNotebookStore } from '~/stores/notebooks'
 
-const { data: notebooks, execute } = useFetch<Notebook[]>('/api/notebooks', {
-  immediate: false,
-  lazy: true
-})
-
-await execute()
+const store = useNotebookStore()
 
 const error = ref('')
 
-const notebookAdded = (newBook: Notebook) => {
-  notebooks.value?.push(newBook)
-  error.value = ''
-}
 const notebookAddedError = (addError: string) => (error.value = addError)
 </script>

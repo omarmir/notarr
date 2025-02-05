@@ -54,9 +54,7 @@
           <!-- menu item -->
           <div>
             <span class="flex select-none items-center px-4 py-3 text-xs font-medium text-neutral-200">Notebooks</span>
-            <Suspense>
-              <SidebarNotebooks></SidebarNotebooks>
-            </Suspense>
+            <SidebarNotebooks></SidebarNotebooks>
           </div>
         </div>
       </div>

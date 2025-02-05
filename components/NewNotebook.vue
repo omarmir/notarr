@@ -29,27 +29,23 @@
   </form>
 </template>
 <script lang="ts" setup>
-import type { Notebook } from '~/types/notebook'
-import type { FetchError } from 'ofetch'
+import { useNotebookStore } from '~/stores/notebooks'
 
 const emit = defineEmits<{
-  (e: 'added', payload: Notebook): void
   (e: 'error', payload: string): void
 }>()
+
+const store = useNotebookStore()
 
 const newBook = ref('')
 
 const addNotebook = async () => {
-  try {
-    const name = newBook.value
-    const resp = await $fetch<Notebook>('/api/notebooks', {
-      method: 'POST',
-      body: { name }
-    })
-    emit('added', resp)
+  const resp = await store.addNotebook(newBook.value)
+
+  if (resp.success) {
     newBook.value = ''
-  } catch (error) {
-    emit('error', (error as FetchError).data.message)
+  } else {
+    emit('error', resp.message)
   }
 }
 </script>

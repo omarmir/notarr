@@ -1,7 +1,12 @@
 <template>
   <ul>
     <li
-      v-for="notebook in notebooks"
+      v-if="store.status === 'pending'"
+      class="flex animate-pulse cursor-pointer select-none flex-row items-center rounded-xl px-4 py-3">
+      <div class="mb-2.5 h-2 w-4/5 rounded-full bg-gray-400/30"></div>
+    </li>
+    <li
+      v-for="notebook in store.notebooks"
       :key="notebook.name"
       class="flex cursor-pointer select-none flex-row items-center rounded-xl px-4 py-3">
       <NuxtLink
@@ -24,12 +29,7 @@
   </ul>
 </template>
 <script lang="ts" setup>
-import type { Notebook } from '~/types/notebook'
+import { useNotebookStore } from '~/stores/notebooks'
 
-const { data: notebooks, execute } = useFetch<Notebook[]>('/api/notebooks', {
-  immediate: false,
-  lazy: true
-})
-
-await execute()
+const store = useNotebookStore()
 </script>
