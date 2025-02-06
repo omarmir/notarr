@@ -16,28 +16,31 @@
         Add
       </button>
     </div>
+    <DangerAlert v-if="error" class="mr-4">{{ error }}</DangerAlert>
   </form>
 </template>
 <script lang="ts" setup>
 import { useNotebookStore } from '~/stores/notebooks'
 
-const emit = defineEmits<{
-  (e: 'error', payload: string): void
-}>()
-
 const store = useNotebookStore()
 
-const newNote = ref('')
+const newNote: Ref<string | null> = ref('')
+const error: Ref<string | null> = ref(null)
 
 const addNotebook = async () => {
   if (!store.currentNotebook) return
+  if (!newNote.value) {
+    error.value = 'Name is required'
+    return
+  }
 
   const resp = await store.addNote(store.currentNotebook, newNote.value)
 
   if (resp.success) {
-    newNote.value = ''
+    newNote.value = null
+    error.value = null
   } else {
-    emit('error', resp.message)
+    error.value = resp.message
   }
 }
 </script>

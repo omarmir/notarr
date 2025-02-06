@@ -23,7 +23,7 @@ export default defineEventHandlerWithNotebookAndNote(
       throw createError({
         statusCode: 400,
         statusMessage: 'Bad Request',
-        message: 'File already exists'
+        message: 'Note with that name already exists.'
       })
     } catch (err) {
       if ((err as NodeJS.ErrnoException).code !== 'ENOENT') throw err
