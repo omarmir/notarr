@@ -25,6 +25,7 @@
     "@vueuse/core": "^12.5.0",
     "nuxt": "^3.15.4",
     "pinia": "^2.3.1",
+    "shell-escape": "^0.2.0",
     "vue": "latest",
     "vue-router": "latest"
   },
@@ -33,6 +34,7 @@
     "@nuxt/eslint": "^1.0.0",
     "@nuxt/eslint-config": "^1.0.0",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@types/shell-escape": "^0.2.3",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
     "eslint": "^9.19.0",
