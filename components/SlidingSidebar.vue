@@ -30,7 +30,6 @@
               <span class="flex cursor-pointer select-none items-center rounded-xl px-4 py-3">
                 <NuxtLink
                   to="/"
-                  href=""
                   class="flex flex-grow flex-row items-center gap-2 text-base font-medium text-gray-400 hover:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24">
                     <path
