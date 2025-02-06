@@ -1,5 +1,5 @@
 <template>
-  <Milkdown />
+  <Milkdown class="milkdown-editor" />
 </template>
 
 <script setup lang="ts">
@@ -46,3 +46,16 @@ useEditor((root) => {
   return crepe
 })
 </script>
+<style>
+.milkdown-editor div.milkdown > div {
+  @apply px-0 py-2;
+}
+
+.milkdown-editor div.milkdown {
+  @apply px-0 py-5;
+}
+
+.milkdown {
+  --crepe-color-background: #f9fafb;
+}
+</style>

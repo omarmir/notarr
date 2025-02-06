@@ -60,7 +60,7 @@
                       fill="currentColor"
                       d="M672 128h64v768h-64zM96 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32" />
                   </svg>
-                  <div class="flex flex-col justify-start text-sm font-semibold">
+                  <div class="flex flex-col justify-start text-left text-sm font-semibold">
                     {{ notebook.name }}
                   </div>
                 </button>
