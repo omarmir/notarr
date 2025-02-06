@@ -26,6 +26,14 @@ export default defineEventHandler(async (event) => {
     })
   }
 
+  if (folderName.length > 255) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Bad Request',
+      message: `Name exceeds maximum allowed length of 255 characters.`
+    })
+  }
+
   const fullPath = join(basePath, folderName)
 
   // Check OS path length limitations

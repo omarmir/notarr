@@ -18,6 +18,14 @@ export default defineEventHandlerWithNotebookAndNote(
       }
     }
 
+    if (cleanNote.length > 255) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Bad Request',
+        message: `Name exceeds maximum allowed length of 255 characters.`
+      })
+    }
+
     // Add OS path length validation
     const isWindows = process.platform === 'win32'
     const maxPathLength = isWindows ? 259 : 4095 // Same limits as folder creation
