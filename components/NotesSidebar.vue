@@ -7,7 +7,6 @@
       <div class="mt-28 pl-7">
         <h2 class="text-lg font-bold text-white">{{ store.currentNotebook }}</h2>
         <h3 class="flex select-none items-center text-xs font-medium text-neutral-200">Notes</h3>
-        <NewNote></NewNote>
         <NotebookNotes></NotebookNotes>
       </div>
     </div>
