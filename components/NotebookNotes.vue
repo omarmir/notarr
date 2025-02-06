@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li v-for="note in store.currentNotes" :key="note.name" class="my-2">
+    <li v-for="note in store.currentNotes" :key="note.name" class="my-4">
       <NuxtLink
         :to="`/${store.currentNotebook}/${note.name}`"
         class="flex flex-row items-center gap-2 text-gray-400 hover:text-white">

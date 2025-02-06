@@ -16,6 +16,7 @@ export function defineEventHandlerWithNotebookAndNote<T extends EventHandlerRequ
   return defineEventHandler(async (event) => {
     const basePath = join(process.cwd(), 'notes')
     const { notebook, note } = event.context.params || {}
+    console.log(event.context.params)
 
     if (!notebook || !note) {
       throw createError({
@@ -37,6 +38,27 @@ export function defineEventHandlerWithNotebookAndNote<T extends EventHandlerRequ
     const targetFolder = resolve(join(basePath, cleanNotebook))
     const filename = `${cleanNote}.md`
     const fullPath = join(targetFolder, filename)
+
+    //Is the name going to exceed limits?
+    if (cleanNote.length > 255) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Bad Request',
+        message: `Name exceeds maximum allowed length of 255 characters.`
+      })
+    }
+
+    // Add OS path length validation
+    const isWindows = process.platform === 'win32'
+    const maxPathLength = isWindows ? 259 : 4095 // Same limits as folder creation
+
+    if (fullPath.length > maxPathLength) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'Bad Request',
+        message: `Path exceeds maximum allowed length of ${maxPathLength} characters.`
+      })
+    }
 
     // Security checks
     if (!targetFolder.startsWith(resolve(basePath))) {

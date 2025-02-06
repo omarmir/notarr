@@ -5,7 +5,8 @@ import type { Note } from '~/types/notebook'
 /**
  * Returns list of notes for a specific notebook
  */
-export default defineEventHandlerWithNotebook(async (_event, cleanNotebook, targetFolder) => {
+export default defineEventHandlerWithNotebook(async (_event, cleanNotebook, _fullPath, targetFolder) => {
+  console.log(targetFolder)
   try {
     // Read directory contents
     const files = await readdir(targetFolder, { withFileTypes: true })

@@ -8,7 +8,7 @@
         type="text"
         name="name"
         class="my-2 block w-full rounded-md border border-gray-700 bg-transparent p-2 pe-16 ps-2 text-sm text-gray-400 focus:border-blue-500 focus:ring-blue-500"
-        placeholder="Notebook name"
+        placeholder="Note"
         required />
       <button
         type="submit"

@@ -20,9 +20,8 @@ export const useNotebookStore = defineStore('notebook', () => {
 
   const addNotebook = async (name: string): Promise<Result<Notebook>> => {
     try {
-      const resp = await $fetch<Notebook>('/api/notebooks', {
-        method: 'POST',
-        body: { name }
+      const resp = await $fetch<Notebook>(`/api/${name}`, {
+        method: 'POST'
       })
       notebooks.value?.push(resp)
       return {
@@ -45,7 +44,7 @@ export const useNotebookStore = defineStore('notebook', () => {
 
   const getNotes = async () => {
     try {
-      const resp = await $fetch<Note[]>(`/api/${currentNotebook.value}`)
+      const resp = await $fetch<Note[]>(`/api/${currentNotebook.value}/notes`)
       currentNotes.value = resp
     } catch (error) {
       console.log(error)
