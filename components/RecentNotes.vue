@@ -20,8 +20,8 @@
             <tr class="text-secondary-dark text-[0.95rem]">
               <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Note</th>
               <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Notebook</th>
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Created</th>
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Updated</th>
+              <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Created</th>
+              <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Updated</th>
               <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Size</th>
             </tr>
           </thead>
@@ -48,15 +48,15 @@
                   {{ note.notebook }}
                 </span>
               </td>
-              <td>
-                <span class="text-light-inverse text-sm font-medium">
-                  {{ note.createdAt }}
-                </span>
+              <td class="hidden lg:table-cell">
+                <div class="text-sm font-medium">
+                  <DateDisplay :date="note.createdAt"></DateDisplay>
+                </div>
               </td>
-              <td>
-                <span class="text-light-inverse text-sm font-medium">
-                  {{ note.updatedAt }}
-                </span>
+              <td class="hidden lg:table-cell">
+                <div class="text-sm font-medium">
+                  <DateDisplay :date="note.createdAt"></DateDisplay>
+                </div>
               </td>
               <td>
                 <span class="text-light-inverse text-sm font-medium">{{ note.size ? note.size / 1000 : 0 }}kb</span>

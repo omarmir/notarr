@@ -7,7 +7,7 @@
         <span class="mr-3 text-lg font-medium">Notebooks</span>
         <span class="font-base mt-1 text-sm text-gray-400">All notebooks</span>
       </h3>
-      <div class="min-w-xs relative my-2 flex w-1/3 flex-wrap items-center">
+      <div class="min-w-xs relative my-2 flex w-1/3 min-w-72 flex-wrap items-center">
         <div class="relative my-2 flex w-full flex-wrap items-center">
           <NewNotebook @error="notebookAddedError"></NewNotebook>
         </div>
@@ -24,10 +24,9 @@
           <thead class="align-bottom">
             <tr class="text-secondary-dark text-[0.95rem]">
               <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Notebook</th>
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Created</th>
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Updated</th>
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400"># of Notes</th>
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Actions</th>
+              <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Created</th>
+              <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Updated</th>
+              <th class="pb-3 text-center text-xs font-medium uppercase text-gray-400"># of Notes</th>
             </tr>
           </thead>
           <tbody>
@@ -35,13 +34,10 @@
               <td>
                 <div class="mb-2.5 h-2 w-4/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
               </td>
-              <td>
+              <td class="hidden lg:table-cell">
                 <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
               </td>
-              <td>
-                <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
-              </td>
-              <td>
+              <td class="hidden lg:table-cell">
                 <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
               </td>
               <td>
@@ -54,7 +50,7 @@
               class="border-b border-dashed border-neutral-200 last:border-b-0">
               <td>
                 <div class="my-3 flex flex-row items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 1024 1024">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-5 shrink-0" viewBox="0 0 1024 1024">
                     <path
                       fill="currentColor"
                       d="M192 128v768h640V128zm-32-64h704a32 32 0 0 1 32 32v832a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V96a32 32 0 0 1 32-32" />
@@ -70,27 +66,21 @@
                   </div>
                 </div>
               </td>
-              <td>
-                <span class="text-light-inverse text-sm font-medium">
-                  {{ notebook.createdAt }}
-                </span>
-              </td>
-              <td class="py-3">
-                <span class="text-light-inverse text-sm font-medium">
-                  {{ notebook.updatedAt }}
-                </span>
-              </td>
-              <td class="py-3">
-                <div
-                  class="text-light-inverse flex size-8 items-center justify-center rounded-full bg-emerald-600 text-center text-sm font-medium text-white">
-                  <span>{{ notebook.fileCount }}</span>
+              <td class="hidden lg:table-cell">
+                <div class="text-sm font-medium">
+                  <DateDisplay :date="notebook.createdAt"></DateDisplay>
                 </div>
               </td>
-              <td>
-                <span class="text-light-inverse text-sm font-medium">
-                  <button>New note</button>
-                  <button>View notes</button>
-                </span>
+              <td class="hidden py-3 lg:table-cell">
+                <div class="text-sm font-medium">
+                  <DateDisplay :date="notebook.updatedAt"></DateDisplay>
+                </div>
+              </td>
+              <td class="flex justify-center py-3">
+                <div
+                  class="flex size-8 items-center justify-center rounded-full bg-emerald-600 text-center text-sm font-medium text-white">
+                  <span>{{ notebook.fileCount }}</span>
+                </div>
               </td>
             </tr>
           </tbody>

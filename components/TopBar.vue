@@ -1,5 +1,5 @@
 <template>
-  <nav class="mx-10 mt-4 flex justify-between lg:mx-5" navbar-scroll="true">
+  <nav class="mt-4 flex justify-between lg:mx-5" navbar-scroll="true">
     <!--Search-->
     <div class="relative mr-2 flex w-full items-center sm:mr-0 lg:ml-4 lg:w-1/2">
       <span class="absolute top-1/2 ml-4 -translate-y-1/2 leading-none">
