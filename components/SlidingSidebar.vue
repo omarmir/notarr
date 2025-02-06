@@ -65,7 +65,11 @@
         </div>
       </div>
     </aside>
-    <NotesSidebar v-if="store.currentNotebook" class="hidden lg:flex"></NotesSidebar>
+    <NotesSidebar v-if="store.currentNotebook" class="hidden lg:flex">
+      <h2 class="text-lg font-bold text-white">{{ store.currentNotebook }}</h2>
+      <h3 class="flex select-none items-center text-xs font-medium text-neutral-200">Notes</h3>
+      <NotebookNotes :notes="store.currentNotes" :notebook="store.currentNotebook"></NotebookNotes>
+    </NotesSidebar>
   </div>
 </template>
 <script lang="ts" setup>

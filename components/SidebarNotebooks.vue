@@ -25,9 +25,11 @@
         </div>
       </button>
       <div class="lg:hidden">
-        <Suspense>
-          <NotebookNotes v-if="notebook.name === store.currentNotebook" class="pl-7"></NotebookNotes>
-        </Suspense>
+        <NotebookNotes
+          v-if="notebook.name === store.currentNotebook"
+          :notebook="notebook.name"
+          :notes="store.currentNotes"
+          class="pl-7"></NotebookNotes>
       </div>
     </li>
   </ul>

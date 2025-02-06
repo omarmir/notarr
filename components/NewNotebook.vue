@@ -17,7 +17,7 @@
         v-model="newBook"
         type="text"
         name="name"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pe-16 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pe-16 ps-10 text-sm text-gray-900 focus:outline-0 focus:ring-1"
         placeholder="Notebook name"
         required />
       <button

@@ -48,8 +48,8 @@
               v-for="notebook in store.notebooks"
               :key="notebook.name"
               class="border-b border-dashed border-neutral-200 last:border-b-0">
-              <td>
-                <div class="my-3 flex flex-row items-center gap-2">
+              <td class="flex flex-col">
+                <button class="mt-3 flex flex-row items-center gap-2" @click="toggleNotes(notebook.name)">
                   <svg xmlns="http://www.w3.org/2000/svg" class="size-5 shrink-0" viewBox="0 0 1024 1024">
                     <path
                       fill="currentColor"
@@ -64,7 +64,14 @@
                       {{ notebook.name }}
                     </a>
                   </div>
-                </div>
+                </button>
+                <NotebookNotes
+                  v-if="notebook.name === openNotebookNotes?.notebook"
+                  class="ml-6"
+                  :on-background="true"
+                  :notebook="notebook.name"
+                  :notes="openNotebookNotes?.notes"
+                  @added="addedNote"></NotebookNotes>
               </td>
               <td class="hidden lg:table-cell">
                 <div class="text-sm font-medium">
@@ -91,10 +98,32 @@
 </template>
 <script lang="ts" setup>
 import { useNotebookStore } from '~/stores/notebooks'
+import type { Note } from '~/types/notebook'
 
 const store = useNotebookStore()
 
-const error = ref('')
+const error: Ref<string | null> = ref(null)
+const openError: Ref<{ notebook: string; error: string } | null> = ref(null)
+const openNotebookNotes: Ref<{ notebook: string; notes: Note[] } | null> = ref(null)
 
 const notebookAddedError = (addError: string) => (error.value = addError)
+
+const toggleNotes = async (notebook: string) => {
+  if (openNotebookNotes.value?.notebook === notebook) {
+    openNotebookNotes.value = null
+    return
+  }
+  const resp = await store.getNotebookNotes(notebook)
+
+  if (resp.success) {
+    openNotebookNotes.value = { notebook, notes: resp.data }
+  } else {
+    openError.value = { notebook, error: resp.message }
+  }
+}
+
+const addedNote = (newNote: Note) => {
+  console.log(newNote)
+  openNotebookNotes.value?.notes.push(newNote)
+}
 </script>

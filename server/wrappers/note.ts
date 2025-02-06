@@ -16,7 +16,6 @@ export function defineEventHandlerWithNotebookAndNote<T extends EventHandlerRequ
   return defineEventHandler(async (event) => {
     const basePath = join(process.cwd(), 'notes')
     const { notebook, note } = event.context.params || {}
-    console.log(event.context.params)
 
     if (!notebook || !note) {
       throw createError({

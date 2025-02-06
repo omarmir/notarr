@@ -17,6 +17,7 @@ export const useNotebookStore = defineStore('notebook', () => {
   const currentNotebook: Ref<string | null> = ref(null)
 
   const currentNotes: Ref<Note[] | null> = ref(null)
+  const currentNotesError: Ref<string | null> = ref(null)
 
   const addNotebook = async (name: string): Promise<Result<Notebook>> => {
     try {
@@ -43,20 +44,32 @@ export const useNotebookStore = defineStore('notebook', () => {
   }
 
   const getNotes = async () => {
-    try {
-      const resp = await $fetch<Note[]>(`/api/${currentNotebook.value}/notes`)
-      currentNotes.value = resp
-    } catch (error) {
-      console.log(error)
+    if (!currentNotebook.value) return
+
+    const resp = await getNotebookNotes(currentNotebook.value)
+
+    if (resp.success) {
+      currentNotes.value = resp.data
+      currentNotesError.value = null
+    } else {
+      currentNotesError.value = resp.message
     }
   }
 
-  const addNote = async (notebook: string, note: string) => {
+  const getNotebookNotes = async (notebook: string): Promise<Result<Note[]>> => {
+    try {
+      const resp = await $fetch<Note[]>(`/api/${notebook}/notes`)
+      return { success: true, data: resp }
+    } catch (error) {
+      return { success: false, message: (error as FetchError).data.message }
+    }
+  }
+
+  const addNote = async (notebook: string, note: string): Promise<Result<Note>> => {
     try {
       const resp = await $fetch<Note>(`/api/${notebook}/${note}`, {
         method: 'POST'
       })
-      console.log(resp)
       if (currentNotebook.value === notebook) currentNotes.value?.push(resp)
       return {
         success: true,
@@ -75,6 +88,7 @@ export const useNotebookStore = defineStore('notebook', () => {
     status,
     error,
     toggleNotebook,
+    getNotebookNotes,
     currentNotebook,
     currentNotes
   }
