@@ -6,7 +6,8 @@ type EventHandlerWithNotebook<T extends EventHandlerRequest, D> = (
   event: H3Event<T>,
   cleanNotebook: string,
   fullPath: string,
-  targetFolder: string
+  targetFolder: string,
+  basePath: string
 ) => Promise<D>
 
 export function defineEventHandlerWithNotebook<T extends EventHandlerRequest, D>(
@@ -56,7 +57,8 @@ export function defineEventHandlerWithNotebook<T extends EventHandlerRequest, D>
     }
 
     // This is for a new notebook, we can bail early
-    if (options?.notebookCheck === false) return await handler(event, cleanNotebook, fullPath, resolve(basePath))
+    if (options?.notebookCheck === false)
+      return await handler(event, cleanNotebook, fullPath, resolve(basePath), basePath)
 
     // Security checks
     if (!targetFolder.startsWith(resolve(basePath))) {
@@ -77,6 +79,6 @@ export function defineEventHandlerWithNotebook<T extends EventHandlerRequest, D>
       })
     }
 
-    return await handler(event, cleanNotebook, fullPath, targetFolder)
+    return await handler(event, cleanNotebook, fullPath, targetFolder, basePath)
   })
 }
