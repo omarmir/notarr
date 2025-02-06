@@ -49,7 +49,9 @@
               :key="notebook.name"
               class="border-b border-dashed border-neutral-200 last:border-b-0">
               <td class="flex flex-col">
-                <button class="mt-3 flex flex-row items-center gap-2" @click="toggleNotes(notebook.name)">
+                <button
+                  class="mt-3 flex flex-row items-center gap-2 hover:text-gray-500"
+                  @click="toggleNotes(notebook.name)">
                   <svg xmlns="http://www.w3.org/2000/svg" class="size-5 shrink-0" viewBox="0 0 1024 1024">
                     <path
                       fill="currentColor"
@@ -58,11 +60,8 @@
                       fill="currentColor"
                       d="M672 128h64v768h-64zM96 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32" />
                   </svg>
-                  <div class="flex flex-col justify-start">
-                    <a
-                      class="text-secondary-inverse hover:text-primary mb-1 text-left text-sm font-semibold transition-colors duration-200 ease-in-out">
-                      {{ notebook.name }}
-                    </a>
+                  <div class="flex flex-col justify-start text-sm font-semibold">
+                    {{ notebook.name }}
                   </div>
                 </button>
                 <NotebookNotes
