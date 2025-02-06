@@ -60,7 +60,7 @@
                   </svg>
                   <div class="flex flex-col justify-start">
                     <a
-                      class="text-secondary-inverse hover:text-primary mb-1 text-sm font-semibold transition-colors duration-200 ease-in-out">
+                      class="text-secondary-inverse hover:text-primary mb-1 text-left text-sm font-semibold transition-colors duration-200 ease-in-out">
                       {{ notebook.name }}
                     </a>
                   </div>
