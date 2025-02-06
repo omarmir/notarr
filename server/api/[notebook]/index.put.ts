@@ -41,7 +41,7 @@ export default defineEventHandlerWithNotebook(
 
       return {
         oldName: cleanNotebook,
-        name: cleanNewName,
+        newName: cleanNewName,
         createdAt: stats.birthtime.toISOString(),
         updatedAt: stats.mtime.toISOString()
       }

@@ -3,7 +3,7 @@ import { join } from 'node:path'
 import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
 
 export default defineEventHandlerWithNotebookAndNote(
-  async (event, cleanNotebook, _cleanNote, fullPath, notebookPath) => {
+  async (event, cleanNotebook, cleanNote, fullPath, notebookPath) => {
     const body = await readBody(event)
 
     try {
@@ -36,7 +36,8 @@ export default defineEventHandlerWithNotebookAndNote(
       const stats = await stat(newPath)
 
       return {
-        name: cleanNewNote,
+        oldName: cleanNote,
+        newName: cleanNewNote,
         notebook: cleanNotebook,
         createdAt: stats.birthtime.toISOString(),
         updatedAt: stats.mtime.toISOString()
