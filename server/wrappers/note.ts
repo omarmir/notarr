@@ -6,7 +6,8 @@ type EventHandlerWithNotebookAndNote<T extends EventHandlerRequest, D> = (
   event: H3Event<T>,
   cleanNotebook: string,
   cleanNote: string,
-  fullPath: string
+  fullPath: string,
+  notebookPath: string
 ) => Promise<D>
 
 export function defineEventHandlerWithNotebookAndNote<T extends EventHandlerRequest, D>(
@@ -88,6 +89,6 @@ export function defineEventHandlerWithNotebookAndNote<T extends EventHandlerRequ
       })
     }
 
-    return await handler(event, cleanNotebook, cleanNote, fullPath)
+    return await handler(event, cleanNotebook, cleanNote, fullPath, targetFolder)
   })
 }
