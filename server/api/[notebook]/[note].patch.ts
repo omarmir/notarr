@@ -27,7 +27,8 @@ export default defineEventHandlerWithNotebookAndNote(async (event, cleanNotebook
   try {
     // Get original stats first to preserve creation date
     const originalStats = await stat(fullPath)
-
+    const originalStatsCreatedAtTime =
+      originalStats.birthtime.getTime() !== 0 ? originalStats.birthtime : originalStats.ctime
     // Overwrite file content
     await writeFile(fullPath, fileEntry.data)
 
@@ -38,7 +39,7 @@ export default defineEventHandlerWithNotebookAndNote(async (event, cleanNotebook
       notebook: cleanNotebook,
       note: cleanNote,
       path: fullPath,
-      createdAt: originalStats.birthtime.toISOString(),
+      createdAt: originalStatsCreatedAtTime.toISOString(),
       updatedAt: newStats.mtime.toISOString(),
       size: newStats.size,
       originalFilename: fileEntry.filename || 'unknown'

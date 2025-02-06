@@ -29,10 +29,12 @@ export default defineEventHandler(async (event): Promise<Note[]> => {
               const filePath = join(notebookPath, dirent.name)
               try {
                 const stats = await stat(filePath)
+                const createdAtTime = stats.birthtime.getTime() !== 0 ? stats.birthtime : stats.ctime
+
                 return {
                   name: dirent.name.replace(/\.md$/, ''),
                   notebook,
-                  createdAt: stats.birthtime.toISOString(),
+                  createdAt: createdAtTime.toISOString(),
                   updatedAt: stats.mtime.toISOString(),
                   size: stats.size
                 } satisfies Note

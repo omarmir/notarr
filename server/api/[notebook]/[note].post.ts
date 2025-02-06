@@ -32,11 +32,12 @@ export default defineEventHandlerWithNotebookAndNote(
     try {
       await writeFile(fullPath, fileContent)
       const stats = await stat(fullPath)
+      const createdAtTime = stats.birthtime.getTime() !== 0 ? stats.birthtime : stats.ctime
 
       return {
         notebook: cleanNotebook,
         name: cleanNote,
-        createdAt: stats.birthtime.toISOString(),
+        createdAt: createdAtTime.toISOString(),
         updatedAt: stats.mtime.toISOString(),
         size: stats.size
       } satisfies Note

@@ -1,7 +1,22 @@
 <template>
   <div class="-mx-3 mb-5 flex flex-wrap">
     <div class="mb-6 w-full max-w-full px-3 sm:flex-none">
-      <h1 class="text-xl font-semibold text-gray-900">{{ note }}</h1>
+      <div class="flex flex-col gap-2 divide-y divide-gray-300">
+        <h1 class="text-xl font-semibold text-gray-900">{{ note }}</h1>
+        <div v-if="updated" class="pt-2 text-sm text-gray-500">
+          {{
+            updated.toLocaleString('en-CA', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
+              hour12: true
+            })
+          }}
+        </div>
+      </div>
       <DangerAlert v-if="error">{{ error }}</DangerAlert>
       <MilkdownProvider>
         <Milkdown v-model="md" />
@@ -21,6 +36,7 @@ const note = route.params.note
 const error: Ref<string | null> = ref(null)
 
 const md: Ref<string> = ref('')
+const updated: Ref<Date | null> = ref(null)
 
 const fetchMarkdown = async () => {
   if (!note || !notebook) {
@@ -36,6 +52,13 @@ const fetchMarkdown = async () => {
     const response = await fetch(`/api/${notebook}/${note}/download`)
 
     if (!response.body) throw new Error('No response body')
+
+    console.log()
+
+    const dateUpdated = response.headers.get('Content-Updated')
+    if (dateUpdated) {
+      updated.value = new Date(dateUpdated).getTime() !== 0 ? new Date(dateUpdated) : null
+    }
 
     // Create a reader for the stream
     const reader = response.body.getReader()
@@ -67,7 +90,7 @@ const saveFile = async (markdownText: string) => {
   formData.append('filename', 'example.md') // The filename to use when saving
 
   try {
-    //@ts-expect-error For some reason I can't issue PATCH requests...
+    //@ts-expect-error For some reason I can't issue PATCH requests. I wonder if its because it can't tell the route since the route is dynamic
     await $fetch(`/api/${notebook}/${note}`, { method: 'PATCH', body: formData })
   } catch (err) {
     error.value = `Unable to save: ${(err as FetchError).data.message}`

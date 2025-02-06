@@ -17,11 +17,12 @@ export default defineEventHandlerWithNotebook(async (_event, cleanNotebook, _ful
 
         const filePath = join(targetFolder, dirent.name)
         const stats = await stat(filePath)
+        const createdAtTime = stats.birthtime.getTime() !== 0 ? stats.birthtime : stats.ctime
 
         return {
           name: dirent.name.replace(/\.md$/, ''),
           notebook: cleanNotebook,
-          createdAt: stats.birthtime.toISOString(),
+          createdAt: createdAtTime.toISOString(),
           updatedAt: stats.mtime.toISOString()
         } satisfies Note
       })

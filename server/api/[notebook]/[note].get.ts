@@ -6,10 +6,12 @@ export default defineEventHandlerWithNotebookAndNote(async (_event, cleanNoteboo
   try {
     // Read file contents and stats
     const stats = await stat(fullPath)
+    const createdAtTime = stats.birthtime.getTime() !== 0 ? stats.birthtime : stats.ctime
+
     return {
       name: cleanNote,
       notebook: cleanNotebook,
-      createdAt: stats.birthtime.toISOString(),
+      createdAt: createdAtTime.toISOString(),
       updatedAt: stats.mtime.toISOString(),
       size: stats.size // Optional: Remove if not needed
     }
