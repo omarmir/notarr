@@ -18,12 +18,12 @@
       <input
         v-model="search"
         :class="isSearching ? 'rounded-t-md' : 'rounded-md'"
-        class="peer block w-full appearance-none border border-solid border-gray-200 bg-gray-50 bg-clip-padding py-2 pe-20 pl-12 text-xs font-medium leading-normal text-stone-500 outline-none"
+        class="peer block w-full appearance-none border border-solid border-gray-200 bg-gray-50 bg-clip-padding py-3 pe-20 pl-12 text-base font-medium leading-normal text-stone-500 outline-none"
         placeholder="Search..."
         type="text" />
       <button
         type="button"
-        class="absolute bottom-1.5 end-2.5 rounded-md bg-neutral-200 px-4 py-1 text-xs font-medium text-gray-900 hover:bg-neutral-300 focus:outline-none focus:ring-4 focus:ring-neutral-300"
+        class="absolute bottom-2 end-2.5 rounded-md bg-neutral-200 px-4 py-2 text-xs font-medium text-gray-900 hover:bg-neutral-300 focus:outline-none focus:ring-4 focus:ring-neutral-300"
         @click="clearSearch()">
         Clear
       </button>

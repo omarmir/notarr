@@ -1,5 +1,5 @@
 <template>
-  <nav class="mt-4 flex justify-between" navbar-scroll="true">
+  <nav class="mt-4 flex flex-row gap-2 justify-between" navbar-scroll="true">
     <!--Search-->
     <UniversalSearch></UniversalSearch>
     <!--Search end-->
