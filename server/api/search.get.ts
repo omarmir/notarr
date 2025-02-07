@@ -7,7 +7,7 @@ import escape from 'shell-escape'
 interface SearchResult {
   notebook: string
   note: string | null
-  matchType: 'folder' | 'note_name' | 'content'
+  matchType: 'folder' | 'note' | 'content'
   snippet: string
   score: number
 }
@@ -51,7 +51,7 @@ export default defineEventHandler(async (event): Promise<SearchResult[]> => {
         results.push({
           notebook: folder.name,
           note: noteName,
-          matchType: 'note_name',
+          matchType: 'note',
           snippet: `Note name contains "${rawQuery}"`,
           score: 2
         })
@@ -65,11 +65,9 @@ export default defineEventHandler(async (event): Promise<SearchResult[]> => {
     const searchPath = escape([fullPath])
 
     if (osPlatform === 'linux') {
-      // Use PCRE with grep for Linux (fastest)
-      command = `grep -r -i -m1 -P -oh ".{0,${CONTEXT_CHARS}}${query}.{0,${CONTEXT_CHARS}}" --include="*.md" ${searchPath}`
+      command = `grep -r -i -m1 -P -oH ".{0,${CONTEXT_CHARS}}${query}.{0,${CONTEXT_CHARS}}" --include="*.md" ${searchPath} || true`
     } else if (osPlatform === 'darwin') {
-      // Use BSD grep with extended regex for macOS
-      command = `grep -r -i -m1 -E -oh ".{0,${CONTEXT_CHARS}}${query}.{0,${CONTEXT_CHARS}}" --include="*.md" ${searchPath}`
+      command = `grep -r -i -m1 -E -oH ".{0,${CONTEXT_CHARS}}${query}.{0,${CONTEXT_CHARS}}" --include="*.md" ${searchPath} || true`
     } else {
       // Windows fallback using PowerShell (slower but works)
       const escapedQuery = rawQuery.replace(/"/g, '""')
@@ -106,7 +104,13 @@ export default defineEventHandler(async (event): Promise<SearchResult[]> => {
 
     results.push(...contentResults.filter((r) => r.notebook))
   } catch (error) {
-    console.error('Search error:', error)
+    console.log(error)
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Internal Server Error',
+      data: error,
+      message: 'Unable to search. Check console for details.'
+    })
   }
 
   // Deduplicate and sort
