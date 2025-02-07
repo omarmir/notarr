@@ -1,6 +1,7 @@
 import { readdir } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { platform } from 'node:os'
+import type { ExecSyncOptionsWithStringEncoding } from 'node:child_process'
 import { execSync } from 'node:child_process'
 import escape from 'shell-escape'
 import type { SearchResult } from '~/types/notebook'
@@ -68,23 +69,39 @@ export default defineEventHandler(async (event): Promise<SearchResult[]> => {
         `Get-ChildItem -Path ${searchPath} -Recurse -Filter *.md | ` +
         `Select-String -Pattern "${escapedQuery}" -CaseSensitive:$false | ` +
         `Select-Object -First ${MAX_RESULTS} | ` +
-        `% { $_.Line }`
+        `ForEach-Object { "$($_.Path)|~|$($_.Line)" }`
     }
 
-    const output = execSync(command, {
+    const execOptions: ExecSyncOptionsWithStringEncoding = {
       encoding: 'utf-8',
       maxBuffer: 1024 * 1024 * 10 // 10MB buffer
-    })
+    }
+
+    // When on Windows, use PowerShell as the shell
+    if (osPlatform === 'win32') {
+      execOptions.shell = 'powershell.exe'
+    }
+
+    const output = execSync(command, execOptions)
 
     // Parse results
     const contentResults = output
       .split('\n')
       .filter((line) => line.trim())
       .map((line) => {
-        // Linux/macOS format: /path/notebook/note.md:...match...
-        const [path, ...rest] = line.split(':')
-        const snippet = rest.join(':')
-        const relativePath = path.replace(fullPath, '').split('/').filter(Boolean)
+        let filePath, snippet
+        if (osPlatform === 'win32' && line.includes('|~|')) {
+          // Windows output (custom delimiter)
+          ;[filePath, snippet] = line.split('|~|')
+        } else {
+          // Linux/macOS output (colon-delimited)
+          const [p, ...rest] = line.split(':')
+          filePath = p
+          snippet = rest.join(':')
+        }
+
+        // Split paths on both forward and backslashes
+        const relativePath = filePath.replace(fullPath, '').split(/[/\\]/).filter(Boolean)
 
         return {
           notebook: relativePath[0],
