@@ -124,7 +124,8 @@ const toggleNotes = async (notebook: string) => {
 }
 
 const addedNote = (newNote: Note) => {
-  console.log(newNote)
-  openNotebookNotes.value?.notes.push(newNote)
+  if (openNotebookNotes.value?.notebook === newNote.notebook) {
+    openNotebookNotes.value?.notes.push(newNote)
+  }
 }
 </script>

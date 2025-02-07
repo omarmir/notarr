@@ -1,7 +1,7 @@
 <template>
   <form class="w-full grow" @submit.prevent="addNotebook">
     <label for="search" class="sr-only mb-2 text-sm font-medium text-gray-900">Note</label>
-    <div class="relative mr-4">
+    <div class="relative mr-4 max-w-lg">
       <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-gray-400" viewBox="0 0 24 24">
           <path fill="currentColor" d="M4 22V2h10l6 6v14zm9-13V4H6v16h12V9zM6 4v5zv16z" />
