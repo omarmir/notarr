@@ -82,10 +82,12 @@
                   <DateDisplay :date="notebook.updatedAt"></DateDisplay>
                 </div>
               </td>
-              <td class="flex justify-center py-3">
-                <div
-                  class="flex size-8 items-center justify-center rounded-full bg-emerald-600 text-center text-sm font-medium text-white">
-                  <span>{{ notebook.fileCount }}</span>
+              <td class="table-cell py-3">
+                <div class="flex w-full justify-center">
+                  <div
+                    class="flex size-8 flex-row items-center justify-center rounded-full bg-emerald-600 text-sm font-medium text-white">
+                    <span>{{ notebook.fileCount }}</span>
+                  </div>
                 </div>
               </td>
             </tr>
