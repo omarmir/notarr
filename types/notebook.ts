@@ -24,3 +24,11 @@ export type NoteResponse = {
 }
 
 export type SavingState = 'pending' | 'success' | 'error'
+
+export type SearchResult = {
+  notebook: string
+  note: string | null
+  matchType: 'folder' | 'note' | 'content'
+  snippet: string
+  score: number
+}

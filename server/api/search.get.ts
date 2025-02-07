@@ -3,14 +3,7 @@ import { join, resolve } from 'node:path'
 import { platform } from 'node:os'
 import { execSync } from 'node:child_process'
 import escape from 'shell-escape'
-
-interface SearchResult {
-  notebook: string
-  note: string | null
-  matchType: 'folder' | 'note' | 'content'
-  snippet: string
-  score: number
-}
+import type { SearchResult } from '~/types/notebook'
 
 const CONTEXT_CHARS = 50
 const MAX_RESULTS = 100
