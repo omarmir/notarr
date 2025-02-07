@@ -3,18 +3,21 @@
     <div class="mb-6 w-full max-w-full px-3 sm:flex-none">
       <div class="flex flex-col gap-2 divide-y divide-gray-300">
         <h1 class="text-xl font-semibold text-gray-900">{{ note }}</h1>
-        <div v-if="updated" class="pt-2 text-sm text-gray-500">
-          {{
-            updated.toLocaleString('en-CA', {
-              weekday: 'long',
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-              hour12: true
-            })
-          }}
+        <div class="flex flex-row items-center gap-4 py-2">
+          <div v-if="updated" class="text-sm text-gray-500">
+            {{
+              updated.toLocaleString('en-CA', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true
+              })
+            }}
+          </div>
+          <SavingIndicator :status="savingState"></SavingIndicator>
         </div>
       </div>
       <DangerAlert v-if="error">{{ error }}</DangerAlert>
@@ -29,6 +32,7 @@ import Milkdown from '~/components/MilkdownEditor.vue'
 import { MilkdownProvider } from '@milkdown/vue'
 import { watchDebounced } from '@vueuse/core'
 import type { FetchError } from 'ofetch'
+import type { SavingState } from '~/types/notebook'
 const route = useRoute()
 const notebook = route.params.notebook
 const note = route.params.note
@@ -37,6 +41,7 @@ const error: Ref<string | null> = ref(null)
 
 const md: Ref<string> = ref('')
 const updated: Ref<Date | null> = ref(null)
+const savingState: Ref<SavingState> = ref('success')
 
 const fetchMarkdown = async () => {
   if (!note || !notebook) {
@@ -83,6 +88,7 @@ await fetchMarkdown()
 watchDebounced(md, () => saveFile(md.value), { debounce: 500, maxWait: 5000 })
 
 const saveFile = async (markdownText: string) => {
+  savingState.value = 'pending'
   const blob = new Blob([markdownText], { type: 'text/markdown' })
 
   const formData = new FormData()
@@ -92,8 +98,10 @@ const saveFile = async (markdownText: string) => {
   try {
     //@ts-expect-error For some reason I can't issue PATCH requests. I wonder if its because it can't tell the route since the route is dynamic
     await $fetch(`/api/${notebook}/${note}`, { method: 'PATCH', body: formData })
+    savingState.value = 'success'
   } catch (err) {
     error.value = `Unable to save: ${(err as FetchError).data.message}`
+    savingState.value = 'error'
   }
 }
 </script>

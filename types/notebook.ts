@@ -22,3 +22,5 @@ export type NoteResponse = {
   size: number
   originalFilename: string
 }
+
+export type SavingState = 'pending' | 'success' | 'error'
