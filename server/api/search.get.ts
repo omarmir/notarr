@@ -15,7 +15,7 @@ export default defineEventHandler(async (event): Promise<SearchResult[]> => {
   const { q: rawQuery } = getQuery(event)
 
   if (!rawQuery || typeof rawQuery !== 'string') {
-    throw createError({ statusCode: 400, message: 'Missing query' })
+    throw createError({ statusCode: 400, message: 'Missing query.' })
   }
 
   const results: SearchResult[] = []
@@ -30,7 +30,7 @@ export default defineEventHandler(async (event): Promise<SearchResult[]> => {
         notebook: folder.name,
         note: null,
         matchType: 'folder',
-        snippet: `Folder name contains "${rawQuery}"`,
+        snippet: `Notebook name contains "${rawQuery}"`,
         score: 1
       })
     }
