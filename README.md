@@ -15,6 +15,31 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 
 ## Getting Started
 
+### Docker
+
+You can clone the repo, build the image and run the compose file.
+
+```bash
+git clone https://github.com/omarmir/notarr.git
+cd notarr
+docket build -t notarr .
+```
+
+Edit the compose file (specifically the volumes mount point):
+
+```yml
+environment:
+  - NOTES_PATH=/notes
+volumes:
+  - /path/to/local/folder:/notes
+```
+
+If these are not set then the app will save files locally within itself.
+
+```bash
+docker compose -d up
+```
+
 ### Prerequisites
 
 - Node.js 18+
