@@ -51,7 +51,7 @@ docker compose -d up
 - Nuxt3 and Vue
 - Tailwind 3
 
-### Contribution guide
+### Contributing
 
 Right now, the place that needs the most help is the home page, its hard to read so some help there would be appreciated. Open an issue and discuss the issue first. Notarr is distributed under the GNU Affero General Public License.
 
@@ -68,6 +68,10 @@ pnpm install
 # Start development server
 pnpm run dev
 ```
+
+### API
+
+The notarr server does expose an API and this will be documented better in the future, the app is in VERY early stages so things are still liable to shift. I am now daily driving this for my notes so its not going anywhere and you should expect updates.
 
 ### Features pending
 
