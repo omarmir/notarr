@@ -42,12 +42,13 @@ pnpm install
 
 # Start development server
 pnpm run dev
+```
 
 ### Features pending
+
 - [ ] Rename notes (90% complete)
 - [ ] Rename notebooks (90% complete)
 - [ ] Delete notes
 - [ ] Archive notes
 - [ ] Rollup checklists - Allow users to rollup checklist items from all their notes into its own page for easier task management
 - [ ] File upload (deciding to store in folder vs base64 in md file)
-```
