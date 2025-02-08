@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { join } from 'node:path'
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
+  runtimeConfig: {
+    NOTES_PATH: process.env.NOTES_PATH || join(process.cwd(), 'notes')
+  },
   ssr: false,
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],

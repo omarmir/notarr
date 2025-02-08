@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  notarr:
+    image: notarr:latest
+    ports:
+      - '3030:3000'
+    environment:
+      - NOTES_PATH=/notes
+    #volumes:
+    #  - /path/to/local/folder:/notes

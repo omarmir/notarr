@@ -5,12 +5,12 @@ import type { ExecSyncOptionsWithStringEncoding } from 'node:child_process'
 import { execSync } from 'node:child_process'
 import escape from 'shell-escape'
 import type { SearchResult } from '~/types/notebook'
+import basePath from '~/server/folder'
 
 const CONTEXT_CHARS = 50
 const MAX_RESULTS = 100
 
 export default defineEventHandler(async (event): Promise<SearchResult[]> => {
-  const basePath = join(process.cwd(), 'notes')
   const fullPath = resolve(basePath)
   const { q: rawQuery } = getQuery(event)
 

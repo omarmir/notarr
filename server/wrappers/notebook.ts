@@ -1,6 +1,7 @@
 import type { EventHandlerRequest, H3Event } from 'h3'
 import { access, constants } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
+import basePath from '~/server/folder'
 
 type EventHandlerWithNotebook<T extends EventHandlerRequest, D> = (
   event: H3Event<T>,
@@ -15,7 +16,6 @@ export function defineEventHandlerWithNotebook<T extends EventHandlerRequest, D>
   options?: { notebookCheck: boolean }
 ) {
   return defineEventHandler(async (event) => {
-    const basePath = join(process.cwd(), 'notes')
     const notebook = event.context.params?.notebook
 
     if (!notebook) {

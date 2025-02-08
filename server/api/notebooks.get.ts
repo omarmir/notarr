@@ -1,6 +1,7 @@
 import { readdir, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 import type { Notebook } from '~/types/notebook'
+import basePath from '~/server/folder'
 
 // function waitforme(millisec: number) {
 //   return new Promise((resolve) => {
@@ -11,7 +12,7 @@ import type { Notebook } from '~/types/notebook'
 // }
 
 export default defineEventHandler(async (_event): Promise<Notebook[]> => {
-  const basePath = join(process.cwd(), 'notes')
+  // const basePath = join(process.cwd(), 'notes')
   //await waitforme(1000)
 
   try {

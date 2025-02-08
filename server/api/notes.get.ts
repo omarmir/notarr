@@ -1,12 +1,11 @@
 import { readdir, stat } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import type { Note } from '~/types/notebook'
-
+import basePath from '~/server/folder'
 /**
  * All notes ordered by date updated
  */
 export default defineEventHandler(async (event): Promise<Note[]> => {
-  const basePath = join(process.cwd(), 'notes')
   const query = getQuery<{ display: number }>(event)
 
   try {
