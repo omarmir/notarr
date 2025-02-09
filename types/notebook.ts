@@ -31,7 +31,7 @@ export type RenameNote = {
   updatedAt: string
 }
 
-export type SavingState = 'pending' | 'success' | 'error'
+export type SavingState = 'pending' | 'saving' | 'success' | 'error'
 
 export type SearchResult = {
   notebook: string

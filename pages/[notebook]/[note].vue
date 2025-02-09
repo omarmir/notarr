@@ -17,7 +17,7 @@
               })
             }}
           </div>
-          <SavingIndicator :status="savingState"></SavingIndicator>
+          <SavingIndicator :saving-state></SavingIndicator>
         </div>
       </div>
       <DangerAlert v-if="error">{{ error }}</DangerAlert>
@@ -85,10 +85,14 @@ const fetchMarkdown = async () => {
 // Call when needed (e.g., in onMounted or click handler)
 await fetchMarkdown()
 
+watch(md, () => {
+  savingState.value = 'pending'
+})
+
 watchDebounced(md, () => saveFile(md.value), { debounce: 500, maxWait: 5000 })
 
 const saveFile = async (markdownText: string) => {
-  savingState.value = 'pending'
+  savingState.value = 'saving'
   const blob = new Blob([markdownText], { type: 'text/markdown' })
 
   const formData = new FormData()

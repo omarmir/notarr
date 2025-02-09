@@ -1,7 +1,7 @@
 <template>
   <div>
     <svg
-      v-if="status === 'pending'"
+      v-if="savingState === 'saving'"
       xmlns="http://www.w3.org/2000/svg"
       class="size-4 text-amber-500"
       viewBox="0 0 24 24">
@@ -25,7 +25,7 @@
       </g>
     </svg>
     <svg
-      v-else-if="status === 'success'"
+      v-else-if="savingState === 'success' || savingState === 'pending'"
       xmlns="http://www.w3.org/2000/svg"
       class="size-4 text-emerald-600"
       viewBox="0 0 1024 1024">
@@ -38,5 +38,5 @@
 <script lang="ts" setup>
 import type { SavingState } from '~/types/notebook'
 
-const { status } = defineProps<{ status: SavingState }>()
+const { savingState } = defineProps<{ savingState: SavingState }>()
 </script>
