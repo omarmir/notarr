@@ -14,7 +14,7 @@
         type="text"
         name="name"
         class="my-2 block w-full rounded-md border bg-transparent p-2 pe-16 ps-10 text-sm focus:outline-0 focus:ring-1"
-        placeholder="Note"
+        placeholder="Note name"
         required />
       <button
         type="submit"
