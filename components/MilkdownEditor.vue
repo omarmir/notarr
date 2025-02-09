@@ -58,4 +58,16 @@ useEditor((root) => {
 .milkdown {
   --crepe-color-background: #f3f4f6;
 }
+
+.milkdown milkdown-code-block .cm-content {
+  @apply bg-gray-800;
+}
+
+.milkdown milkdown-code-block {
+  background: transparent;
+}
+
+.milkdown milkdown-code-block .cm-gutters {
+  @apply bg-gray-950 text-slate-400;
+}
 </style>
