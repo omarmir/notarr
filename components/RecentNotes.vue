@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-light/30 relative mb-5 flex min-w-0 flex-col break-words rounded-2xl border border-dashed border-stone-200 bg-clip-border">
+    class="relative mb-5 flex min-w-0 flex-col break-words rounded-md border border-gray-200 bg-white bg-clip-border shadow-sm">
     <!-- card header -->
     <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
       <h3 class="text-dark m-2 ml-0 flex flex-col items-start justify-center">
@@ -22,7 +22,7 @@
               <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Notebook</th>
               <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Created</th>
               <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Updated</th>
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Size</th>
+              <th class="hidden pb-3 text-start text-xs font-medium uppercase text-gray-400 lg:table-cell">Size</th>
             </tr>
           </thead>
           <tbody>
@@ -59,7 +59,7 @@
                   <DateDisplay :date="note.createdAt"></DateDisplay>
                 </div>
               </td>
-              <td>
+              <td class="hidden lg:table-cell">
                 <span class="text-light-inverse text-sm font-medium">{{ note.size ? note.size / 1000 : 0 }}kb</span>
               </td>
             </tr>

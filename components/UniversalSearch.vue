@@ -23,7 +23,7 @@
         type="text" />
       <button
         type="button"
-        class="absolute bottom-2 end-2.5 rounded-md bg-neutral-200 px-4 py-2 text-xs font-medium text-gray-900 hover:bg-neutral-300 focus:outline-none focus:ring-4 focus:ring-neutral-300"
+        class="absolute bottom-2 end-2.5 rounded-md bg-[#306cfe] px-4 py-2 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300"
         @click="clearSearch()">
         Clear
       </button>
@@ -31,7 +31,7 @@
     <div
       v-show="isSearching"
       id="suggestions"
-      class="animate-slideDownAndFade absolute left-0 top-full z-50 w-full rounded-b-md bg-gray-200 pt-1 shadow-lg lg:w-1/2">
+      class="absolute left-0 top-full z-50 w-full animate-slideDownAndFade rounded-b-md bg-gray-200 pt-1 shadow-lg lg:w-1/2">
       <ul class="bg-gray-200">
         <li
           v-if="status === 'pending'"

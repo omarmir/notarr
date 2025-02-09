@@ -1,5 +1,5 @@
 <template>
-  <nav class="mt-4 flex flex-row gap-2 justify-between" navbar-scroll="true">
+  <nav class="mt-4 flex flex-row justify-between gap-2" navbar-scroll="true">
     <!--Search-->
     <UniversalSearch></UniversalSearch>
     <!--Search end-->
@@ -7,7 +7,7 @@
       <!--Sidebar button-->
       <a
         href="javascript:void(0)"
-        class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-2xl border border-solid border-stone-200 bg-transparent text-center align-middle text-base font-medium leading-normal text-stone-500 shadow-none transition-colors duration-150 ease-in-out"
+        class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-2xl border border-solid border-gray-200 bg-white text-center align-middle text-base font-medium leading-normal text-stone-500 shadow-none transition-colors duration-150 ease-in-out"
         @click="toggleSideMenu()">
         <!-- onclick="(function(){document.querySelector('.group\\/sidebar').classList.toggle('-translate-x-full');})();"> -->
         <svg

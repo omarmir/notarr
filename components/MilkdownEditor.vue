@@ -48,14 +48,14 @@ useEditor((root) => {
 </script>
 <style>
 .milkdown-editor div.milkdown > div {
-  @apply px-0 py-2;
+  @apply px-0 py-0;
 }
 
 .milkdown-editor div.milkdown {
-  @apply px-0 py-5;
+  @apply px-0 py-1;
 }
 
 .milkdown {
-  --crepe-color-background: #f9fafb;
+  --crepe-color-background: #f3f4f6;
 }
 </style>

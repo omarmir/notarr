@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-light/30 relative mb-5 flex min-w-0 flex-col break-words rounded-2xl border border-dashed border-stone-200 bg-clip-border">
+    class="relative mb-5 flex min-w-0 flex-col break-words rounded-md border border-gray-200 bg-white bg-clip-border shadow-sm">
     <!-- card header -->
     <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
       <h3 class="text-dark m-2 ml-0 flex flex-col items-start justify-center">
@@ -47,7 +47,7 @@
             <tr
               v-for="notebook in store.notebooks"
               :key="notebook.name"
-              class="border-b border-dashed border-neutral-200 last:border-b-0">
+              class="border-b border-neutral-200 last:border-b-0">
               <td class="flex flex-col">
                 <button
                   class="mt-3 flex flex-row items-center gap-2 hover:text-gray-500"
@@ -85,7 +85,7 @@
               <td class="table-cell py-3">
                 <div class="flex w-full justify-center">
                   <div
-                    class="flex size-8 flex-row items-center justify-center rounded-full bg-emerald-600 text-sm font-medium text-white">
+                    class="flex size-6 flex-row items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-900">
                     <span>{{ notebook.fileCount }}</span>
                   </div>
                 </div>
