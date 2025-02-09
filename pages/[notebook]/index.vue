@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <BaseCard class="px-9 py-5">
     <h1 class="flex flex-row items-center gap-2 text-xl">
       <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 1024 1024">
         <path
@@ -12,7 +12,7 @@
       {{ notebook }}
     </h1>
     <NotebookNotes v-if="notebook" :notebook="notebook" :notes :on-background="true" @added="addNote"></NotebookNotes>
-  </div>
+  </BaseCard>
 </template>
 <script lang="ts" setup>
 import type { Note } from '~/types/notebook'

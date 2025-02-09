@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="relative mb-5 flex min-w-0 flex-col break-words rounded-md border border-gray-200 bg-white bg-clip-border shadow-sm">
+  <BaseCard>
     <!-- card header -->
     <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
       <h3 class="text-dark m-2 ml-0 flex flex-col items-start justify-center">
@@ -67,7 +66,7 @@
         </table>
       </div>
     </div>
-  </div>
+  </BaseCard>
 </template>
 <script lang="ts" setup>
 import type { Note } from '~/types/notebook'
