@@ -23,6 +23,14 @@ export type NoteResponse = {
   originalFilename: string
 }
 
+export type RenameNote = {
+  oldName: string
+  newName: string
+  notebook: string
+  createdAt: string
+  updatedAt: string
+}
+
 export type SavingState = 'pending' | 'success' | 'error'
 
 export type SearchResult = {

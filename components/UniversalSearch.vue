@@ -21,12 +21,7 @@
         class="peer block w-full appearance-none border border-solid border-gray-200 bg-gray-50 bg-clip-padding py-3 pe-20 pl-12 text-base font-medium leading-normal text-stone-500 outline-none"
         placeholder="Search..."
         type="text" />
-      <button
-        type="button"
-        class="absolute bottom-[9px] end-2 rounded-md bg-[#306cfe] px-4 py-2 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300"
-        @click="clearSearch()">
-        Clear
-      </button>
+      <BaseButton class="py-2.5" @click="clearSearch">Clear</BaseButton>
     </div>
     <div
       v-show="isSearching"

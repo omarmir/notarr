@@ -15,6 +15,7 @@
     "config-check": "npx @eslint/config-inspector@latest"
   },
   "dependencies": {
+    "@milkdown/core": "^7.6.2",
     "@milkdown/crepe": "^7.6.2",
     "@milkdown/kit": "^7.6.2",
     "@milkdown/theme-nord": "^7.6.2",

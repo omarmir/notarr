@@ -8,10 +8,12 @@ import { Crepe } from '@milkdown/crepe'
 import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
 import { upload } from '@milkdown/kit/plugin/upload'
 import { imageBlockConfig } from '@milkdown/kit/component/image-block'
+import { editorViewOptionsCtx } from '@milkdown/kit/core'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
 
 const model = defineModel<string>({ required: true })
+const { disabled } = defineProps<{ disabled: boolean }>()
 
 const toBase64 = (file: Blob): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -39,6 +41,11 @@ useEditor((root) => {
       ctx.update(imageBlockConfig.key, (defaultConfig) => ({
         ...defaultConfig,
         onUpload: async (file) => await toBase64(file)
+      }))
+
+      ctx.update(editorViewOptionsCtx, (prev) => ({
+        ...prev,
+        editable: () => !disabled
       }))
     })
     .use(listener)

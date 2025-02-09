@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@milkdown/core':
+        specifier: ^7.6.2
+        version: 7.6.2(@milkdown/ctx@7.6.2)(@milkdown/prose@7.6.2)(@milkdown/transformer@7.6.2(@milkdown/prose@7.6.2))
       '@milkdown/crepe':
         specifier: ^7.6.2
         version: 7.6.2(element-internals-polyfill@0.1.55)

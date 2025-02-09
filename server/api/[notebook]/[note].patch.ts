@@ -1,14 +1,7 @@
 import { writeFile, stat } from 'node:fs/promises'
 import { readMultipartFormData } from 'h3'
 import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
-
-// function waitforme(millisec: number) {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve('')
-//     }, millisec)
-//   })
-// }
+import { waitforme } from '~/server/utils'
 
 export default defineEventHandlerWithNotebookAndNote(async (event, cleanNotebook, cleanNote, fullPath) => {
   // Parse form data
@@ -21,7 +14,7 @@ export default defineEventHandlerWithNotebookAndNote(async (event, cleanNotebook
     })
   }
 
-  // await waitforme(1000)
+  await waitforme(5000)
 
   // Find file in form data
   const fileEntry = formData.find((entry) => entry.name === 'file')

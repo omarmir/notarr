@@ -2,7 +2,7 @@
   <div class="-mx-3 mb-5 flex flex-wrap">
     <div class="mb-6 w-full max-w-full px-3 sm:flex-none">
       <div class="flex flex-col gap-2 divide-y divide-gray-300">
-        <h1 class="text-xl font-semibold text-gray-900">{{ note }}</h1>
+        <NoteName v-model="renamePending" :notebook="notebook" :name="note" :saving-state></NoteName>
         <div class="flex flex-row items-center gap-4 py-2">
           <div v-if="updated" class="text-sm text-gray-500">
             {{
@@ -22,7 +22,7 @@
       </div>
       <DangerAlert v-if="error">{{ error }}</DangerAlert>
       <MilkdownProvider>
-        <Milkdown v-model="md" />
+        <Milkdown v-model="md" :disabled="renamePending" />
       </MilkdownProvider>
     </div>
   </div>
@@ -34,9 +34,9 @@ import { watchDebounced } from '@vueuse/core'
 import type { FetchError } from 'ofetch'
 import type { SavingState } from '~/types/notebook'
 const route = useRoute()
-const notebook = route.params.notebook
-const note = route.params.note
-
+const notebook = typeof route.params.notebook === 'string' ? route.params.notebook : route.params.notebook[0]
+const note = typeof route.params.note === 'string' ? route.params.note : route.params.note[0]
+const renamePending = ref(false)
 const error: Ref<string | null> = ref(null)
 
 const md: Ref<string> = ref('')
