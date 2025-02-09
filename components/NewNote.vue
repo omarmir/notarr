@@ -18,7 +18,7 @@
         required />
       <button
         type="submit"
-        class="absolute bottom-1.5 end-2.5 rounded-md bg-[#306cfe] px-4 py-1 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300">
+        class="absolute bottom-[7px] end-2 rounded-md bg-[#306cfe] px-4 py-1 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300">
         Add
       </button>
     </div>

@@ -23,7 +23,7 @@
         type="text" />
       <button
         type="button"
-        class="absolute bottom-2 end-2.5 rounded-md bg-[#306cfe] px-4 py-2 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300"
+        class="absolute bottom-[9px] end-2 rounded-md bg-[#306cfe] px-4 py-2 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300"
         @click="clearSearch()">
         Clear
       </button>
