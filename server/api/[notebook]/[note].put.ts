@@ -1,7 +1,7 @@
 import { rename, access, constants, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
-import { waitforme } from '~/server/utils'
+// import { waitforme } from '~/server/utils'
 
 /**
  * Renaming note
@@ -10,7 +10,7 @@ export default defineEventHandlerWithNotebookAndNote(
   async (event, cleanNotebook, cleanNote, fullPath, notebookPath) => {
     const body = await readBody(event)
 
-    await waitforme(5000)
+    // await waitforme(5000)
 
     try {
       // Validate and decode parameters

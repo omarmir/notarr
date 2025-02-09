@@ -3,16 +3,7 @@ import { join } from 'node:path'
 import type { Notebook } from '~/types/notebook'
 import basePath from '~/server/folder'
 
-// function waitforme(millisec: number) {
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve('')
-//     }, millisec)
-//   })
-// }
-
 export default defineEventHandler(async (_event): Promise<Notebook[]> => {
-  // const basePath = join(process.cwd(), 'notes')
   //await waitforme(1000)
 
   try {
