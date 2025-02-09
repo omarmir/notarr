@@ -6,12 +6,22 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 
 - 📂 **Notebook-based Organization** - Folders as notebooks, markdown files as notes
 - 🔍 **Universal Search** - Fast content search across all notes (OS-optimized)
-- 📱 **Markdown Support** - Native .md file handling with proper MIME types
+- 🖹 **Markdown Support** - Native .md file handling with proper MIME types
 - 🔒 **Local Storage** - No databases - uses your existing filesystem
 - 🐳 **Docker Ready** - Full container support with sample compose file
 - 🔧 **TypeSafe API** - Fully typed REST endpoints with validation
 - 🚀 **Performance** - Optimized file operations and platform-specific search
 - 📱 **Mobile friendly** - Mobile friendly layout for viewing and editing notes
+
+### Pending
+
+- [ ] **Rename** - Rename notes done, pending notebook
+- [ ] **Delete** - Delete notes and notebooks
+- [ ] **Archive** - Archive notes and notebooks
+- [ ] **Rollup checklists** - Rollup checklist items from all their notes into its own page for easier task management
+- [ ] **File upload** - Images done, need one for file
+- [ ] **Encryption** - Note/Notebook encryption at rest
+- [ ] **Auth** - Some form of basic auth
 
 ## Getting Started
 
@@ -72,12 +82,3 @@ pnpm run dev
 ### API
 
 The notarr server does expose an API and this will be documented better in the future, the app is in VERY early stages so things are still liable to shift. I am now daily driving this for my notes so its not going anywhere and you should expect updates.
-
-### Features pending
-
-- [ ] Rename notes (90% complete)
-- [ ] Rename notebooks (90% complete)
-- [ ] Delete notes
-- [ ] Archive notes
-- [ ] Rollup checklists - Allow users to rollup checklist items from all their notes into its own page for easier task management
-- [ ] File upload (deciding to store in folder vs base64 in md file)
