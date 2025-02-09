@@ -9,6 +9,7 @@ import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
 import { upload } from '@milkdown/kit/plugin/upload'
 import { imageBlockConfig } from '@milkdown/kit/component/image-block'
 import { editorViewOptionsCtx } from '@milkdown/kit/core'
+import { emoji } from '@milkdown/plugin-emoji'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
 
@@ -50,6 +51,7 @@ useEditor((root) => {
     })
     .use(listener)
     .use(upload)
+    .use(emoji)
   return crepe
 })
 </script>
