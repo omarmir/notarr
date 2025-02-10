@@ -1,5 +1,6 @@
 {
-  "name": "nuxt-app",
+  "name": "notarr",
+  "description": "Lightweight, self-hosted note-taking application with filesystem-based storage so you maintain 100% portability of your notes.",
   "private": true,
   "type": "module",
   "scripts": {
