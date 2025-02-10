@@ -26,6 +26,7 @@
               <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Created</th>
               <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Updated</th>
               <th class="pb-3 text-center text-xs font-medium uppercase text-gray-400">Notes</th>
+              <th class="pb-3 text-center text-xs font-medium uppercase text-gray-400"></th>
             </tr>
           </thead>
           <tbody>
@@ -37,6 +38,9 @@
                 <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
               </td>
               <td class="hidden lg:table-cell">
+                <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
+              </td>
+              <td>
                 <div class="mb-2.5 h-2 w-2/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
               </td>
               <td>
@@ -75,6 +79,7 @@
                   </div>
                 </div>
               </td>
+              <td><NotebookDelete :notebook="notebook.name"></NotebookDelete></td>
             </tr>
           </tbody>
         </table>
