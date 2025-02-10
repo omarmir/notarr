@@ -2,7 +2,7 @@
   <div class="-mx-3 mb-5 flex flex-wrap">
     <div class="mb-6 w-full max-w-full px-3 sm:flex-none">
       <div class="flex flex-col gap-2 divide-y divide-gray-300">
-        <NoteNoteName v-model="renamePending" :notebook="notebook" :name="note" :saving-state></NoteNoteName>
+        <NoteName v-model="renamePending" :notebook="notebook" :name="note" :saving-state></NoteName>
         <div class="flex flex-row items-center gap-4 py-2">
           <div v-if="updated" class="text-sm text-gray-500">
             {{
