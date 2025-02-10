@@ -17,15 +17,20 @@
           @click="renameNote">
           Rename
         </CommonButton>
-        <button
-          type="button"
-          class="rounded-md bg-red-500 px-2 py-1 text-sm font-medium text-white hover:bg-red-600"
-          @click="deleteNote()">
-          Delete
-        </button>
+        <CommonButton theme="danger" @click="deleteDialog = true">Delete</CommonButton>
       </div>
     </div>
     <DangerAlert v-if="error" class="w-full">{{ error }}</DangerAlert>
+    <BaseDialog
+      v-model="deleteDialog"
+      theme="danger"
+      title="Delete Note"
+      desc="Are you sure you want to delete this note?">
+      <div class="flex flex-row justify-end gap-4">
+        <CommonButton class="py-2" theme="danger" @click="deleteNote()">Delete</CommonButton>
+        <CommonButton class="py-2" @click="deleteDialog = false">Cancel</CommonButton>
+      </div>
+    </BaseDialog>
   </div>
 </template>
 <script lang="ts" setup>
@@ -40,7 +45,9 @@ const note = ref(name)
 
 const isRenaming = computed(() => name !== note.value)
 const error: Ref<string | null> = ref(null)
+const deleteError: Ref<string | null> = ref(null)
 const actionPending = defineModel<boolean>({ required: true })
+const deleteDialog = ref(false)
 
 const renameNote = async () => {
   actionPending.value = true
@@ -57,10 +64,12 @@ const deleteNote = async () => {
   actionPending.value = true
   const resp = await store.deleteNote(notebook, name)
   if (resp.success) {
+    deleteError.value = null
     navigateTo('/')
+    deleteDialog.value = true
   } else {
-    error.value = null
-    error.value = resp.message
+    deleteError.value = resp.message
   }
+  actionPending.value = true
 }
 </script>

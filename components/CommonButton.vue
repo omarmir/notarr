@@ -1,7 +1,8 @@
 <template>
   <button
     :disabled="disabled || isLoading"
-    class="bg-accent hover:bg-accent-hover flex flex-row items-center gap-2 rounded-md px-4 py-1 text-xs font-medium text-white focus:outline-none focus:ring-4 focus:ring-neutral-300 disabled:bg-gray-300"
+    :class="{ 'bg-red-500 hover:bg-red-700': theme === 'danger' }"
+    class="flex flex-row items-center gap-2 rounded-md bg-accent px-4 py-1 text-xs font-medium text-white hover:bg-accent-hover focus:outline-none focus:ring-4 focus:ring-neutral-300 disabled:bg-gray-300"
     @click="$emit('click')">
     <svg v-if="showLoading && isLoading" xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24">
       <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -27,10 +28,13 @@
   </button>
 </template>
 <script lang="ts" setup>
+import type { Theme } from '~/types/ui'
+
 const {
+  theme = 'primary',
   showLoading = false,
   disabled = false,
   isLoading = false
-} = defineProps<{ isLoading?: boolean; disabled?: boolean; showLoading?: boolean }>()
+} = defineProps<{ isLoading?: boolean; disabled?: boolean; showLoading?: boolean; theme?: Theme }>()
 defineEmits(['click'])
 </script>
