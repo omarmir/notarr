@@ -7,7 +7,7 @@ export default {
     extend: {
       colors: {
         accent: '#306cfe',
-        'accent-hover': '#314cfe'
+        'accent-hover': '#100eee'
       },
       height: {
         svw: '100svw'
