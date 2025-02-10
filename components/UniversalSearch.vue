@@ -1,6 +1,6 @@
 <template>
   <div class="relative w-full">
-    <div class="relative z-30 mr-2 flex w-full items-center sm:mr-0 lg:w-1/2">
+    <div class="relative z-20 mr-2 flex w-full items-center sm:mr-0 lg:w-1/2">
       <span class="absolute top-1/2 ml-4 -translate-y-1/2 leading-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"

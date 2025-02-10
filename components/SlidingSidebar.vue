@@ -56,6 +56,9 @@
       <h3 class="flex select-none items-center text-xs font-medium text-neutral-200">Notes</h3>
       <NoteNotebookNotes :notes="store.currentNotes" :notebook="store.currentNotebook"></NoteNotebookNotes>
     </NoteNotesSidebar>
+    <div
+      v-if="isSidebarOpen"
+      class="fixed left-0 top-0 z-30 flex h-[100%] w-[100%] animate-overlayShow flex-row items-center justify-center bg-gray-950/50"></div>
   </div>
 </template>
 <script lang="ts" setup>
