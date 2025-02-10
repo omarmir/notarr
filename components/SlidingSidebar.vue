@@ -45,17 +45,17 @@
               <span class="flex select-none items-center px-4 py-3 text-xs font-medium text-neutral-200">
                 Notebooks
               </span>
-              <SidebarNotebooks></SidebarNotebooks>
+              <NotebookSidebarNotebooks></NotebookSidebarNotebooks>
             </div>
           </div>
         </div>
       </div>
     </aside>
-    <NotesSidebar v-if="store.currentNotebook" class="hidden lg:flex">
+    <NoteNotesSidebar v-if="store.currentNotebook" class="hidden lg:flex">
       <h2 class="text-lg font-bold text-white">{{ store.currentNotebook }}</h2>
       <h3 class="flex select-none items-center text-xs font-medium text-neutral-200">Notes</h3>
-      <NotebookNotes :notes="store.currentNotes" :notebook="store.currentNotebook"></NotebookNotes>
-    </NotesSidebar>
+      <NoteNotebookNotes :notes="store.currentNotes" :notebook="store.currentNotebook"></NoteNotebookNotes>
+    </NoteNotesSidebar>
   </div>
 </template>
 <script lang="ts" setup>

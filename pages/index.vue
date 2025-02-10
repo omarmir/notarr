@@ -1,8 +1,8 @@
 <template>
   <div>
-    <AllNotebooks></AllNotebooks>
+    <NotebookAllNotebooks></NotebookAllNotebooks>
     <Suspense>
-      <RecentNotes :display="5"></RecentNotes>
+      <NoteRecentNotes :display="5"></NoteRecentNotes>
     </Suspense>
   </div>
 </template>

@@ -16,9 +16,9 @@
         class="my-2 block w-full rounded-md border bg-transparent p-2 pe-16 ps-10 text-sm focus:outline-0 focus:ring-1"
         placeholder="Note name"
         required />
-      <CommonButton type="submit" class="absolute bottom-[7px] end-2">Add</CommonButton>
+      <CommonThemeButton type="submit" class="absolute bottom-[7px] end-2">Add</CommonThemeButton>
     </div>
-    <DangerAlert v-if="error" class="mr-4">{{ error }}</DangerAlert>
+    <CommonDangerAlert v-if="error" class="mr-4">{{ error }}</CommonDangerAlert>
   </form>
 </template>
 <script lang="ts" setup>

@@ -1,5 +1,5 @@
 <template>
-  <BaseCard>
+  <CommonBaseCard>
     <!-- card header -->
     <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
       <h3 class="text-dark m-2 ml-0 flex flex-col items-start justify-center">
@@ -8,15 +8,15 @@
       </h3>
       <div class="min-w-xs relative my-2 flex w-1/3 min-w-72 flex-wrap items-center">
         <div class="relative my-2 flex w-full flex-wrap items-center">
-          <NewNotebook @error="notebookAddedError"></NewNotebook>
+          <NotebookNewNotebook @error="notebookAddedError"></NotebookNewNotebook>
         </div>
       </div>
     </div>
     <!-- end card header -->
     <!-- card body  -->
-    <DangerAlert v-if="error">
+    <CommonDangerAlert v-if="error">
       {{ error }}
-    </DangerAlert>
+    </CommonDangerAlert>
     <div class="block flex-auto px-9 py-8 pt-6">
       <div class="overflow-x-auto">
         <table class="text-dark my-0 w-full border-neutral-200 align-middle">
@@ -48,23 +48,23 @@
               :key="notebook.name"
               class="border-b border-neutral-200 last:border-b-0">
               <td class="flex flex-col">
-                <RenameNotebook :notebook="notebook.name" @toggle="toggleNotes"></RenameNotebook>
-                <NotebookNotes
+                <NotebookRenameNotebook :notebook="notebook.name" @toggle="toggleNotes"></NotebookRenameNotebook>
+                <NoteNotebookNotes
                   v-if="notebook.name === openNotebookNotes?.notebook"
                   class="ml-6"
                   :on-background="true"
                   :notebook="notebook.name"
                   :notes="openNotebookNotes?.notes"
-                  @added="addedNote"></NotebookNotes>
+                  @added="addedNote"></NoteNotebookNotes>
               </td>
               <td class="hidden lg:table-cell">
                 <div class="text-sm font-medium">
-                  <DateDisplay :date="notebook.createdAt"></DateDisplay>
+                  <CommonDateDisplay :date="notebook.createdAt"></CommonDateDisplay>
                 </div>
               </td>
               <td class="hidden py-3 lg:table-cell">
                 <div class="text-sm font-medium">
-                  <DateDisplay :date="notebook.updatedAt"></DateDisplay>
+                  <CommonDateDisplay :date="notebook.updatedAt"></CommonDateDisplay>
                 </div>
               </td>
               <td class="table-cell py-3">
@@ -80,7 +80,7 @@
         </table>
       </div>
     </div>
-  </BaseCard>
+  </CommonBaseCard>
 </template>
 <script lang="ts" setup>
 import { useNotebookStore } from '~/stores/notebooks'

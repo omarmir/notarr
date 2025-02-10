@@ -10,12 +10,12 @@
       :aria-hidden="!open"
       :open="open"
       :title
-      class="animate-popIn z-[100] max-h-[85vh] w-[100%] rounded-[6px] bg-white p-[25px] shadow-md focus:outline-none md:max-w-[70%] lg:w-[30vw]">
+      class="z-[100] max-h-[85vh] w-[100%] animate-popIn rounded-[6px] bg-white p-[25px] shadow-md focus:outline-none md:max-w-[70%] lg:w-[30vw]">
       <div class="flex flex-col gap-4">
         <h2 id="title" class="text-md font-medium text-accent" :class="{ 'text-red-600': theme === 'danger' }">
           {{ title }}
         </h2>
-        <p id="desc" class="text-sm">{{ desc }}</p>
+        <p id="desc" class="text-sm font-normal">{{ desc }}</p>
         <slot></slot>
       </div>
     </dialog>

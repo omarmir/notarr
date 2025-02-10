@@ -25,11 +25,11 @@
         </div>
       </button>
       <div class="lg:hidden">
-        <NotebookNotes
+        <NoteNotebookNotes
           v-if="notebook.name === store.currentNotebook"
           :notebook="notebook.name"
           :notes="store.currentNotes"
-          class="pl-7"></NotebookNotes>
+          class="pl-7"></NoteNotebookNotes>
       </div>
     </li>
   </ul>

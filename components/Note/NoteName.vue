@@ -9,28 +9,28 @@
           aria-details="Allows you to rename the note" />
       </h1>
       <div class="flex flex-row gap-4">
-        <CommonButton
+        <CommonThemeButton
           v-if="isRenaming"
           :show-loading="true"
           :is-loading="actionPending"
           :disabled="savingState === 'pending'"
           @click="renameNote">
           Rename
-        </CommonButton>
-        <CommonButton theme="danger" @click="deleteDialog = true">Delete</CommonButton>
+        </CommonThemeButton>
+        <CommonThemeButton theme="danger" @click="deleteDialog = true">Delete</CommonThemeButton>
       </div>
     </div>
-    <DangerAlert v-if="error" class="w-full">{{ error }}</DangerAlert>
-    <BaseDialog
+    <CommonDangerAlert v-if="error" class="w-full">{{ error }}</CommonDangerAlert>
+    <CommonBaseDialog
       v-model="deleteDialog"
       theme="danger"
       title="Delete Note"
       desc="Are you sure you want to delete this note?">
       <div class="flex flex-row justify-end gap-4">
-        <CommonButton class="py-2" theme="danger" @click="deleteNote()">Delete</CommonButton>
-        <CommonButton class="py-2" @click="deleteDialog = false">Cancel</CommonButton>
+        <CommonThemeButton class="py-2" theme="danger" @click="deleteNote()">Delete</CommonThemeButton>
+        <CommonThemeButton class="py-2" @click="deleteDialog = false">Cancel</CommonThemeButton>
       </div>
-    </BaseDialog>
+    </CommonBaseDialog>
   </div>
 </template>
 <script lang="ts" setup>

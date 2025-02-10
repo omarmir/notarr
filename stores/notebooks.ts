@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { DeleteNote, Note, Notebook, RenameNote, RenameNotebook } from '~/types/notebook'
+import type { DeleteNotebook, DeleteNote, Note, Notebook, RenameNote, RenameNotebook } from '~/types/notebook'
 import type { Result } from '~/types/result'
 import type { FetchError } from 'ofetch'
 
@@ -18,6 +18,30 @@ export const useNotebookStore = defineStore('notebook', () => {
 
   const currentNotes: Ref<Note[] | null> = ref(null)
   const currentNotesError: Ref<string | null> = ref(null)
+
+  const deleteNotebook = async (notebook: string): Promise<Result<DeleteNotebook>> => {
+    try {
+      const resp = await $fetch<DeleteNotebook>(`/api/${notebook}`, {
+        method: 'DELETE'
+      })
+
+      const success: Result<DeleteNotebook> = {
+        success: true,
+        data: resp
+      }
+
+      if (!notebooks.value || notebooks.value?.length === 0) return success
+      notebooks.value = notebooks.value.filter((nb) => nb.name !== resp.notebook)
+
+      return success
+    } catch (err) {
+      const error = err as FetchError
+      return {
+        success: false,
+        message: error.data.message
+      }
+    }
+  }
 
   const renameNotebook = async (oldName: string, newName: string): Promise<Result<RenameNotebook>> => {
     try {
@@ -159,6 +183,7 @@ export const useNotebookStore = defineStore('notebook', () => {
     currentNotes,
     renameNotebook,
     deleteNote,
-    renameNote
+    renameNote,
+    deleteNotebook
   }
 })

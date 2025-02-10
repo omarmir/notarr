@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NewNote :notebook :on-background @added="(note: Note) => emit('added', note)"></NewNote>
+    <NoteNewNote :notebook :on-background @added="(note: Note) => emit('added', note)"></NoteNewNote>
     <ul v-if="notes">
       <li v-for="note in notes" :key="note.name" class="my-4">
         <NuxtLink

@@ -1,5 +1,5 @@
 <template>
-  <BaseCard>
+  <CommonBaseCard>
     <!-- card header -->
     <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
       <h3 class="text-dark m-2 ml-0 flex flex-col items-start justify-center">
@@ -50,12 +50,12 @@
               </td>
               <td class="hidden lg:table-cell">
                 <div class="text-sm font-medium">
-                  <DateDisplay :date="note.createdAt"></DateDisplay>
+                  <CommonDateDisplay :date="note.createdAt"></CommonDateDisplay>
                 </div>
               </td>
               <td class="hidden lg:table-cell">
                 <div class="text-sm font-medium">
-                  <DateDisplay :date="note.createdAt"></DateDisplay>
+                  <CommonDateDisplay :date="note.createdAt"></CommonDateDisplay>
                 </div>
               </td>
               <td class="hidden lg:table-cell">
@@ -66,7 +66,7 @@
         </table>
       </div>
     </div>
-  </BaseCard>
+  </CommonBaseCard>
 </template>
 <script lang="ts" setup>
 import type { Note } from '~/types/notebook'

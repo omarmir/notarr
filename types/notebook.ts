@@ -45,6 +45,12 @@ export type DeleteNote = {
   deleted: boolean
 }
 
+export type DeleteNotebook = {
+  timestamp: string
+  notebook: string
+  deleted: boolean
+}
+
 export type SavingState = 'pending' | 'saving' | 'success' | 'error'
 
 export type SearchResult = {

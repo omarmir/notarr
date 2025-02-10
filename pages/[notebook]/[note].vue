@@ -2,7 +2,7 @@
   <div class="-mx-3 mb-5 flex flex-wrap">
     <div class="mb-6 w-full max-w-full px-3 sm:flex-none">
       <div class="flex flex-col gap-2 divide-y divide-gray-300">
-        <NoteName v-model="renamePending" :notebook="notebook" :name="note" :saving-state></NoteName>
+        <NoteNoteName v-model="renamePending" :notebook="notebook" :name="note" :saving-state></NoteNoteName>
         <div class="flex flex-row items-center gap-4 py-2">
           <div v-if="updated" class="text-sm text-gray-500">
             {{
@@ -17,10 +17,10 @@
               })
             }}
           </div>
-          <SavingIndicator :saving-state></SavingIndicator>
+          <CommonSavingIndicator :saving-state></CommonSavingIndicator>
         </div>
       </div>
-      <DangerAlert v-if="error">{{ error }}</DangerAlert>
+      <CommonDangerAlert v-if="error">{{ error }}</CommonDangerAlert>
       <MilkdownProvider>
         <Milkdown v-model="md" :disabled="renamePending" />
       </MilkdownProvider>
