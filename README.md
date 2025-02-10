@@ -15,7 +15,6 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 
 ### Pending
 
-- [ ] **Delete** - Delete ~~notes and~~ notebooks
 - [ ] **Archive** - Archive notes and notebooks
 - [ ] **Rollup checklists** - Rollup checklist items from all their notes into its own page for easier task management
 - [ ] **File upload** - Images done, need one for file
