@@ -1,6 +1,7 @@
 import { rename, access, constants, stat } from 'node:fs/promises'
 import { join } from 'node:path'
 import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
+import type { RenameNote } from '~/types/notebook'
 // import { waitforme } from '~/server/utils'
 
 /**
@@ -47,7 +48,7 @@ export default defineEventHandlerWithNotebookAndNote(
         notebook: cleanNotebook,
         createdAt: stats.birthtime.toISOString(),
         updatedAt: stats.mtime.toISOString()
-      }
+      } satisfies RenameNote
     } catch (error) {
       if (error instanceof URIError) {
         throw createError({

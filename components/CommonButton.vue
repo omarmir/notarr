@@ -1,7 +1,7 @@
 <template>
   <button
     :disabled="disabled || isLoading"
-    class="flex flex-row items-center gap-2 rounded-md bg-[#306cfe] px-4 py-1 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300 disabled:bg-gray-300"
+    class="bg-accent hover:accent-accent-hover flex flex-row items-center gap-2 rounded-md px-4 py-1 text-xs font-medium text-white focus:outline-none focus:ring-4 focus:ring-neutral-300 disabled:bg-gray-300"
     @click="$emit('click')">
     <svg v-if="showLoading && isLoading" xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24">
       <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

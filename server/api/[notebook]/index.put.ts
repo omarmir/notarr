@@ -1,6 +1,7 @@
 import { rename, access, constants, stat } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { defineEventHandlerWithNotebook } from '~/server/wrappers/notebook'
+import type { RenameNotebook } from '~/types/notebook'
 
 export default defineEventHandlerWithNotebook(
   async (event, cleanNotebook, fullPath, targetFolder, basePath) => {
@@ -44,7 +45,7 @@ export default defineEventHandlerWithNotebook(
         newName: cleanNewName,
         createdAt: stats.birthtime.toISOString(),
         updatedAt: stats.mtime.toISOString()
-      }
+      } satisfies RenameNotebook
     } catch (error) {
       if (error instanceof URIError) {
         throw createError({

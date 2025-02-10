@@ -1,9 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
     extend: {
+      colors: {
+        accent: '#306cfe',
+        'accent-hover': '#314cfe'
+      },
       height: {
         svw: '100svw'
       },

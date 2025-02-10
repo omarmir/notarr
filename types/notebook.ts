@@ -23,6 +23,13 @@ export type NoteResponse = {
   originalFilename: string
 }
 
+export type RenameNotebook = {
+  oldName: string
+  newName: string
+  createdAt: string
+  updatedAt: string
+}
+
 export type RenameNote = {
   oldName: string
   newName: string

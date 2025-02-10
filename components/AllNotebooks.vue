@@ -48,21 +48,7 @@
               :key="notebook.name"
               class="border-b border-neutral-200 last:border-b-0">
               <td class="flex flex-col">
-                <button
-                  class="mt-3 flex flex-row items-center gap-2 hover:text-gray-500"
-                  @click="toggleNotes(notebook.name)">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="size-5 shrink-0" viewBox="0 0 1024 1024">
-                    <path
-                      fill="currentColor"
-                      d="M192 128v768h640V128zm-32-64h704a32 32 0 0 1 32 32v832a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V96a32 32 0 0 1 32-32" />
-                    <path
-                      fill="currentColor"
-                      d="M672 128h64v768h-64zM96 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32" />
-                  </svg>
-                  <div class="flex flex-col justify-start text-left text-sm font-semibold">
-                    {{ notebook.name }}
-                  </div>
-                </button>
+                <RenameNotebook :notebook="notebook.name" @toggle="toggleNotes"></RenameNotebook>
                 <NotebookNotes
                   v-if="notebook.name === openNotebookNotes?.notebook"
                   class="ml-6"

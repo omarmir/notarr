@@ -16,11 +16,7 @@
         class="my-2 block w-full rounded-md border bg-transparent p-2 pe-16 ps-10 text-sm focus:outline-0 focus:ring-1"
         placeholder="Note name"
         required />
-      <button
-        type="submit"
-        class="absolute bottom-[7px] end-2 rounded-md bg-[#306cfe] px-4 py-1 text-xs font-medium text-white hover:bg-[#314cfe] focus:outline-none focus:ring-4 focus:ring-neutral-300">
-        Add
-      </button>
+      <CommonButton type="submit" class="absolute bottom-[7px] end-2">Add</CommonButton>
     </div>
     <DangerAlert v-if="error" class="mr-4">{{ error }}</DangerAlert>
   </form>
