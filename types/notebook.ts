@@ -38,6 +38,13 @@ export type RenameNote = {
   updatedAt: string
 }
 
+export type DeleteNote = {
+  name: string
+  timestamp: string
+  notebook: string
+  deleted: boolean
+}
+
 export type SavingState = 'pending' | 'saving' | 'success' | 'error'
 
 export type SearchResult = {
