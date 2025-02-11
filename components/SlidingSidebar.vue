@@ -26,8 +26,8 @@
         <div class="relative">
           <div class="flex w-full flex-col font-medium">
             <!-- menu item -->
-            <div>
-              <span class="flex cursor-pointer select-none items-center rounded-xl px-4 py-3">
+            <ul>
+              <li class="flex cursor-pointer select-none items-center rounded-xl px-4 py-3">
                 <NuxtLink
                   to="/"
                   class="flex flex-grow flex-row items-center gap-2 text-base font-medium text-gray-400 hover:text-white">
@@ -38,8 +38,20 @@
                   </svg>
                   Home
                 </NuxtLink>
-              </span>
-            </div>
+              </li>
+              <li class="flex cursor-pointer select-none items-center rounded-xl px-4 py-3">
+                <button
+                  class="flex flex-grow flex-row items-center gap-2 text-base font-medium text-gray-400 hover:text-white"
+                  @click="logout()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h7v2H5v14h7v2zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5z" />
+                  </svg>
+                  Logout
+                </button>
+              </li>
+            </ul>
             <!-- menu item -->
             <div>
               <span class="flex select-none items-center px-4 py-3 text-xs font-medium text-neutral-200">
@@ -62,11 +74,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { NuxtLink } from '#components'
 import { onClickOutside } from '@vueuse/core'
 const { isSidebarOpen } = useSidebar()
 const input = useTemplateRef('sidebar')
 const store = useNotebookStore()
 
 onClickOutside(input, () => (isSidebarOpen.value = false))
+
+const logout = async () => {
+  await $fetch('/api/auth/logout')
+  navigateTo('/login')
+}
 </script>

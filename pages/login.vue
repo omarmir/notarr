@@ -59,6 +59,7 @@ const login = async () => {
       method: 'POST',
       body: { key: secretKey.value }
     })
+    navigateTo('/')
   } catch (err) {
     console.log(err)
     error.value = (err as FetchError).data.message
