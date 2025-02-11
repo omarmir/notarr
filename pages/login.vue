@@ -31,12 +31,13 @@
         <input
           id="secret-key"
           v-model="secretKey"
-          type="text"
+          type="password"
           name="secret-key"
           class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pe-16 ps-10 text-sm text-gray-900 focus:outline-0 focus:ring-1"
           placeholder="Secret Key"
           required />
       </div>
+      <p class="text-sm font-medium text-red-500">{{ error }}</p>
       <CommonThemeButton type="submit" class="flex self-end py-2">Login</CommonThemeButton>
     </form>
   </CommonBaseCard>
