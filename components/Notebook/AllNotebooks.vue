@@ -30,7 +30,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-if="store.status === 'pending'" class="animate-pulse">
+            <tr v-if="notebookStore.status === 'pending'" class="animate-pulse">
               <td>
                 <div class="mb-2.5 h-2 w-4/5 rounded-full bg-gray-200 dark:bg-gray-700"></div>
               </td>
@@ -48,7 +48,7 @@
               </td>
             </tr>
             <tr
-              v-for="notebook in store.notebooks"
+              v-for="notebook in notebookStore.notebooks"
               :key="notebook.name"
               class="border-b border-neutral-200 last:border-b-0">
               <td class="flex flex-col">
@@ -88,10 +88,10 @@
   </CommonBaseCard>
 </template>
 <script lang="ts" setup>
-import { useNotebookStore } from '~/stores/notebooks'
 import type { Note } from '~/types/notebook'
 
-const store = useNotebookStore()
+const store = useNoteStore()
+const notebookStore = useNotebookStore()
 
 const error: Ref<string | null> = ref(null)
 const openError: Ref<{ notebook: string; error: string } | null> = ref(null)

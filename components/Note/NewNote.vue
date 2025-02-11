@@ -22,10 +22,11 @@
   </form>
 </template>
 <script lang="ts" setup>
-import { useNotebookStore } from '~/stores/notebooks'
 import type { Note } from '~/types/notebook'
 const { notebook, onBackground = false } = defineProps<{ notebook: string; onBackground?: boolean }>()
-const store = useNotebookStore()
+
+const store = useNoteStore()
+const noteBookStore = useNotebookStore()
 
 const newNote: Ref<string | null> = ref('')
 const error: Ref<string | null> = ref(null)
@@ -38,7 +39,7 @@ const addNotebook = async () => {
     return
   }
 
-  const resp = await store.addNote(notebook, newNote.value)
+  const resp = await store.addNote(notebook, newNote.value, noteBookStore.currentNotebook)
 
   if (resp.success) {
     newNote.value = null

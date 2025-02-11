@@ -50,40 +50,40 @@ export default {
         },
         overlayShow: {
           from: { opacity: 0 },
-          to: { opacity: 1 },
+          to: { opacity: 1 }
         },
-        popIn :{
+        popIn: {
           from: { opacity: 0, transform: 'scale(0.96)' },
-          to: { opacity: 1, transform: 'scale(1)' },
+          to: { opacity: 1, transform: 'scale(1)' }
         },
         contentShow: {
           from: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.96)' },
-          to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+          to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' }
         },
         slideDownAndFade: {
           from: { opacity: 0, transform: 'translateY(-2px)' },
-          to: { opacity: 1, transform: 'translateY(0)' },
+          to: { opacity: 1, transform: 'translateY(0)' }
         },
         slideLeftAndFade: {
           from: { opacity: 0, transform: 'translateX(2px)' },
-          to: { opacity: 1, transform: 'translateX(0)' },
+          to: { opacity: 1, transform: 'translateX(0)' }
         },
         slideUpAndFade: {
           from: { opacity: 0, transform: 'translateY(2px)' },
-          to: { opacity: 1, transform: 'translateY(0)' },
+          to: { opacity: 1, transform: 'translateY(0)' }
         },
         slideRightAndFade: {
           from: { opacity: 0, transform: 'translateX(-2px)' },
-          to: { opacity: 1, transform: 'translateX(0)' },
+          to: { opacity: 1, transform: 'translateX(0)' }
         },
         slideDown: {
           from: { height: 0 },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 'var(--radix-accordion-content-height)' }
         },
         slideUp: {
           from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: 0 },
-        },
+          to: { height: 0 }
+        }
       },
       animation: {
         linspin: 'linspin 1568.2353ms linear infinite',
@@ -105,7 +105,7 @@ export default {
         slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideRightAndFade: 'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
         slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
-        slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+        slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)'
       }
     }
   }

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { DeleteNotebook, DeleteNote, Note, Notebook, RenameNote, RenameNotebook } from '~/types/notebook'
+import type { DeleteNotebook, Note, Notebook, RenameNotebook } from '~/types/notebook'
 import type { Result } from '~/types/result'
 import type { FetchError } from 'ofetch'
 
@@ -17,7 +17,6 @@ export const useNotebookStore = defineStore('notebook', () => {
   const currentNotebook: Ref<string | null> = ref(null)
 
   const currentNotes: Ref<Note[] | null> = ref(null)
-  const currentNotesError: Ref<string | null> = ref(null)
 
   const deleteNotebook = async (notebook: string): Promise<Result<DeleteNotebook>> => {
     try {
@@ -94,79 +93,6 @@ export const useNotebookStore = defineStore('notebook', () => {
       currentNotebook.value = null
     } else {
       currentNotebook.value = notebook
-      getNotes()
-    }
-  }
-
-  const getNotes = async () => {
-    if (!currentNotebook.value) return
-
-    const resp = await getNotebookNotes(currentNotebook.value)
-
-    if (resp.success) {
-      currentNotes.value = resp.data
-      currentNotesError.value = null
-    } else {
-      currentNotesError.value = resp.message
-    }
-  }
-
-  const getNotebookNotes = async (notebook: string): Promise<Result<Note[]>> => {
-    try {
-      const resp = await $fetch<Note[]>(`/api/${notebook}/notes`)
-      return { success: true, data: resp }
-    } catch (error) {
-      return { success: false, message: (error as FetchError).data.message }
-    }
-  }
-
-  const addNote = async (notebook: string, note: string): Promise<Result<Note>> => {
-    try {
-      const resp = await $fetch<Note>(`/api/${notebook}/${note}`, {
-        method: 'POST'
-      })
-      if (currentNotebook.value === notebook) currentNotes.value?.push(resp)
-      return {
-        success: true,
-        data: resp
-      }
-    } catch (error) {
-      return { success: false, message: (error as FetchError).data.message }
-    }
-  }
-
-  const deleteNote = async (notebook: string, note: string): Promise<Result<DeleteNote>> => {
-    try {
-      const resp = await $fetch<DeleteNote>(`/api/${notebook}/${note}`, {
-        method: 'DELETE'
-      })
-      if (currentNotebook.value === notebook && currentNotes.value && currentNotes.value.length > 0)
-        currentNotes.value = currentNotes.value.filter((item) => item.name !== note && item.notebook !== notebook)
-      return {
-        success: true,
-        data: resp
-      }
-    } catch (error) {
-      return { success: false, message: (error as FetchError).data.message }
-    }
-  }
-
-  const renameNote = async (notebook: string, note: string, newName: string): Promise<Result<RenameNotebook>> => {
-    try {
-      const rename = await $fetch<RenameNote>(`/api/${notebook}/${note}`, {
-        body: { newName },
-        method: 'PUT'
-      })
-      return {
-        success: true,
-        data: rename
-      }
-    } catch (e) {
-      const err = e as FetchError
-      return {
-        success: false,
-        message: err.data?.message ?? err
-      }
     }
   }
 
@@ -174,16 +100,12 @@ export const useNotebookStore = defineStore('notebook', () => {
     notebooks,
     refresh,
     addNotebook,
-    addNote,
     status,
     error,
     toggleNotebook,
-    getNotebookNotes,
     currentNotebook,
     currentNotes,
     renameNotebook,
-    deleteNote,
-    renameNote,
     deleteNotebook
   }
 })

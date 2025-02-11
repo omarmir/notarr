@@ -38,7 +38,8 @@ import type { SavingState } from '~/types/notebook'
 
 const { name, notebook, savingState } = defineProps<{ name: string; savingState: SavingState; notebook: string }>()
 
-const store = useNotebookStore()
+const store = useNoteStore()
+const notebookStore = useNotebookStore()
 
 const note = ref(name)
 // const router = useRouter()
@@ -62,7 +63,7 @@ const renameNote = async () => {
 
 const deleteNote = async () => {
   actionPending.value = true
-  const resp = await store.deleteNote(notebook, name)
+  const resp = await store.deleteNote(notebook, name, notebookStore.currentNotebook)
   if (resp.success) {
     deleteError.value = null
     navigateTo('/')
