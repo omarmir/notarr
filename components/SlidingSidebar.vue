@@ -83,6 +83,7 @@ onClickOutside(input, () => (isSidebarOpen.value = false))
 
 const logout = async () => {
   await $fetch('/api/auth/logout')
+  localStorage.setItem('isLoggedIn', 'false')
   navigateTo('/login')
 }
 </script>

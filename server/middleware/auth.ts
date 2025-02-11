@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import SECRET_KEY from '~/server/key'
 
 export default defineEventHandler((event) => {
-  if (event.path === '/login' || event.path === '/api/auth/login') return
+  if (!event.path.startsWith('/api/') || event.path === '/api/auth/login') return
 
   const cookie = getCookie(event, 'token')
 
@@ -16,7 +16,6 @@ export default defineEventHandler((event) => {
 
   try {
     jwt.verify(cookie, SECRET_KEY)
-    event.context.authenticated = true
   } catch (err) {
     console.log(err)
     throw createError({

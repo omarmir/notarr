@@ -59,6 +59,7 @@ const login = async () => {
       method: 'POST',
       body: { key: secretKey.value }
     })
+    localStorage.setItem('isLoggedIn', 'true')
     navigateTo('/')
   } catch (err) {
     console.log(err)
