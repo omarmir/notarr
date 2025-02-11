@@ -26,6 +26,14 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 
 ### Docker
 
+You can use the following published image with the compose file
+
+```bash
+omarmir/notarr
+```
+
+OR
+
 You can clone the repo, build the image and run the compose file.
 
 ```bash
