@@ -5,26 +5,18 @@ import type { FetchError } from 'ofetch'
 
 export const useNoteStore = defineStore('note', () => {
   const currentNotes: Ref<Note[] | null> = ref(null)
-  const currentNotesError: Ref<string | null> = ref(null)
 
-  const getNotes = async (notebook: string) => {
-    if (!notebook) return
-
-    const resp = await getNotebookNotes(notebook)
-
-    if (resp.success) {
-      currentNotes.value = resp.data
-      currentNotesError.value = null
-    } else {
-      currentNotesError.value = resp.message
-    }
-  }
-
-  const getNotebookNotes = async (notebook: string): Promise<Result<Note[]>> => {
+  const getNotebookNotes = async (notebook: string, setAsCurrent?: boolean): Promise<Result<Note[]>> => {
     try {
       const resp = await $fetch<Note[]>(`/api/${notebook}/notes`)
+      if (setAsCurrent) {
+        currentNotes.value = resp
+      }
       return { success: true, data: resp }
     } catch (error) {
+      if (setAsCurrent) {
+        currentNotes.value = null
+      }
       return { success: false, message: (error as FetchError).data.message }
     }
   }
@@ -88,7 +80,6 @@ export const useNoteStore = defineStore('note', () => {
     getNotebookNotes,
     currentNotes,
     deleteNote,
-    renameNote,
-    getNotes
+    renameNote
   }
 })

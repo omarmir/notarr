@@ -15,9 +15,6 @@ export const useNotebookStore = defineStore('notebook', () => {
   })
 
   const currentNotebook: Ref<string | null> = ref(null)
-
-  const currentNotes: Ref<Note[] | null> = ref(null)
-
   const deleteNotebook = async (notebook: string): Promise<Result<DeleteNotebook>> => {
     try {
       const resp = await $fetch<DeleteNotebook>(`/api/${notebook}`, {
@@ -104,7 +101,6 @@ export const useNotebookStore = defineStore('notebook', () => {
     error,
     toggleNotebook,
     currentNotebook,
-    currentNotes,
     renameNotebook,
     deleteNotebook
   }

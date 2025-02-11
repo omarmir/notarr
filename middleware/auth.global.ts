@@ -1,4 +1,3 @@
-// import { useAuthStore } from "~/stores/auth"
 export default defineNuxtRouteMiddleware((to, _from) => {
   if (to.path !== '/login') {
     const isLoggedId = localStorage.getItem('isLoggedIn')

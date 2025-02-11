@@ -60,6 +60,7 @@
                   :notebook="notebook.name"
                   :notes="openNotebookNotes?.notes"
                   @added="addedNote"></NoteNotebookNotes>
+                <CommonDangerAlert v-if="openError">{{ openError }}</CommonDangerAlert>
               </td>
               <td class="hidden pb-3 pt-4 align-top lg:table-cell">
                 <div class="text-sm font-medium">

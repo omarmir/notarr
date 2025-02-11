@@ -11,7 +11,7 @@
       <button
         type="button"
         class="text-muted flex flex-grow flex-row items-center gap-2 overflow-x-clip text-left text-base font-medium text-gray-400 hover:text-white"
-        @click="store.toggleNotebook(notebook.name)">
+        @click="toggleNotebook(notebook.name)">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 1024 1024">
           <path
             fill="currentColor"
@@ -28,8 +28,9 @@
         <NoteNotebookNotes
           v-if="notebook.name === store.currentNotebook"
           :notebook="notebook.name"
-          :notes="store.currentNotes"
+          :notes="noteStore.currentNotes"
           class="pl-7"></NoteNotebookNotes>
+        <CommonDangerAlert v-if="error" class="mt-4">{{ error }}</CommonDangerAlert>
       </div>
     </li>
   </ul>
@@ -38,4 +39,17 @@
 import { useNotebookStore } from '~/stores/notebooks'
 
 const store = useNotebookStore()
+const noteStore = useNoteStore()
+const isLoadingNotes = ref(false)
+const error: Ref<string | null> = ref(null)
+
+const toggleNotebook = async (notebook: string) => {
+  isLoadingNotes.value = true
+  store.toggleNotebook(notebook)
+  const resp = await noteStore.getNotebookNotes(notebook, true)
+
+  if (!resp.success) error.value = resp.message
+
+  isLoadingNotes.value = false
+}
 </script>

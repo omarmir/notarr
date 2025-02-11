@@ -30,7 +30,8 @@
               <li class="flex cursor-pointer select-none items-center rounded-xl px-4 py-3">
                 <NuxtLink
                   to="/"
-                  class="flex flex-grow flex-row items-center gap-2 text-base font-medium text-gray-400 hover:text-white">
+                  class="flex flex-grow flex-row items-center gap-2 text-base font-medium text-gray-400 hover:text-white"
+                  @click="outsideClick()">
                   <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24">
                     <path
                       fill="currentColor"
@@ -66,23 +67,25 @@
     <NoteNotesSidebar v-if="store.currentNotebook" class="hidden lg:flex">
       <h2 class="text-lg font-bold text-white">{{ store.currentNotebook }}</h2>
       <h3 class="flex select-none items-center text-xs font-medium text-neutral-200">Notes</h3>
-      <NoteNotebookNotes :notes="store.currentNotes" :notebook="store.currentNotebook"></NoteNotebookNotes>
+      <NoteNotebookNotes :notes="noteStore.currentNotes" :notebook="store.currentNotebook"></NoteNotebookNotes>
     </NoteNotesSidebar>
     <div
       v-if="isSidebarOpen"
-      class="fixed left-0 top-0 z-30 flex h-[100%] w-[100%] animate-overlayShow flex-row items-center justify-center bg-gray-950/50"></div>
+      class="fixed left-0 top-0 z-30 flex h-[100%] w-[100%] animate-overlayShow flex-row items-center justify-center bg-gray-950/50 lg:hidden"></div>
   </div>
 </template>
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core'
-const { isSidebarOpen } = useSidebar()
+const { isSidebarOpen, outsideClick } = useSidebar()
 const input = useTemplateRef('sidebar')
 const store = useNotebookStore()
+const noteStore = useNoteStore()
 
 onClickOutside(input, () => (isSidebarOpen.value = false))
 
 const logout = async () => {
   await $fetch('/api/auth/logout')
+  outsideClick()
   localStorage.setItem('isLoggedIn', 'false')
   navigateTo('/login')
 }
