@@ -18,11 +18,11 @@ FROM base AS build
 # Copy package.json and pnpm-lock.yaml
 COPY --link package.json pnpm-lock.yaml ./
 
-# Install dependencies using PNPM
-RUN pnpm install --frozen-lockfile
-
 # Copy application source code
 COPY --link . .
+
+# Install dependencies using PNPM
+RUN pnpm install --frozen-lockfile
 
 # Build the application
 RUN pnpm build
