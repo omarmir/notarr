@@ -6,6 +6,10 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 
 **Auth** : If you don't set the SECRET_KEY environment variable the default secret key is `notarr` though you should set key
 
+## Screenshot
+
+![screenshot](Screenshot From 2025-02-11 11-04-24)
+
 ## Features
 
 - 📂 **Notebook-based Organization** - Folders as notebooks, markdown files as notes
