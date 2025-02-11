@@ -39,6 +39,7 @@ Edit the compose file (specifically the volumes mount point):
 ```yml
 environment:
   - NOTES_PATH=/notes
+  - SECRET_KEY=<yourkey>
 volumes:
   - /path/to/local/folder:/notes
 ```
