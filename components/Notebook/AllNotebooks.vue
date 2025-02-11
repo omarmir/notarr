@@ -22,7 +22,7 @@
         <table class="text-dark my-0 w-full border-neutral-200 align-middle">
           <thead class="align-bottom">
             <tr class="text-secondary-dark text-[0.95rem]">
-              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400">Notebook</th>
+              <th class="pb-3 text-start text-xs font-medium uppercase text-gray-400 lg:w-1/2">Notebook</th>
               <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Created</th>
               <th class="hidden pb-3 text-center text-xs font-medium uppercase text-gray-400 lg:table-cell">Updated</th>
               <th class="pb-3 text-center text-xs font-medium uppercase text-gray-400">Notes</th>
@@ -55,23 +55,23 @@
                 <NotebookRenameNotebook :notebook="notebook.name" @toggle="toggleNotes"></NotebookRenameNotebook>
                 <NoteNotebookNotes
                   v-if="notebook.name === openNotebookNotes?.notebook"
-                  class="ml-6"
+                  class="ml-8"
                   :on-background="true"
                   :notebook="notebook.name"
                   :notes="openNotebookNotes?.notes"
                   @added="addedNote"></NoteNotebookNotes>
               </td>
-              <td class="hidden lg:table-cell">
+              <td class="hidden pb-3 pt-4 align-top lg:table-cell">
                 <div class="text-sm font-medium">
                   <CommonDateDisplay :date="notebook.createdAt"></CommonDateDisplay>
                 </div>
               </td>
-              <td class="hidden py-3 lg:table-cell">
+              <td class="hidden pb-3 pt-4 align-top lg:table-cell">
                 <div class="text-sm font-medium">
                   <CommonDateDisplay :date="notebook.updatedAt"></CommonDateDisplay>
                 </div>
               </td>
-              <td class="table-cell py-3">
+              <td class="table-cell pb-3 pt-4 align-top">
                 <div class="flex w-full justify-center">
                   <div
                     class="flex size-6 flex-row items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-900">
@@ -79,7 +79,7 @@
                   </div>
                 </div>
               </td>
-              <td><NotebookDelete :notebook="notebook.name"></NotebookDelete></td>
+              <td class="pb-3 pt-4 align-top"><NotebookDelete :notebook="notebook.name"></NotebookDelete></td>
             </tr>
           </tbody>
         </table>
