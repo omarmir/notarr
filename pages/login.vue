@@ -37,36 +37,20 @@
           placeholder="Secret Key"
           required />
       </div>
-      <p class="text-sm font-medium text-red-500">{{ error }}</p>
+      <p v-if="store.error" class="text-sm font-medium text-red-500">{{ store.error }}</p>
       <CommonThemeButton type="submit" class="flex self-end py-2">Login</CommonThemeButton>
     </form>
   </CommonBaseCard>
 </template>
 <script lang="ts" setup>
-import type { FetchError } from 'ofetch'
+import { useAuthStore } from '~/stores/auth'
 
 definePageMeta({
   layout: 'auth'
 })
 
+const store = useAuthStore()
 const secretKey: Ref<string | null> = ref(null)
-const isLoggingIn: Ref<boolean> = ref(false)
-const error: Ref<string | null> = ref(null)
 
-const login = async () => {
-  isLoggingIn.value = true
-  try {
-    await $fetch(`/api/auth/login`, {
-      method: 'POST',
-      body: { key: secretKey.value }
-    })
-    localStorage.setItem('isLoggedIn', 'true')
-    navigateTo('/')
-  } catch (err) {
-    console.log(err)
-    error.value = (err as FetchError).data.message
-  } finally {
-    isLoggingIn.value = false
-  }
-}
+const login = () => store.login(secretKey.value)
 </script>
