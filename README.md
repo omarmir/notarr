@@ -27,6 +27,7 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 - [ ] **Rollup checklists** - Rollup checklist items from all their notes into its own page for easier task management
 - [ ] **File upload** - Images done, need one for file
 - [ ] **Encryption** - Note/Notebook encryption at rest
+- [ ] **Apps** - Mobile/desktop apps (possibly via PWA)
 
 ## Getting Started
 
