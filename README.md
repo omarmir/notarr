@@ -8,7 +8,7 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 
 ## Screenshot
 
-![screenshot](Screenshot From 2025-02-11 11-04-24)
+![Screenshot](/screenshot.png?raw=true 'Notarr screenshot')
 
 ## Features
 
