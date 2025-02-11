@@ -1,5 +1,7 @@
 # Notarr
 
+**CONSIDER THIS PRE-ALPHA**: There will be bugs even I am daily driving this for myself.
+
 A lightweight, self-hosted note-taking application with filesystem-based storage. Built with Nuxt 3, TypeScript, and designed for simplicity and performance. The primary goal of this app is to manage your notes in a manner that is 100% portable. You should be able to manage your notes in terminal, notepad or any other app - there is no database, just folders and files.
 
 **Auth** : If you don't set the SECRET_KEY environment variable the default secret key is `notarr` though you should set key
