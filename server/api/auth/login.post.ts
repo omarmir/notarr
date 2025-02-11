@@ -1,8 +1,5 @@
 import jwt from 'jsonwebtoken'
-
-const envSecretKey = process.env.SECRET_KEY
-
-const SECRET_KEY = envSecretKey ?? 'TEST'
+import SECRET_KEY from '~/server/key'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -20,7 +17,7 @@ export default defineEventHandler(async (event) => {
   // Create JWT token
   const token = jwt.sign({ app: 'notarr' }, SECRET_KEY, { expiresIn: '7d' })
 
-  setCookie(event, 'auth_token', token, {
+  setCookie(event, 'token', token, {
     httpOnly: true,
     sameSite: 'strict',
     maxAge: 3600 * 24 * 7, // 7 days

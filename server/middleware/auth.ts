@@ -1,12 +1,15 @@
 import jwt from 'jsonwebtoken'
-
-const envSecretKey = process.env.SECRET_KEY
-
-const SECRET_KEY = envSecretKey ?? 'TEST'
+import { navigateTo } from 'nuxt/app'
+import SECRET_KEY from '~/server/key'
 
 export default defineEventHandler((event) => {
-  const authHeader = getHeader(event, 'authorization')
-  if (!authHeader) {
+  console.log(event.path)
+
+  if (event.path === '/login' || event.path === '/api/auth/login') return
+
+  const cookie = getCookie(event, 'token')
+
+  if (!cookie) {
     throw createError({
       statusCode: 401,
       statusMessage: 'Unauthorized',
@@ -15,9 +18,9 @@ export default defineEventHandler((event) => {
   }
 
   try {
-    const token = authHeader.split(' ')[1] // Expecting "Bearer <token>"
-    jwt.verify(token, SECRET_KEY)
+    jwt.verify(cookie, SECRET_KEY)
     event.context.authenticated = true
+    return navigateTo('/')
   } catch (err) {
     console.log(err)
     throw createError({
