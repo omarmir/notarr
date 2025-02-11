@@ -1,8 +1,6 @@
 import { join } from 'node:path'
 import { existsSync } from 'node:fs'
 
-console.log('Directory:', process.env.NOTES_PATH)
-
 // Define the default path (e.g., a "notes" folder in your project directory)
 const defaultPath = join(process.cwd(), 'notes')
 
