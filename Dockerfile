@@ -4,7 +4,7 @@
 ARG NODE_VERSION=22.12.0
 
 # Base image for Node.js
-FROM node:${NODE_VERSION}-slim as base
+FROM node:${NODE_VERSION}-slim AS base
 
 WORKDIR /src
 
@@ -13,7 +13,7 @@ WORKDIR /src
 RUN npm install -g pnpm
 
 # Build stage
-FROM base as build
+FROM base AS build
 
 # Copy package.json and pnpm-lock.yaml
 COPY --link package.json pnpm-lock.yaml ./
@@ -28,7 +28,7 @@ COPY --link . .
 RUN pnpm build
 
 # Final runtime stage
-FROM node:${NODE_VERSION}-slim as runtime
+FROM node:${NODE_VERSION}-slim AS runtime
 
 # Environment variables
 ENV NODE_ENV=production
