@@ -1,14 +1,14 @@
-# Notarr
+# Nanote
 
 **CONSIDER THIS PRE-ALPHA**: There will be bugs even I am daily driving this for myself.
 
 A lightweight, self-hosted note-taking application with filesystem-based storage. Built with Nuxt 3, TypeScript, and designed for simplicity and performance. The primary goal of this app is to manage your notes in a manner that is 100% portable. You should be able to manage your notes in terminal, notepad or any other app - there is no database, just folders and files.
 
-**Auth** : If you don't set the SECRET_KEY environment variable the default secret key is `notarr` though you should set key
+**Auth** : If you don't set the SECRET_KEY environment variable the default secret key is `nanote` though you should set key
 
 ## Screenshot
 
-![Screenshot](/screenshot.png?raw=true 'Notarr screenshot')
+![Screenshot](/screenshot.png?raw=true 'Nanote screenshot')
 
 ## Features
 
@@ -36,7 +36,7 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 You can use the following published image with the compose file
 
 ```bash
-omarmir/notarr
+omarmir/nanote
 ```
 
 OR
@@ -44,9 +44,9 @@ OR
 You can clone the repo, build the image and run the compose file.
 
 ```bash
-git clone https://github.com/omarmir/notarr.git
-cd notarr
-docket build -t notarr .
+git clone https://github.com/omarmir/nanote.git
+cd nanote
+docket build -t nanote .
 ```
 
 Edit the compose file (specifically the volumes mount point):
@@ -78,14 +78,14 @@ docker compose -d up
 
 ### Contributing
 
-Right now, the place that needs the most help is the home page, its hard to read so some help there would be appreciated. Open an issue and discuss the issue first. Notarr is distributed under the GNU Affero General Public License.
+Right now, the place that needs the most help is the home page, its hard to read so some help there would be appreciated. Open an issue and discuss the issue first. Nanote is distributed under the GNU Affero General Public License.
 
 ### Local Development
 
 ```bash
 # Clone repository
-git clone https://github.com/omarmir/notarr.git
-cd notarr
+git clone https://github.com/omarmir/nanote.git
+cd nanote
 
 # Install dependencies
 pnpm install
@@ -96,4 +96,4 @@ pnpm run dev
 
 ### API
 
-The notarr server does expose an API and this will be documented better in the future, the app is in VERY early stages so things are still liable to shift. I am now daily driving this for my notes so its not going anywhere and you should expect updates.
+The nanote server does expose an API and this will be documented better in the future, the app is in VERY early stages so things are still liable to shift. I am now daily driving this for my notes so its not going anywhere and you should expect updates.

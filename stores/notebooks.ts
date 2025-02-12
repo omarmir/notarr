@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import type { DeleteNotebook, Note, Notebook, RenameNotebook } from '~/types/notebook'
+import type { DeleteNotebook, Notebook, RenameNotebook } from '~/types/notebook'
 import type { Result } from '~/types/result'
 import type { FetchError } from 'ofetch'
 

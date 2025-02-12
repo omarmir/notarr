@@ -19,7 +19,7 @@
                   d="M10.417 6.25h6.25v37.5h-6.25a2.083 2.083 0 0 1-2.084-2.083V8.333a2.083 2.083 0 0 1 2.084-2.083" />
               </g>
             </svg>
-            <h1 class="text-xl font-bold text-white">notarr</h1>
+            <h1 class="text-xl font-bold text-white">nanote</h1>
           </div>
         </NuxtLink>
         <!--logo end-->

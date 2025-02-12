@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   }
 
   // Create JWT token
-  const token = jwt.sign({ app: 'notarr' }, SECRET_KEY, { expiresIn: '7d' })
+  const token = jwt.sign({ app: 'nanote' }, SECRET_KEY, { expiresIn: '7d' })
 
   setCookie(event, 'token', token, {
     httpOnly: true,
