@@ -12,11 +12,12 @@
       {{ notebook }}
     </h1>
     <NoteNotebookNotes
-      v-if="notebook"
+      v-if="notebook && !error"
       :notebook="notebook"
       :notes
       :on-background="true"
       @added="addNote"></NoteNotebookNotes>
+    <CommonDangerAlert v-if="error" class="mt-4">{{ error.data.message }}</CommonDangerAlert>
   </CommonBaseCard>
 </template>
 <script lang="ts" setup>
@@ -25,7 +26,7 @@ import type { Note } from '~/types/notebook'
 const route = useRoute()
 const notebook: string = typeof route.params.notebook === 'string' ? route.params.notebook : route.params.notebook[0]
 
-const { data: notes } = useFetch<Note[]>(`/api/${notebook}/notes`, { immediate: true })
+const { data: notes, error } = useFetch<Note[]>(`/api/${notebook}/notes`, { immediate: true })
 
 const addNote = (note: Note) => {
   if (note.notebook === notebook) {
