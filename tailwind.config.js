@@ -5,6 +5,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      boxShadow: {
+        'top-md': '0 -1px 0 -1px #e0e3e8,0 -1px 6px 0 rgba(69,98,155,.12)',
+      },
       colors: {
         accent: '#306cfe',
         'accent-hover': '#100eee'

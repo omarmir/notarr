@@ -20,7 +20,7 @@
           <CommonSavingIndicator :saving-state></CommonSavingIndicator>
         </div>
       </div>
-      <CommonDangerAlert v-if="error">{{ error }}</CommonDangerAlert>
+      <CommonDangerAlert v-if="error" class="mb-4">{{ error }}</CommonDangerAlert>
       <MilkdownProvider>
         <Milkdown v-model="md" :disabled="renamePending" />
       </MilkdownProvider>
@@ -100,7 +100,6 @@ const saveFile = async (markdownText: string) => {
   formData.append('filename', 'example.md') // The filename to use when saving
 
   try {
-    //@ts-expect-error For some reason I can't issue PATCH requests. I wonder if its because it can't tell the route since the route is dynamic
     await $fetch(`/api/${notebook}/${note}`, { method: 'PATCH', body: formData })
     savingState.value = 'success'
   } catch (err) {

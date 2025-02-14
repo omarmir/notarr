@@ -14,7 +14,7 @@
     </div>
     <!-- end card header -->
     <!-- card body  -->
-    <CommonDangerAlert v-if="error">
+    <CommonDangerAlert v-if="error" class="mb-4">
       {{ error }}
     </CommonDangerAlert>
     <div class="block flex-auto px-9 py-8 pt-6">
