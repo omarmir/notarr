@@ -5,7 +5,8 @@
   <div
     v-if="open"
     class="fixed left-0 top-0 z-50 flex h-[100%] w-[100%] flex-row justify-center"
-    :class="{ 'items-center': position === 'middle', 'top-1 lg:top-24': position === 'top' }">
+    :class="{ 'items-center': position === 'middle', 'top-1 lg:top-24': position === 'top' }"
+    @keydown="keyDown">
     <dialog
       ref="delete-wrapper"
       aria-describedby="desc"
@@ -13,9 +14,8 @@
       :aria-hidden="!open"
       :open="open"
       :title
-      :class="isCommand ? 'p-2' : 'p-[25px]'"
-      class="z-[100] max-h-[85vh] w-[100%] animate-popIn rounded-[6px] bg-white shadow-md focus:outline-none md:max-w-[70%] lg:w-[45vw]">
-      <div class="flex flex-col gap-4">
+      class="z-[100] max-h-[85vh] w-[100%] animate-popIn rounded-md bg-white shadow-md focus:outline-none md:max-w-[70%] lg:w-[45vw]">
+      <div class="flex flex-col gap-4" :class="isCommand ? 'p-2' : 'p-[25px]'">
         <div v-if="!hideTitleDesc" class="flex flex-col gap-4">
           <h2 id="title" class="text-md font-medium text-accent" :class="{ 'text-red-600': theme === 'danger' }">
             {{ title }}
@@ -23,6 +23,52 @@
           <p id="desc" class="text-sm font-normal">{{ desc }}</p>
         </div>
         <slot></slot>
+      </div>
+      <div class="shadow-top-md h-8 w-full rounded-b-md bg-gray-200">
+        <slot name="footer">
+          <div
+            class="mt-4 border-t bg-gray-100 p-4 text-sm shadow-[0_-1px_#e0e3e8,0_-3px_6px_#45629b1f] dark:border-gray-700 dark:bg-gray-900 dark:shadow-none">
+            <ul class="flex list-none gap-2">
+              <li class="flex items-center">
+                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">enter</kbd>
+                <span class="text-gray-900 dark:text-white">to select</span>
+              </li>
+              <li class="flex items-center">
+                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1">
+                  <svg width="15" height="15" aria-label="arrow down" role="img">
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.2">
+                      <path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path>
+                    </g>
+                  </svg>
+                </kbd>
+                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1">
+                  <svg width="15" height="15" aria-label="arrow up" role="img">
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.2">
+                      <path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path>
+                    </g>
+                  </svg>
+                </kbd>
+                <span class="text-gray-900 dark:text-white">or</span>
+                <kbd class="mx-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">tab</kbd>
+                <span class="text-gray-900 dark:text-white">navigate</span>
+              </li>
+              <li class="flex items-center">
+                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">esc</kbd>
+                <span class="text-gray-900 dark:text-white">close</span>
+              </li>
+            </ul>
+          </div>
+        </slot>
       </div>
     </dialog>
   </div>
@@ -52,4 +98,13 @@ const renameWrapper = useTemplateRef('delete-wrapper')
 onClickOutside(renameWrapper, () => {
   open.value = false
 })
+
+const keyDown = (payload: KeyboardEvent) => {
+  switch (payload.key) {
+    case 'Esc': {
+      open.value = false
+      break
+    }
+  }
+}
 </script>

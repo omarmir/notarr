@@ -8,7 +8,7 @@ import type { SearchResult } from '~/types/notebook'
 import basePath from '~/server/folder'
 
 const CONTEXT_CHARS = 50
-const MAX_RESULTS = 100
+const MAX_RESULTS = 5
 
 export default defineEventHandler(async (event): Promise<SearchResult[]> => {
   const fullPath = resolve(basePath)
