@@ -6,6 +6,6 @@ services:
       - '3030:3000'
     #environment:
     #  - NOTES_PATH=/notes
-    #  - SECRETKEY=<yourkey>
+    #  - SECRET_KEY=<yourkey>
     #volumes:
     #  - /path/to/local/folder:/notes

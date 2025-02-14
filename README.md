@@ -49,7 +49,7 @@ cd nanote
 docket build -t nanote .
 ```
 
-Edit the compose file (specifically the volumes mount point):
+Edit the compose file (specifically the volumes mount point and environment path):
 
 ```yml
 environment:
