@@ -41,7 +41,7 @@
         </CommonThemeButton>
       </form>
     </div>
-    <CommonDangerAlert v-if="error" class="ml-6">{{ error }}</CommonDangerAlert>
+    <CommonDangerAlert v-if="error" class="mb-4 ml-6">{{ error }}</CommonDangerAlert>
   </div>
 </template>
 <script lang="ts" setup>

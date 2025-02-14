@@ -79,7 +79,8 @@
   <SearchCommandPalette v-model="showCommandPalette"></SearchCommandPalette>
 </template>
 <script lang="ts" setup>
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, useMagicKeys, whenever } from '@vueuse/core'
+
 const { isSidebarOpen, outsideClick } = useSidebar()
 const input = useTemplateRef('sidebar')
 const store = useNotebookStore()
@@ -94,4 +95,15 @@ const logout = async () => {
   localStorage.setItem('isLoggedIn', 'false')
   navigateTo('/login')
 }
+
+const { ctrl_k } = useMagicKeys({
+  passive: false,
+  onEventFired(e) {
+    if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') e.preventDefault()
+  }
+})
+
+whenever(ctrl_k, () => {
+  showCommandPalette.value = true
+})
 </script>

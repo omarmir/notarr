@@ -18,7 +18,7 @@
         required />
       <CommonThemeButton type="submit" class="absolute bottom-[7px] end-2">Add</CommonThemeButton>
     </div>
-    <CommonDangerAlert v-if="error" class="mr-4">{{ error }}</CommonDangerAlert>
+    <CommonDangerAlert v-if="error" class="mb-0 mr-4">{{ error }}</CommonDangerAlert>
   </form>
 </template>
 <script lang="ts" setup>

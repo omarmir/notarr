@@ -1,6 +1,7 @@
 import { useDebounce } from '@vueuse/core'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
+import type { SearchResult } from '~/types/notebook'
 
 export function useSearch() {
   const search: Ref<string | null> = ref(null)
@@ -13,11 +14,19 @@ export function useSearch() {
     status,
     refresh,
     clear
-  } = useFetch('/api/search', {
+  } = useFetch<SearchResult[]>('/api/search', {
     immediate: false,
     lazy: true,
     query: { q: debounced },
-    watch: false
+    watch: false,
+    transform: (searchRes) => {
+      return searchRes.map((res) => {
+        return {
+          ...res,
+          snippet: stripMD(res.snippet)
+        }
+      })
+    }
   })
 
   watch(debounced, () => {
@@ -27,6 +36,8 @@ export function useSearch() {
       clear()
     }
   })
+
+  const noResults = computed(() => status.value === 'success' && (results.value?.length === 0 || !results.value))
 
   const clearSearch = () => {
     search.value = null
@@ -76,6 +87,9 @@ export function useSearch() {
     stripMD,
     error,
     status,
-    results
+    results,
+    clear,
+    noResults,
+    debounced
   }
 }

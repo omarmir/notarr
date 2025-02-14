@@ -1,5 +1,9 @@
 <template>
-  <button type="button" class="w-full" aria-label="Search" @click="$emit('click')">
+  <button
+    type="button"
+    class="rounded-md bg-neutral-800 px-2 py-1 hover:outline hover:outline-1 hover:outline-accent focus-visible:outline-none"
+    aria-label="Search"
+    @click="$emit('click')">
     <div class="flex w-full flex-row items-center gap-2 rounded-md py-1">
       <svg
         xmlns="http://www.w3.org/2000/svg"

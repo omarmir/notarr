@@ -14,7 +14,7 @@
       :aria-hidden="!open"
       :open="open"
       :title
-      class="z-[100] max-h-[85vh] w-[100%] animate-popIn rounded-md bg-white shadow-md focus:outline-none md:max-w-[70%] lg:w-[45vw]">
+      class="z-[100] max-h-[85vh] w-[100%] animate-popIn rounded-md bg-white shadow-md focus:outline-none md:max-w-[70%] lg:w-[35vw]">
       <div class="flex flex-col gap-4" :class="isCommand ? 'p-2' : 'p-[25px]'">
         <div v-if="!hideTitleDesc" class="flex flex-col gap-4">
           <h2 id="title" class="text-md font-medium text-accent" :class="{ 'text-red-600': theme === 'danger' }">
@@ -24,59 +24,34 @@
         </div>
         <slot></slot>
       </div>
-      <div class="shadow-top-md h-8 w-full rounded-b-md bg-gray-200">
-        <slot name="footer">
-          <div
-            class="mt-4 border-t bg-gray-100 p-4 text-sm shadow-[0_-1px_#e0e3e8,0_-3px_6px_#45629b1f] dark:border-gray-700 dark:bg-gray-900 dark:shadow-none">
-            <ul class="flex list-none gap-2">
-              <li class="flex items-center">
-                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">enter</kbd>
-                <span class="text-gray-900 dark:text-white">to select</span>
-              </li>
-              <li class="flex items-center">
-                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1">
-                  <svg width="15" height="15" aria-label="arrow down" role="img">
-                    <g
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.2">
-                      <path d="M7.5 3.5v8M10.5 8.5l-3 3-3-3"></path>
-                    </g>
-                  </svg>
-                </kbd>
-                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1">
-                  <svg width="15" height="15" aria-label="arrow up" role="img">
-                    <g
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.2">
-                      <path d="M7.5 11.5v-8M10.5 6.5l-3-3-3 3"></path>
-                    </g>
-                  </svg>
-                </kbd>
-                <span class="text-gray-900 dark:text-white">or</span>
-                <kbd class="mx-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">tab</kbd>
-                <span class="text-gray-900 dark:text-white">navigate</span>
-              </li>
-              <li class="flex items-center">
-                <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">esc</kbd>
-                <span class="text-gray-900 dark:text-white">close</span>
-              </li>
-            </ul>
-          </div>
-        </slot>
+      <div v-if="isCommand" class="h-8 w-full bg-gray-200 shadow-top-md">
+        <div
+          class="mt-4 rounded-b-md border-t bg-gray-100 p-4 text-sm shadow-[0_-1px_#e0e3e8,0_-3px_6px_#45629b1f] dark:border-gray-700 dark:bg-gray-900 dark:shadow-none">
+          <ul class="flex list-none gap-2">
+            <li class="flex items-center">
+              <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">enter</kbd>
+              <span class="text-gray-900 dark:text-white">to select</span>
+            </li>
+            <li class="flex items-center">
+              <kbd class="mx-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">tab</kbd>
+              <span class="text-gray-900 dark:text-white">navigate</span>
+            </li>
+            <li class="flex items-center">
+              <kbd class="mr-1 flex h-5 items-center justify-center rounded-md bg-gray-300 px-1 font-bold">esc</kbd>
+              <span class="text-gray-900 dark:text-white">close</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </dialog>
   </div>
 </template>
 <script lang="ts" setup>
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, onKeyStroke } from '@vueuse/core'
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 import type { Theme } from '~/types/ui'
 const open = defineModel<boolean>({ required: true })
+
 const {
   title,
   desc,
@@ -95,6 +70,8 @@ const {
 
 const renameWrapper = useTemplateRef('delete-wrapper')
 
+const { activate, deactivate } = useFocusTrap(renameWrapper, { immediate: true })
+
 onClickOutside(renameWrapper, () => {
   open.value = false
 })
@@ -107,4 +84,20 @@ const keyDown = (payload: KeyboardEvent) => {
     }
   }
 }
+
+onKeyStroke('Escape', (e) => {
+  e.preventDefault()
+  open.value = false
+})
+
+onMounted(async () => {
+  watch(open, async () => {
+    if (open.value) {
+      await nextTick()
+      activate()
+    } else {
+      deactivate()
+    }
+  })
+})
 </script>

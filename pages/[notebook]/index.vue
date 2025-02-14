@@ -17,7 +17,7 @@
       :notes
       :on-background="true"
       @added="addNote"></NoteNotebookNotes>
-    <CommonDangerAlert v-if="error" class="mt-4">{{ error.data.message }}</CommonDangerAlert>
+    <CommonDangerAlert v-if="error" class="mb-4 mt-4">{{ error.data.message }}</CommonDangerAlert>
   </CommonBaseCard>
 </template>
 <script lang="ts" setup>

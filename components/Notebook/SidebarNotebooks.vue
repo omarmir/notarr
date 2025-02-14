@@ -30,7 +30,7 @@
           :notebook="notebook.name"
           :notes="noteStore.currentNotes"
           class="pl-7"></NoteNotebookNotes>
-        <CommonDangerAlert v-if="error" class="mt-4">{{ error }}</CommonDangerAlert>
+        <CommonDangerAlert v-if="error" class="mb-4 mt-4">{{ error }}</CommonDangerAlert>
       </div>
     </li>
   </ul>

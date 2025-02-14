@@ -20,7 +20,7 @@
         <CommonThemeButton theme="danger" @click="deleteDialog = true">Delete</CommonThemeButton>
       </div>
     </div>
-    <CommonDangerAlert v-if="error" class="w-full">{{ error }}</CommonDangerAlert>
+    <CommonDangerAlert v-if="error" class="mb-4 w-full">{{ error }}</CommonDangerAlert>
     <CommonBaseDialog
       v-model="deleteDialog"
       theme="danger"

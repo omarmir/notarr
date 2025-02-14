@@ -1,6 +1,6 @@
 # Nanote
 
-**CONSIDER THIS PRE-ALPHA**: There will be bugs even I am daily driving this for myself.
+**CONSIDER THIS PRE-ALPHA**: There will be bugs. I am daily driving this app myself and will fix bugs reported or ones I find on my own ASAP.
 
 A lightweight, self-hosted note-taking application with filesystem-based storage. Built with Nuxt 3, TypeScript, and designed for simplicity and performance. The primary goal of this app is to manage your notes in a manner that is 100% portable. You should be able to manage your notes in terminal, notepad or any other app - there is no database, just folders and files.
 

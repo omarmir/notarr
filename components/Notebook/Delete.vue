@@ -22,7 +22,7 @@
           Delete
         </CommonThemeButton>
         <CommonThemeButton class="py-2" @click="deleteDialog = false">Cancel</CommonThemeButton>
-        <CommonDangerAlert v-if="error" class="w-full">{{ error }}</CommonDangerAlert>
+        <CommonDangerAlert v-if="error" class="mb-4 w-full">{{ error }}</CommonDangerAlert>
       </div>
     </CommonBaseDialog>
   </div>
