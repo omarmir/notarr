@@ -25,6 +25,9 @@
         <!--logo end-->
         <div class="relative">
           <div class="flex w-full flex-col font-medium">
+            <div class="mb-4 px-4">
+              <SearchButton @click="showCommandPalette = true"></SearchButton>
+            </div>
             <!-- menu item -->
             <ul>
               <li class="flex cursor-pointer select-none items-center rounded-xl px-4 py-3">
@@ -73,6 +76,7 @@
       v-if="isSidebarOpen"
       class="fixed left-0 top-0 z-30 flex h-[100%] w-[100%] animate-overlayShow flex-row items-center justify-center bg-gray-950/50 lg:hidden"></div>
   </div>
+  <SearchCommandPalette v-model="showCommandPalette"></SearchCommandPalette>
 </template>
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core'
@@ -80,6 +84,7 @@ const { isSidebarOpen, outsideClick } = useSidebar()
 const input = useTemplateRef('sidebar')
 const store = useNotebookStore()
 const noteStore = useNoteStore()
+const showCommandPalette = ref(false)
 
 onClickOutside(input, () => (isSidebarOpen.value = false))
 
