@@ -39,6 +39,8 @@ export const useNotebookStore = defineStore('notebook', () => {
     }
   }
 
+  const resetCurrentNotebook = () => (currentNotebook.value = null)
+
   const renameNotebook = async (oldName: string, newName: string): Promise<Result<RenameNotebook>> => {
     try {
       const resp = await $fetch<RenameNotebook>(`/api/${oldName}`, {
@@ -102,6 +104,7 @@ export const useNotebookStore = defineStore('notebook', () => {
     toggleNotebook,
     currentNotebook,
     renameNotebook,
-    deleteNotebook
+    deleteNotebook,
+    resetCurrentNotebook
   }
 })
