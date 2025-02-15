@@ -67,11 +67,12 @@
         </div>
       </div>
     </aside>
-    <NoteNotesSidebar v-if="store.currentNotebook" class="hidden lg:flex">
+    <NoteNotesSidebar v-if="store.currentNotebook" class="hidden lg:flex" @close="store.resetCurrentNotebook()">
       <h2 class="text-lg font-bold text-white">{{ store.currentNotebook }}</h2>
       <h3 class="flex select-none items-center text-xs font-medium text-neutral-200">Notes</h3>
       <NoteNotebookNotes :notes="noteStore.currentNotes" :notebook="store.currentNotebook"></NoteNotebookNotes>
     </NoteNotesSidebar>
+
     <div
       v-if="isSidebarOpen"
       class="fixed left-0 top-0 z-30 flex h-[100%] w-[100%] animate-overlayShow flex-row items-center justify-center bg-gray-950/50 lg:hidden"></div>
