@@ -12,3 +12,5 @@ const envNotesPath = process.env.NOTES_PATH
 const basePath = envNotesPath && existsSync(envNotesPath) ? envNotesPath : defaultPath
 
 export default basePath
+
+export { envNotesPath }
