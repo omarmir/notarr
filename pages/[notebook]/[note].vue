@@ -4,7 +4,7 @@
       <div class="flex flex-col gap-2 divide-y divide-gray-300">
         <NoteName v-model="renamePending" :notebook="notebook" :name="note" :saving-state></NoteName>
         <div class="flex flex-row items-center gap-4 py-2">
-          <div v-if="updated" class="text-sm text-gray-500">
+          <div v-if="updated" class="text-sm text-gray-500 dark:text-gray-300">
             {{
               updated.toLocaleString('en-CA', {
                 weekday: 'long',

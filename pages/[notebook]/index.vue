@@ -1,6 +1,6 @@
 <template>
   <CommonBaseCard class="px-9 py-5">
-    <h1 class="flex flex-row items-center gap-2 text-xl">
+    <h1 class="mb-2 flex flex-row items-center gap-2 text-xl">
       <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 1024 1024">
         <path
           fill="currentColor"

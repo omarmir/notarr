@@ -10,7 +10,7 @@ export default {
       },
       colors: {
         accent: '#306cfe',
-        'accent-hover': '#100eee'
+        'accent-hover': '#0035b3'
       },
       height: {
         svw: '100svw'

@@ -4,7 +4,7 @@
       <h1>
         <input
           v-model="note"
-          class="bg-transparent text-xl font-semibold text-gray-900 focus:italic focus:outline-none"
+          class="bg-transparent text-xl font-semibold text-gray-900 focus:italic focus:outline-none dark:text-gray-200"
           aria-label="Rename name"
           aria-details="Allows you to rename the note" />
       </h1>

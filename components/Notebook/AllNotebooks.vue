@@ -3,8 +3,8 @@
     <!-- card header -->
     <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
       <h3 class="text-dark m-2 ml-0 flex flex-col items-start justify-center">
-        <span class="mr-3 text-lg font-medium">Notebooks</span>
-        <span class="font-base mt-1 text-sm text-gray-400">All notebooks</span>
+        <span class="mr-3 text-lg font-medium dark:text-gray-300">Notebooks</span>
+        <span class="font-base mt-1 text-sm text-gray-600 dark:text-gray-400">All notebooks</span>
       </h3>
       <div class="min-w-xs relative my-2 flex w-1/3 min-w-72 flex-wrap items-center">
         <div class="relative my-2 flex w-full flex-wrap items-center">
@@ -50,7 +50,7 @@
             <tr
               v-for="notebook in notebookStore.notebooks"
               :key="notebook.name"
-              class="border-b border-neutral-200 last:border-b-0">
+              class="border-b border-neutral-200 last:border-b-0 dark:border-neutral-700">
               <td class="flex flex-col">
                 <NotebookRenameNotebook :notebook="notebook.name" @toggle="toggleNotes"></NotebookRenameNotebook>
                 <NoteNotebookNotes
@@ -75,7 +75,7 @@
               <td class="table-cell pb-3 pt-4 align-top">
                 <div class="flex w-full justify-center">
                   <div
-                    class="flex size-6 flex-row items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-900">
+                    class="flex size-6 flex-row items-center justify-center rounded-full bg-gray-200 text-xs font-medium text-gray-900 dark:bg-gray-700 dark:text-gray-200">
                     <span>{{ notebook.fileCount }}</span>
                   </div>
                 </div>

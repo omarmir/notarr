@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="open"
-    class="fixed left-0 top-0 z-50 flex h-[100%] w-[100%] animate-overlayShow flex-row items-center justify-center bg-gray-950/50"></div>
+    class="fixed left-0 top-0 z-50 flex h-[100%] w-[100%] animate-overlayShow flex-row items-center justify-center bg-gray-950/50 dark:bg-slate-700/50"></div>
   <div
     v-if="open"
     class="fixed left-0 top-0 z-50 flex h-[100%] w-[100%] flex-row justify-center"
@@ -14,13 +14,13 @@
       :aria-hidden="!open"
       :open="open"
       :title
-      class="z-[100] max-h-[85vh] w-[100%] animate-popIn rounded-md bg-white shadow-md focus:outline-none md:max-w-[70%] lg:w-[35vw]">
+      class="z-[100] max-h-[85vh] w-[100%] animate-popIn rounded-md bg-white shadow-md focus:outline-none dark:bg-neutral-900 md:max-w-[70%] lg:w-[35vw]">
       <div class="flex flex-col gap-4" :class="isCommand ? 'p-2' : 'p-[25px]'">
         <div v-if="!hideTitleDesc" class="flex flex-col gap-4">
           <h2 id="title" class="text-md font-medium text-accent" :class="{ 'text-red-600': theme === 'danger' }">
             {{ title }}
           </h2>
-          <p id="desc" class="text-sm font-normal">{{ desc }}</p>
+          <p id="desc" class="text-sm font-normal text-gray-900 dark:text-gray-400">{{ desc }}</p>
         </div>
         <slot></slot>
       </div>

@@ -12,6 +12,7 @@ import { editorViewOptionsCtx, editorViewCtx } from '@milkdown/kit/core'
 import { emoji } from '@milkdown/plugin-emoji'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
+import '@milkdown/crepe/theme/nord-dark.css'
 
 const model = defineModel<string>({ required: true })
 const { disabled } = defineProps<{ disabled: boolean }>()
@@ -59,9 +60,9 @@ useEditor((root) => {
   return crepe
 })
 </script>
-<style>
+<style lang="postcss">
 .milkdown-editor div.milkdown > div {
-  @apply px-0 py-0;
+  @apply px-0 py-0 text-gray-900 dark:text-gray-200;
 }
 
 .milkdown-editor div.milkdown {
@@ -69,18 +70,17 @@ useEditor((root) => {
 }
 
 .milkdown {
-  --crepe-color-background: #f3f4f6;
+  --crepe-color-background: transparent;
 }
 
-.milkdown milkdown-code-block .cm-content {
-  @apply bg-gray-800;
-}
-
-.milkdown milkdown-code-block {
-  background: transparent;
-}
-
-.milkdown milkdown-code-block .cm-gutters {
-  @apply bg-gray-950 text-slate-400;
+.milkdown-editor div.milkdown .ProseMirror {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 10px 0px;
+  }
 }
 </style>

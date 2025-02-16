@@ -3,8 +3,8 @@
     <!-- card header -->
     <div class="flex min-h-[70px] flex-wrap items-stretch justify-between bg-transparent px-9 pb-0 pt-5">
       <h3 class="text-dark m-2 ml-0 flex flex-col items-start justify-center">
-        <span class="mr-3 text-lg font-medium">Recent Notes</span>
-        <span class="font-base mt-1 text-sm text-gray-400">Notes created or modified recently</span>
+        <span class="mr-3 text-lg font-medium dark:text-gray-300">Recent Notes</span>
+        <span class="font-base mt-1 text-sm text-gray-600 dark:text-gray-400">Notes created or modified recently</span>
       </h3>
       <div class="relative my-2 flex flex-wrap items-center">
         <!--Possible buttons-->
@@ -28,23 +28,21 @@
             <tr
               v-for="note in notes"
               :key="note.notebook + note.name"
-              class="border-b border-dashed border-neutral-200 last:border-b-0">
+              class="border-b border-dashed border-neutral-200 last:border-b-0 dark:border-neutral-700">
               <td>
-                <div class="my-3 flex flex-row items-center gap-2 hover:text-gray-400">
+                <div class="my-3 flex flex-row items-center gap-2 hover:text-gray-400 dark:hover:text-gray-100">
                   <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M4 22V2h10l6 6v14zm9-13V4H6v16h12V9zM6 4v5zv16z" />
                   </svg>
                   <div class="flex flex-col justify-start">
-                    <NuxtLink
-                      :to="`/${note.notebook}/${note.name}`"
-                      class="text-secondary-inverse hover:text-primary text-sm font-semibold transition-colors duration-200 ease-in-out">
+                    <NuxtLink :to="`/${note.notebook}/${note.name}`" class="text-sm font-semibold">
                       {{ note.name }}
                     </NuxtLink>
                   </div>
                 </div>
               </td>
               <td>
-                <span class="text-light-inverse text-sm font-medium">
+                <span class="text-sm font-medium">
                   {{ note.notebook }}
                 </span>
               </td>

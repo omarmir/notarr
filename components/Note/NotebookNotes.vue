@@ -1,15 +1,11 @@
 <template>
   <div>
-    <NoteNewNote :notebook :on-background @added="(note: Note) => emit('added', note)"></NoteNewNote>
+    <NoteNewNote :notebook @added="(note: Note) => emit('added', note)"></NoteNewNote>
     <ul v-if="notes">
       <li v-for="note in notes" :key="note.name" class="my-4">
         <NuxtLink
           :to="`/${note.notebook}/${note.name}`"
-          :class="{
-            'text-gray-900 hover:text-gray-500': onBackground,
-            'text-gray-400 hover:text-white': !onBackground
-          }"
-          class="flex flex-col gap-1"
+          class="flex flex-col gap-1 hover:text-gray-600 dark:hover:text-gray-200"
           @click="outsideClick()">
           <div class="flex flex-row items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24">
@@ -33,9 +29,5 @@ const { outsideClick } = useSidebar()
 const emit = defineEmits<{
   (e: 'added', payload: Note): void
 }>()
-const {
-  notes,
-  notebook,
-  onBackground = false
-} = defineProps<{ notebook: string; onBackground?: boolean; notes: Note[] | null }>()
+const { notes, notebook } = defineProps<{ notebook: string; notes: Note[] | null }>()
 </script>

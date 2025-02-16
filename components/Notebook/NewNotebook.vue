@@ -12,14 +12,13 @@
             d="M672 128h64v768h-64zM96 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32" />
         </svg>
       </div>
-      <input
+      <CommonBaseInput
         id="name"
         v-model="newBook"
         type="text"
         name="name"
-        class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pe-16 ps-10 text-sm text-gray-900 focus:outline-0 focus:ring-1"
         placeholder="Notebook name"
-        required />
+        required></CommonBaseInput>
       <CommonBaseButton type="submit">Add</CommonBaseButton>
     </div>
   </form>

@@ -12,7 +12,9 @@
           </g>
         </svg>
       </button>
-      <button class="flex flex-row items-center gap-2 hover:text-gray-500" @click="emit('toggle', notebook)">
+      <button
+        class="flex flex-row items-center gap-2 hover:text-gray-500 dark:hover:text-gray-100"
+        @click="emit('toggle', notebook)">
         <svg xmlns="http://www.w3.org/2000/svg" class="size-5 shrink-0" viewBox="0 0 1024 1024">
           <path
             fill="currentColor"
@@ -22,16 +24,18 @@
             d="M672 128h64v768h-64zM96 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32m0 192h128q32 0 32 32t-32 32H96q-32 0-32-32t32-32" />
         </svg>
         <div class="flex flex-col justify-start text-left text-sm font-semibold">
-          <span v-show="!isRenaming" class="w-full py-2">{{ notebook }}</span>
+          <span v-show="!isRenaming" class="w-full py-2">
+            {{ notebook }}
+          </span>
         </div>
       </button>
       <form v-show="isRenaming" ref="rename-wrapper" class="relative" @submit.prevent="renameNotebook">
-        <input
+        <CommonBaseInput
           ref="rename"
           v-model="newNotebookName"
           aria-label="Notebook name"
-          title="Notebook name"
-          class="-ml-2 w-full py-2 pe-20 text-left text-sm font-semibold" />
+          class="-ml-2 !ps-1 pe-20 pl-1 text-left"
+          title="Notebook name"></CommonBaseInput>
         <CommonThemeButton
           :show-loading="true"
           :is-loading="renameState"
@@ -58,18 +62,18 @@ const emit = defineEmits<{
 
 const newNotebookName = ref(notebook)
 const isRenaming = ref(false)
-const renameInput = useTemplateRef('rename')
+// const renameInput = useTemplateRef('rename')
 const renameWrapper = useTemplateRef('rename-wrapper')
 const error: Ref<string | null> = ref(null)
 const renameState = ref(false)
 
-watch(isRenaming, async (newVal) => {
-  if (newVal) {
-    newNotebookName.value = notebook
-    await nextTick()
-    renameInput.value?.focus()
-  }
-})
+// watch(isRenaming, async (newVal) => {
+//   if (newVal) {
+//     newNotebookName.value = notebook
+//     await nextTick()
+//     renameInput.value?.focus()
+//   }
+// })
 
 onClickOutside(renameWrapper, () => {
   isRenaming.value = false

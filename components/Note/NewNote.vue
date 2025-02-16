@@ -7,15 +7,16 @@
           <path fill="currentColor" d="M4 22V2h10l6 6v14zm9-13V4H6v16h12V9zM6 4v5zv16z" />
         </svg>
       </div>
-      <input
+      <CommonBaseInput id="name" v-model="newNote" placeholder="Note name" required class="mt-2"></CommonBaseInput>
+      <!-- <input
         id="name"
         v-model="newNote"
         :class="{ 'border-gray-300 text-gray-900': onBackground, 'border-gray-700 text-gray-400': !onBackground }"
-        type="text"
+        type="text"WS
         name="name"
         class="my-2 block w-full rounded-md border bg-transparent p-2 pe-16 ps-10 text-sm focus:outline-0 focus:ring-1"
         placeholder="Note name"
-        required />
+        required /> -->
       <CommonThemeButton type="submit" class="absolute bottom-[7px] end-2">Add</CommonThemeButton>
     </div>
     <CommonDangerAlert v-if="error" class="mb-0 mr-4">{{ error }}</CommonDangerAlert>
@@ -23,7 +24,7 @@
 </template>
 <script lang="ts" setup>
 import type { Note } from '~/types/notebook'
-const { notebook, onBackground = false } = defineProps<{ notebook: string; onBackground?: boolean }>()
+const { notebook } = defineProps<{ notebook: string }>()
 
 const store = useNoteStore()
 const noteBookStore = useNotebookStore()
