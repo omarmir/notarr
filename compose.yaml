@@ -4,8 +4,14 @@ services:
     image: omarmir/nanote:latest
     ports:
       - '3030:3000'
-    #environment:
-    #  - NOTES_PATH=/notes
-    #  - SECRET_KEY=<yourkey>
-    #volumes:
-    #  - /path/to/local/folder:/notes
+    environment:
+      - NOTES_PATH=/notes
+      - SECRET_KEY=<yourkey>
+    volumes:
+      - /path/to/local/folder:/notes
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/api/health']
+      interval: 30s # Check every 30 seconds
+      timeout: 10s # Fail if no response in 10s
+      retries: 3 # Mark as unhealthy after 3 failed checks
+      start_period: 30s # Wait 10s before starting checks
