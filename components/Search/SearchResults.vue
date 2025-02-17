@@ -2,7 +2,7 @@
   <ul>
     <li v-for="(result, index) in results" :key="index">
       <button
-        class="flex w-full cursor-pointer flex-row gap-2 px-4 py-2 text-left text-xs text-gray-900 hover:bg-accent hover:text-white focus-visible:bg-accent focus-visible:text-white focus-visible:outline-none"
+        class="flex w-full cursor-pointer flex-row gap-2 px-4 py-2 text-left text-xs text-gray-900 hover:bg-accent hover:text-white focus-visible:bg-accent focus-visible:text-white focus-visible:outline-none dark:text-gray-200"
         @click="navigate(result)">
         <svg
           v-if="result.matchType === 'folder'"

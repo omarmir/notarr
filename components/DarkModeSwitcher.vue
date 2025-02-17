@@ -15,6 +15,5 @@
   </div>
 </template>
 <script lang="ts" setup>
-const { toggleDarkMode, isDarkModeEnabled, setInitialDarkMode } = useDarkMode()
-setInitialDarkMode()
+const { toggleDarkMode, isDarkModeEnabled } = useDarkMode()
 </script>

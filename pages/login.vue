@@ -12,7 +12,7 @@
               d="M10.417 6.25h6.25v37.5h-6.25a2.083 2.083 0 0 1-2.084-2.083V8.333a2.083 2.083 0 0 1 2.084-2.083" />
           </g>
         </svg>
-        <h1 class="text-xl font-bold text-gray-900">nanote</h1>
+        <h1 class="text-xl font-bold text-gray-900 dark:text-gray-200">nanote</h1>
       </div>
       <label class="text-sm font-medium">Secret Key</label>
       <div class="relative">
@@ -28,14 +28,14 @@
             </g>
           </svg>
         </div>
-        <input
+        <CommonBaseInput
           id="secret-key"
           v-model="secretKey"
-          type="password"
           name="secret-key"
-          class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2 pe-16 ps-10 text-sm text-gray-900 focus:outline-0 focus:ring-1"
-          placeholder="Secret Key"
-          required />
+          placeholder="Secret key"
+          aria-placeholder="Secret key"
+          type="password"
+          required></CommonBaseInput>
       </div>
       <p v-if="store.error" class="text-sm font-medium text-red-500">{{ store.error }}</p>
       <CommonThemeButton type="submit" class="flex self-end py-2">Login</CommonThemeButton>

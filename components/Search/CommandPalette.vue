@@ -69,7 +69,7 @@
       </svg>
     </div>
     <div v-if="!debounced" class="w-full text-center">
-      <p class="text-sm">Begin typing to search content</p>
+      <p class="text-sm text-gray-900 dark:text-gray-400">Begin typing to search content</p>
     </div>
     <div v-if="error && status === 'error'">
       <CommonDangerAlert>{{ error }}</CommonDangerAlert>

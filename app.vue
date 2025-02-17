@@ -7,6 +7,8 @@
 </template>
 <script lang="ts" setup async>
 const store = useAuthStore()
+const { setInitialDarkMode } = useDarkMode()
+setInitialDarkMode()
 
 const verify = await store.verify()
 
