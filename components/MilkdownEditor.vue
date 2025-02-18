@@ -87,4 +87,8 @@ useEditor((root) => {
     margin: 10px 0px;
   }
 }
+
+.milkdown-editor .milkdown .ProseMirror p {
+  padding: 0px;
+}
 </style>
