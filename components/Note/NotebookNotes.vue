@@ -5,7 +5,7 @@
       <li v-for="note in notes" :key="note.name" class="my-4">
         <NuxtLink
           :to="`/${note.notebook}/${note.name}`"
-          class="flex flex-col gap-1 text-gray-200 hover:text-gray-400 dark:hover:text-gray-200"
+          class="flex flex-col gap-1 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-200"
           @click="outsideClick()">
           <div class="flex flex-row items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24">

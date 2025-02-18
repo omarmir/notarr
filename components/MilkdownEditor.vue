@@ -1,5 +1,5 @@
 <template>
-  <Milkdown class="milkdown-editor" />
+  <Milkdown class="milkdown-editor" :class="{ focus: isFocus }" />
 </template>
 
 <script setup lang="ts">
@@ -15,7 +15,7 @@ import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
 
 const model = defineModel<string>({ required: true })
-const { disabled } = defineProps<{ disabled: boolean }>()
+const { disabled, isFocus } = defineProps<{ disabled: boolean; isFocus: boolean }>()
 
 const toBase64 = (file: Blob): Promise<string> =>
   new Promise((resolve, reject) => {
@@ -67,6 +67,10 @@ useEditor((root) => {
 
 .milkdown-editor div.milkdown {
   @apply px-0 py-1;
+}
+
+.milkdown-editor.focus div.milkdown milkdown-block-handle {
+  display: none;
 }
 
 .milkdown {
