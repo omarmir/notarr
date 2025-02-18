@@ -40,8 +40,10 @@ RUN mkdir /src/notes
 # Copy the built application
 COPY --from=build /src/.output /src/.output
 
-# Install PNPM in the runtime image
-# RUN corepack enable && corepack prepare pnpm@latest --activate
+# Install curl
+RUN apt update && apt install -y curl
+#&& rm -rf /var/lib/apt/lists/*
+
 
 # Expose the desired ports
 # Node
