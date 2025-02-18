@@ -14,7 +14,7 @@ A lightweight, self-hosted note-taking application with filesystem-based storage
 
 - 📂 **Notebook-based Organization** - Folders as notebooks, markdown files as notes
 - 🔍 **Universal Search** - Fast content search across all notes (OS-optimized)
-- 🖹 **Markdown Support** - Native .md file handling with proper MIME types
+- 📄 **Markdown Support** - Native .md file handling with proper MIME types
 - 🔒 **Local Storage** - No databases - uses your existing filesystem
 - 🐳 **Docker Ready** - Full container support with sample compose file
 - 🔧 **TypeSafe API** - Fully typed REST endpoints with validation
