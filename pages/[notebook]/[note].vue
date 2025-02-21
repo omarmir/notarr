@@ -104,8 +104,8 @@ const saveFile = async (markdownText: string) => {
   const blob = new Blob([markdownText], { type: 'text/markdown' })
 
   const formData = new FormData()
-  formData.append('file', blob, 'example.md') // The file to upload
-  formData.append('filename', 'example.md') // The filename to use when saving
+  formData.append('file', blob, `${note}.md`) // The file to upload
+  formData.append('filename', `${note}.md`) // The filename to use when saving
 
   try {
     await $fetch(`/api/${notebook}/${note}`, { method: 'PATCH', body: formData })
