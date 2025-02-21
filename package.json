@@ -21,6 +21,7 @@
     "@milkdown/crepe": "^7.6.3",
     "@milkdown/kit": "^7.6.3",
     "@milkdown/plugin-emoji": "^7.6.3",
+    "@milkdown/plugin-slash": "^7.6.3",
     "@milkdown/theme-nord": "^7.6.3",
     "@milkdown/vue": "^7.6.3",
     "@nuxt/fonts": "0.10.3",

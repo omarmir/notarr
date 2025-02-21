@@ -26,10 +26,33 @@ const { disabled, isFocus, note, notebook } = defineProps<{
 
 const customUploader = createUploader(notebook, note)
 
+// export interface MenuItem {
+//   index: number
+//   key: string
+//   label: string
+//   icon: ReturnType<typeof html>
+//   onRun: (ctx: Ctx) => void
+// }
+
 useEditor((root) => {
   const crepe = new Crepe({
     root,
-    defaultValue: model.value
+    defaultValue: model.value,
+    features: {
+      [Crepe.Feature.Latex]: true
+    },
+    featureConfigs: {
+      'block-edit': {
+        buildMenu: (builder) => {
+          const advanced = builder.getGroup('advanced')
+          advanced.addItem('file', {
+            label: 'File',
+            icon: '',
+            onRun: () => {}
+          })
+        }
+      }
+    }
   })
 
   crepe.editor
