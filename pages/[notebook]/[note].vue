@@ -28,7 +28,7 @@
       </div>
       <CommonDangerAlert v-if="error" class="mb-4">{{ error }}</CommonDangerAlert>
       <MilkdownProvider>
-        <Milkdown v-model="md" :disabled="renamePending" :is-focus />
+        <Milkdown v-model="md" :note :notebook :disabled="renamePending" :is-focus />
       </MilkdownProvider>
     </div>
   </div>

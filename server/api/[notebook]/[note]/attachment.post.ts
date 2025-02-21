@@ -1,5 +1,5 @@
 import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
-import { randomUUID } from 'node:crypto'
+import {nanoid} from 'nanoid'
 import { writeFile, mkdir, constants } from 'node:fs/promises'
 import path from 'node:path'
 import { access, existsSync } from 'node:fs'
@@ -44,9 +44,29 @@ export default defineEventHandlerWithNotebookAndNote(
         }
       })
 
-      const id = randomUUID()
+      const id = nanoid()
       const imageName = `${id}_${fileEntry.filename}`
+
+      if (imageName.length > 255) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'Bad Request',
+          message: `Name will exceed allowed length of 255 characters.`
+        })
+      }
+
       const attachPath = path.join(attachBasePath, imageName)
+
+      const isWindows = process.platform === 'win32'
+      const maxPathLength = isWindows ? 259 : 4095 // Same limits as folder creation
+      if (attachPath.length > maxPathLength) {
+        throw createError({
+          statusCode: 400,
+          statusMessage: 'Bad Request',
+          message: 'Attachment file path is going to exceed maximum path length for your operating system.'
+        })
+      }
+
       await writeFile(attachPath, fileEntry.data)
       return `/api/${cleanNotebook}/${cleanNote}/attachment/${imageName}`
     } catch (error) {

@@ -6,24 +6,25 @@
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { Crepe } from '@milkdown/crepe'
 import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
-import { upload } from '@milkdown/kit/plugin/upload'
+import { upload, uploadConfig } from '@milkdown/kit/plugin/upload'
+import { imageInlineComponent, inlineImageConfig } from '@milkdown/kit/component/image-inline'
 import { imageBlockConfig } from '@milkdown/kit/component/image-block'
 import { editorViewOptionsCtx, editorViewCtx } from '@milkdown/kit/core'
 import { emoji } from '@milkdown/plugin-emoji'
+import { createUploader, onUpload } from '~/utils/uploader'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
 
 const model = defineModel<string>({ required: true })
-const { disabled, isFocus } = defineProps<{ disabled: boolean; isFocus: boolean }>()
+const { disabled, isFocus, note, notebook } = defineProps<{
+  disabled: boolean
+  isFocus: boolean
+  note: string
+  notebook: string
+}>()
 
-const toBase64 = (file: Blob): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result as string)
-    reader.onerror = (error) => reject(error)
-  })
+const customUploader = createUploader(notebook, note)
 
 useEditor((root) => {
   const crepe = new Crepe({
@@ -46,7 +47,17 @@ useEditor((root) => {
 
       ctx.update(imageBlockConfig.key, (defaultConfig) => ({
         ...defaultConfig,
-        onUpload: async (file) => await toBase64(file)
+        onUpload: async (file: File) => onUpload(file, notebook, note)
+      }))
+
+      ctx.update(inlineImageConfig.key, (prev) => ({
+        ...prev,
+        onUpload: async (file: File) => onUpload(file, notebook, note)
+      }))
+
+      ctx.update(uploadConfig.key, (prev) => ({
+        ...prev,
+        uploader: customUploader
       }))
 
       ctx.update(editorViewOptionsCtx, (prev) => ({
@@ -57,6 +68,7 @@ useEditor((root) => {
     .use(listener)
     .use(upload)
     .use(emoji)
+    .use(imageInlineComponent)
   return crepe
 })
 </script>
@@ -90,5 +102,9 @@ useEditor((root) => {
 
 .milkdown-editor .milkdown .ProseMirror p {
   padding: 0px;
+}
+
+milkdown-toolbar {
+  z-index: 999;
 }
 </style>
