@@ -1,5 +1,5 @@
 import { defineEventHandlerWithNotebookAndNote } from '~/server/wrappers/note'
-import {nanoid} from 'nanoid'
+import { nanoid } from 'nanoid'
 import { writeFile, mkdir, constants } from 'node:fs/promises'
 import path from 'node:path'
 import { access, existsSync } from 'node:fs'
@@ -45,7 +45,7 @@ export default defineEventHandlerWithNotebookAndNote(
       })
 
       const id = nanoid()
-      const imageName = `${id}_${fileEntry.filename}`
+      const imageName = `${id}_${fileEntry.filename?.replace(/[\\/:*?"<>|.]/g, '')}`
 
       if (imageName.length > 255) {
         throw createError({
