@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import type { InlineFileConfig } from './config'
 
 export interface Attrs {
-  src: string
+  href: string
   alt: string
   title: string
 }
@@ -19,7 +19,7 @@ export type InlineFileComponentProps = Attrs & {
 const nanoid = customAlphabet('abcdefg', 8)
 
 export const inlineFileComponent: Component<InlineFileComponentProps> = ({
-  src = '',
+  href = '',
   selected = false,
   alt,
   title,
@@ -29,8 +29,8 @@ export const inlineFileComponent: Component<InlineFileComponentProps> = ({
   const linkInput = useRef<HTMLInputElement>()
   const [uuid] = useState(nanoid())
   const [focusLinkInput, setFocusLinkInput] = useState(false)
-  const [hidePlaceholder, setHidePlaceholder] = useState(src.length !== 0)
-  const [currentLink, setCurrentLink] = useState(src)
+  const [hidePlaceholder, setHidePlaceholder] = useState(href.length !== 0)
+  const [currentLink, setCurrentLink] = useState(href)
 
   const onEditLink = (e: InputEvent) => {
     const target = e.target as HTMLInputElement
@@ -46,12 +46,13 @@ export const inlineFileComponent: Component<InlineFileComponentProps> = ({
     const url = await config?.onUpload(file)
     if (!url) return
 
-    setAttr?.('src', url)
+    setAttr?.('href', url)
+    setAttr?.('alt', `📎${file.name}`)
     setHidePlaceholder(true)
   }
 
   const onConfirmLinkInput = () => {
-    setAttr?.('src', linkInput.current?.value ?? '')
+    setAttr?.('href', linkInput.current?.value ?? '')
   }
 
   const onKeydown = (e: KeyboardEvent) => {
@@ -69,8 +70,8 @@ export const inlineFileComponent: Component<InlineFileComponentProps> = ({
   }
 
   return html`
-    <host class=${clsx(selected && 'selected', !src && 'empty')}>
-      ${!src
+    <host class=${clsx(selected && 'selected', !href && 'empty')}>
+      ${!href
         ? html`
             <div class="empty-file-inline">
               <div class="file-icon">${config?.fileIcon()}</div>
@@ -99,14 +100,14 @@ export const inlineFileComponent: Component<InlineFileComponentProps> = ({
             </div>
           `
         : html`
-            <a class="file-inline" href=${src} alt=${alt} title=${title} />attachment</a>
+            <a class="file-inline" href=${href} alt=${alt} title=${title} />attachment</a>
           `}
     </host>
   `
 }
 
 inlineFileComponent.props = {
-  src: String,
+  href: String,
   alt: String,
   title: String,
   selected: Boolean,

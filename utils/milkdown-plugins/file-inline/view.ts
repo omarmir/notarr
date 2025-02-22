@@ -15,14 +15,14 @@ export const inlineFileView = $view(fileSchema.node, (ctx): NodeViewConstructor 
     const proxyDomURL = config.proxyDomURL
     const bindAttrs = (node: Node) => {
       if (!proxyDomURL) {
-        dom.src = node.attrs.src
+        dom.href = node.attrs.href
       } else {
-        const proxiedURL = proxyDomURL(node.attrs.src)
+        const proxiedURL = proxyDomURL(node.attrs.href)
         if (typeof proxiedURL === 'string') {
-          dom.src = proxiedURL
+          dom.href = proxiedURL
         } else {
           proxiedURL.then((url) => {
-            dom.src = url
+            dom.href = url
           })
         }
       }

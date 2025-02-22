@@ -30,7 +30,7 @@ export default defineEventHandlerWithNotebookAndNote(
 
     setHeaders(event, {
       'Content-Type': mimeType,
-      'Content-Disposition': `attachment; filename="${cleanNote}"`,
+      'Content-Disposition': `attachment; filename="${file}"`,
       'Cache-Control': 'no-cache'
     })
 

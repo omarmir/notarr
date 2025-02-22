@@ -18,7 +18,7 @@ import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
 // import { clearContentAndAddBlockType } from '~/utils/md-utils'
 // import { fileUploadSchema } from '~/utils/file-schema'
-import { fileSchema, insertFileCommand } from '~/utils/milkdown-plugins/file-inline/schema'
+import { fileSchema } from '~/utils/milkdown-plugins/file-inline/schema'
 
 const model = defineModel<string>({ required: true })
 const { disabled, isFocus, note, notebook } = defineProps<{
@@ -95,7 +95,7 @@ useEditor((root) => {
 
       ctx.update(inlineFileConfig.key, (prev) => ({
         ...prev,
-        uploader: customUploader
+        onUpload: async (file: File) => onUpload(file, notebook, note)
       }))
 
       ctx.update(editorViewOptionsCtx, (prev) => ({
@@ -151,5 +151,9 @@ milkdown-link-preview {
 
 .milkdown-editor .milkdown .image-inline {
   @apply inline-block;
+}
+
+.milkdown-editor .milkdown img.emoji {
+  @apply mr-0.5 inline h-5;
 }
 </style>

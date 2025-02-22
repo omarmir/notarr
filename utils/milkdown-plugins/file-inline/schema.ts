@@ -24,18 +24,18 @@ export const fileSchema = $nodeSchema('file', (ctx) => {
     defining: true,
     isolating: true,
     attrs: {
-      src: { default: '' },
+      href: { default: '' },
       alt: { default: '' },
       title: { default: '' }
     },
     parseDOM: [
       {
-        tag: 'img[src]',
+        tag: 'img[href]',
         getAttrs: (dom) => {
           if (!(dom instanceof HTMLElement)) throw expectDomTypeError(dom)
 
           return {
-            src: dom.getAttribute('src') || '',
+            href: dom.getAttribute('href') || '',
             alt: dom.getAttribute('alt') || '',
             title: dom.getAttribute('title') || dom.getAttribute('alt') || ''
           }
@@ -52,7 +52,7 @@ export const fileSchema = $nodeSchema('file', (ctx) => {
         const alt = node.alt as string
         const title = node.title as string
         state.addNode(type, {
-          src: url,
+          href: url,
           alt,
           title
         })
@@ -63,8 +63,10 @@ export const fileSchema = $nodeSchema('file', (ctx) => {
       runner: (state, node) => {
         state.addNode('link', undefined, undefined, {
           title: node.attrs.title,
-          url: node.attrs.src,
-          alt: node.attrs.alt
+          url: node.attrs.href,
+          alt: node.attrs.alt,
+          label: node.attrs.alt,
+          link: node.attrs.alt
         })
       }
     }
@@ -83,13 +85,13 @@ withMeta(fileSchema.ctx, {
 
 /// @internal
 export interface UpdateFileCommandPayload {
-  src?: string
+  href?: string
   title?: string
   alt?: string
 }
 
 /// This command will insert a file node.
-/// You can pass a payload to set `src`, `alt` and `title` for the file node.
+/// You can pass a payload to set `href`, `alt` and `title` for the file node.
 export const insertFileCommand = $command(
   'InsertFile',
   (ctx) =>
@@ -97,9 +99,9 @@ export const insertFileCommand = $command(
     (state, dispatch) => {
       if (!dispatch) return true
 
-      const { src = '', alt = '', title = '' } = payload
+      const { href = '', alt = '', title = '' } = payload
 
-      const node = fileSchema.type(ctx).create({ src, alt, title })
+      const node = fileSchema.type(ctx).create({ href, alt, title })
       if (!node) return true
 
       dispatch(state.tr.replaceSelectionWith(node).scrollIntoView())
@@ -113,7 +115,7 @@ withMeta(insertFileCommand, {
 })
 
 /// This command will update the selected file node.
-/// You can pass a payload to update `src`, `alt` and `title` for the file node.
+/// You can pass a payload to update `href`, `alt` and `title` for the file node.
 export const updateFileCommand = $command(
   'UpdateFile',
   (ctx) =>
@@ -125,8 +127,8 @@ export const updateFileCommand = $command(
       const { node, pos } = nodeWithPos
 
       const newAttrs = { ...node.attrs }
-      const { src, alt, title } = payload
-      if (src !== undefined) newAttrs.src = src
+      const { href, alt, title } = payload
+      if (href !== undefined) newAttrs.href = href
       if (alt !== undefined) newAttrs.alt = alt
       if (title !== undefined) newAttrs.title = title
 
@@ -141,7 +143,7 @@ withMeta(updateFileCommand, {
 })
 
 /// This input rule will insert a file node.
-/// You can input `![alt](src "title")` to insert a file node.
+/// You can input `![alt](href "title")` to insert a file node.
 /// The `title` is optional.
 export const insertFileInputRule = $inputRule(
   (ctx) =>
@@ -149,8 +151,8 @@ export const insertFileInputRule = $inputRule(
       // eslint-disable-next-line regexp/no-super-linear-backtracking
       /!\[(?<alt>.*?)\]\((?<filename>.*?)\s*(?="|\))"?(?<title>[^"]+)?"?\)/,
       (state, match, start, end) => {
-        const [matched, alt, src = '', title] = match
-        if (matched) return state.tr.replaceWith(start, end, fileSchema.type(ctx).create({ src, alt, title }))
+        const [matched, alt, href = '', title] = match
+        if (matched) return state.tr.replaceWith(start, end, fileSchema.type(ctx).create({ href, alt, title }))
 
         return null
       }

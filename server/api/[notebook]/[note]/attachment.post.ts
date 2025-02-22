@@ -45,7 +45,7 @@ export default defineEventHandlerWithNotebookAndNote(
       })
 
       const id = nanoid()
-      const imageName = `${id}_${fileEntry.filename?.replace(/[\\/:*?"<>|.]/g, '')}`
+      const imageName = `${id}_${fileEntry.filename?.replace(/[\\/:*?"<>]/g, '')}`
 
       if (imageName.length > 255) {
         throw createError({
