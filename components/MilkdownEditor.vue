@@ -9,12 +9,16 @@ import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
 import { upload, uploadConfig } from '@milkdown/kit/plugin/upload'
 import { imageInlineComponent, inlineImageConfig } from '@milkdown/kit/component/image-inline'
 import { imageBlockConfig } from '@milkdown/kit/component/image-block'
+import { fileInlineComponent, inlineFileConfig } from '~/utils/milkdown-plugins/file-inline'
 import { editorViewOptionsCtx, editorViewCtx } from '@milkdown/kit/core'
 import { emoji } from '@milkdown/plugin-emoji'
 import { createUploader, onUpload } from '~/utils/uploader'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
+// import { clearContentAndAddBlockType } from '~/utils/md-utils'
+// import { fileUploadSchema } from '~/utils/file-schema'
+import { fileSchema, insertFileCommand } from '~/utils/milkdown-plugins/file-inline/schema'
 
 const model = defineModel<string>({ required: true })
 const { disabled, isFocus, note, notebook } = defineProps<{
@@ -48,7 +52,13 @@ useEditor((root) => {
           advanced.addItem('file', {
             label: 'File',
             icon: '',
-            onRun: () => {}
+            onRun: (ctx) => {
+              const view = ctx.get(editorViewCtx)
+              const { dispatch, state } = view
+
+              const command = clearContentAndAddBlockType(fileSchema.type(ctx))
+              command(state, dispatch)
+            }
           })
         }
       }
@@ -83,6 +93,11 @@ useEditor((root) => {
         uploader: customUploader
       }))
 
+      ctx.update(inlineFileConfig.key, (prev) => ({
+        ...prev,
+        uploader: customUploader
+      }))
+
       ctx.update(editorViewOptionsCtx, (prev) => ({
         ...prev,
         editable: () => !disabled
@@ -91,7 +106,9 @@ useEditor((root) => {
     .use(listener)
     .use(upload)
     .use(emoji)
+    .use(fileSchema)
     .use(imageInlineComponent)
+    .use(fileInlineComponent)
   return crepe
 })
 </script>
@@ -127,7 +144,12 @@ useEditor((root) => {
   padding: 0px;
 }
 
-milkdown-toolbar {
-  z-index: 999;
+milkdown-toolbar,
+milkdown-link-preview {
+  z-index: 999 !important;
+}
+
+.milkdown-editor .milkdown .image-inline {
+  @apply inline-block;
 }
 </style>

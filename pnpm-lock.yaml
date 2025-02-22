@@ -14,6 +14,9 @@ importers:
       '@milkdown/crepe':
         specifier: ^7.6.3
         version: 7.6.3(element-internals-polyfill@0.1.55)
+      '@milkdown/exception':
+        specifier: ^7.6.3
+        version: 7.6.3
       '@milkdown/kit':
         specifier: ^7.6.3
         version: 7.6.3(@codemirror/language@6.10.8)(@codemirror/state@6.5.2)(@codemirror/view@6.36.2)(element-internals-polyfill@0.1.55)
@@ -23,9 +26,15 @@ importers:
       '@milkdown/plugin-slash':
         specifier: ^7.6.3
         version: 7.6.3(@milkdown/core@7.6.3(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3)))(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3))
+      '@milkdown/prose':
+        specifier: ^7.6.3
+        version: 7.6.3
       '@milkdown/theme-nord':
         specifier: ^7.6.3
         version: 7.6.3(@milkdown/core@7.6.3(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3)))(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)
+      '@milkdown/utils':
+        specifier: ^7.6.3
+        version: 7.6.3(@milkdown/core@7.6.3(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3)))(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3))
       '@milkdown/vue':
         specifier: ^7.6.3
         version: 7.6.3(@codemirror/language@6.10.8)(@codemirror/state@6.5.2)(@codemirror/view@6.36.2)(element-internals-polyfill@0.1.55)(vue@3.5.13(typescript@5.7.3))
@@ -44,6 +53,12 @@ importers:
       '@vueuse/integrations':
         specifier: ^12.7.0
         version: 12.7.0(change-case@5.4.4)(focus-trap@7.6.4)(fuse.js@7.1.0)(typescript@5.7.3)
+      atomico:
+        specifier: ^1.79.2
+        version: 1.79.2
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       focus-trap:
         specifier: ^7.6.4
         version: 7.6.4
@@ -65,6 +80,9 @@ importers:
       shell-escape:
         specifier: ^0.2.0
         version: 0.2.0
+      view:
+        specifier: link:@milkdown/prose/view
+        version: link:@milkdown/prose/view
       vue:
         specifier: latest
         version: 3.5.13(typescript@5.7.3)
