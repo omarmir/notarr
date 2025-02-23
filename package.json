@@ -19,6 +19,7 @@
   "dependencies": {
     "@milkdown/core": "^7.6.3",
     "@milkdown/crepe": "^7.6.3",
+    "@milkdown/ctx": "^7.6.3",
     "@milkdown/exception": "^7.6.3",
     "@milkdown/kit": "^7.6.3",
     "@milkdown/plugin-emoji": "^7.6.3",

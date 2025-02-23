@@ -3,6 +3,8 @@ import { $inputRule, $node, $nodeAttr, $remark } from '@milkdown/kit/utils'
 import { InputRule } from '@milkdown/prose/inputrules'
 import directive from 'remark-directive'
 import { filePickerRemarkPlugin, regex } from './transformer'
+import { inlineImageConfig } from './config'
+import { inlineImageView } from './view'
 
 const remarkPluginId = 'file-picker'
 export const filePickerremarkDirective = $remark(remarkPluginId, () => directive)
@@ -79,5 +81,7 @@ export const filePicker: MilkdownPlugin[] = [
   filePickerremarkDirective,
   filePickerNode,
   filePickerRule,
-  filePickerRemarkPlugin
+  filePickerRemarkPlugin,
+  inlineImageConfig,
+  inlineImageView
 ].flat()

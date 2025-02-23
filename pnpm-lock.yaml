@@ -14,6 +14,9 @@ importers:
       '@milkdown/crepe':
         specifier: ^7.6.3
         version: 7.6.3(element-internals-polyfill@0.1.55)
+      '@milkdown/ctx':
+        specifier: ^7.6.3
+        version: 7.6.3
       '@milkdown/exception':
         specifier: ^7.6.3
         version: 7.6.3

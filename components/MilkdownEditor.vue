@@ -47,8 +47,8 @@ useEditor((root) => {
               const view = ctx.get(editorViewCtx)
               const { dispatch, state } = view
 
-              // const command = clearContentAndAddBlockType(fileSchema.type(ctx))
-              // command(state, dispatch)
+              const command = clearContentAndAddBlockType(fileUploadSchema.type(ctx))
+              command(state, dispatch)
             }
           })
         }
