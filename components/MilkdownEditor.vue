@@ -17,7 +17,6 @@ import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
 // import { clearContentAndAddBlockType } from '~/utils/md-utils'
 // import { fileUploadSchema } from '~/utils/file-schema'
-import { fileSchema } from '~/utils/milkdown-plugins/file-inline/schema'
 import { filePicker } from '~/utils/milkdown-plugins/file-picker'
 
 const model = defineModel<string>({ required: true })
@@ -48,8 +47,8 @@ useEditor((root) => {
               const view = ctx.get(editorViewCtx)
               const { dispatch, state } = view
 
-              const command = clearContentAndAddBlockType(fileSchema.type(ctx))
-              command(state, dispatch)
+              // const command = clearContentAndAddBlockType(fileSchema.type(ctx))
+              // command(state, dispatch)
             }
           })
         }
@@ -93,7 +92,6 @@ useEditor((root) => {
     .use(listener)
     .use(upload)
     .use(emoji)
-    .use(fileSchema)
     .use(imageInlineComponent)
     .use(filePicker)
   return crepe
