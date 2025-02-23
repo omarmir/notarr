@@ -9,7 +9,6 @@ import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
 import { upload, uploadConfig } from '@milkdown/kit/plugin/upload'
 import { imageInlineComponent, inlineImageConfig } from '@milkdown/kit/component/image-inline'
 import { imageBlockConfig } from '@milkdown/kit/component/image-block'
-import { fileInlineComponent, inlineFileConfig } from '~/utils/milkdown-plugins/file-inline'
 import { editorViewOptionsCtx, editorViewCtx } from '@milkdown/kit/core'
 import { emoji } from '@milkdown/plugin-emoji'
 import { createUploader, onUpload } from '~/utils/uploader'
@@ -19,6 +18,7 @@ import '@milkdown/crepe/theme/nord-dark.css'
 // import { clearContentAndAddBlockType } from '~/utils/md-utils'
 // import { fileUploadSchema } from '~/utils/file-schema'
 import { fileSchema } from '~/utils/milkdown-plugins/file-inline/schema'
+import { filePickerNode, filePickerremarkDirective, filePickerRule } from '~/utils/milkdown-plugins/file-picker'
 
 const model = defineModel<string>({ required: true })
 const { disabled, isFocus, note, notebook } = defineProps<{
@@ -93,11 +93,6 @@ useEditor((root) => {
         uploader: customUploader
       }))
 
-      ctx.update(inlineFileConfig.key, (prev) => ({
-        ...prev,
-        onUpload: async (file: File) => onUpload(file, notebook, note)
-      }))
-
       ctx.update(editorViewOptionsCtx, (prev) => ({
         ...prev,
         editable: () => !disabled
@@ -108,7 +103,8 @@ useEditor((root) => {
     .use(emoji)
     .use(fileSchema)
     .use(imageInlineComponent)
-    .use(fileInlineComponent)
+    .use(filePickerremarkDirective)
+    .use([filePickerNode, filePickerRule])
   return crepe
 })
 </script>
