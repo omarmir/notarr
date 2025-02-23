@@ -18,7 +18,7 @@ import '@milkdown/crepe/theme/nord-dark.css'
 // import { clearContentAndAddBlockType } from '~/utils/md-utils'
 // import { fileUploadSchema } from '~/utils/file-schema'
 import { fileSchema } from '~/utils/milkdown-plugins/file-inline/schema'
-import { filePickerNode, filePickerremarkDirective, filePickerRule } from '~/utils/milkdown-plugins/file-picker'
+import { filePicker } from '~/utils/milkdown-plugins/file-picker'
 
 const model = defineModel<string>({ required: true })
 const { disabled, isFocus, note, notebook } = defineProps<{
@@ -29,14 +29,6 @@ const { disabled, isFocus, note, notebook } = defineProps<{
 }>()
 
 const customUploader = createUploader(notebook, note)
-
-// export interface MenuItem {
-//   index: number
-//   key: string
-//   label: string
-//   icon: ReturnType<typeof html>
-//   onRun: (ctx: Ctx) => void
-// }
 
 useEditor((root) => {
   const crepe = new Crepe({
@@ -103,8 +95,7 @@ useEditor((root) => {
     .use(emoji)
     .use(fileSchema)
     .use(imageInlineComponent)
-    .use(filePickerremarkDirective)
-    .use([filePickerNode, filePickerRule])
+    .use(filePicker)
   return crepe
 })
 </script>
@@ -151,5 +142,27 @@ milkdown-link-preview {
 
 .milkdown-editor .milkdown img.emoji {
   @apply mr-0.5 inline h-5;
+}
+
+.milkdown-editor .milkdown button.attachment-button {
+  @apply inline-block rounded-sm bg-accent px-2 py-0 text-white hover:bg-accent-hover;
+  position: relative;
+  padding-left: 32px; /* Adjust the padding to make space for the icon */
+}
+
+.milkdown-editor .milkdown button.attachment-button::before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 4px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="white" d="m8 9l4-4H9V1H7v4H4zm3.636-1.636l-1.121 1.121L14.579 10L8 12.453L1.421 10l4.064-1.515l-1.121-1.121L0 9v4l8 3l8-3V9z"/></svg>');
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>

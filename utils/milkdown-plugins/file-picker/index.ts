@@ -1,13 +1,20 @@
-import { $inputRule, $node, $remark } from '@milkdown/kit/utils'
+import type { MilkdownPlugin } from '@milkdown/kit/ctx'
+import { $inputRule, $node, $nodeAttr, $remark } from '@milkdown/kit/utils'
 import { InputRule } from '@milkdown/prose/inputrules'
 import directive from 'remark-directive'
+import { filePickerRemarkPlugin, regex } from './transformer'
 
 const remarkPluginId = 'file-picker'
 export const filePickerremarkDirective = $remark(remarkPluginId, () => directive)
 
+export const fileAttr = $nodeAttr('file', () => ({
+  href: {},
+  title: {}
+}))
+
 export const filePickerNode = $node('file', () => ({
-  group: 'block',
-  // inline: true,
+  group: 'inline',
+  inline: true,
   atom: true,
   isolating: true,
   marks: '',
@@ -31,16 +38,14 @@ export const filePickerNode = $node('file', () => ({
       {
         type: 'button',
         'data-href': href,
+        class: 'attachment-button flex flex-row',
         onclick: `window.open('${href}', '_blank')`
       },
       title
     ]
   },
   parseMarkdown: {
-    match: (node) => {
-      console.log(node)
-      return node.type === 'leafDirective' && node.name === 'file'
-    },
+    match: ({ type }) => type === 'file',
     runner: (state, node, type) => {
       const attrs = node.attributes as { href: string; title: string }
       state.addNode(type, { href: attrs.href, title: attrs.title })
@@ -49,18 +54,16 @@ export const filePickerNode = $node('file', () => ({
   toMarkdown: {
     match: (node) => node.type.name === 'file',
     runner: (state, node) => {
-      state.addNode('leafDirective', undefined, undefined, {
-        name: 'file',
-        attributes: { href: node.attrs.href, title: node.attrs.title }
-      })
+      const { href, title } = node.attrs
+      state.addNode('text', undefined, `::file{href="${href}" title="${title}"}`)
     }
   }
 }))
 
 export const filePickerRule = $inputRule(
   (ctx) =>
-    new InputRule(/::file\{href="(?<href>[^"]+)?"? title="(?<title>[^"]+)?"?\}/, (state, match, start, end) => {
-      const [href = '', title = ''] = match
+    new InputRule(regex, (state, match, start, end) => {
+      const [_full = '', href = '', title = ''] = match
       const { tr } = state
 
       if (href) {
@@ -70,3 +73,11 @@ export const filePickerRule = $inputRule(
       return tr
     })
 )
+
+export const filePicker: MilkdownPlugin[] = [
+  fileAttr,
+  filePickerremarkDirective,
+  filePickerNode,
+  filePickerRule,
+  filePickerRemarkPlugin
+].flat()

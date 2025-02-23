@@ -32,6 +32,9 @@ importers:
       '@milkdown/theme-nord':
         specifier: ^7.6.3
         version: 7.6.3(@milkdown/core@7.6.3(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3)))(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)
+      '@milkdown/transformer':
+        specifier: ^7.6.3
+        version: 7.6.3(@milkdown/prose@7.6.3)
       '@milkdown/utils':
         specifier: ^7.6.3
         version: 7.6.3(@milkdown/core@7.6.3(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3)))(@milkdown/ctx@7.6.3)(@milkdown/prose@7.6.3)(@milkdown/transformer@7.6.3(@milkdown/prose@7.6.3))
