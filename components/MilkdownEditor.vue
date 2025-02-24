@@ -167,14 +167,14 @@ milkdown-link-preview {
 
 .milkdown-editor .milkdown {
   milkdown-file-picker {
-    > div {
-      @apply inline rounded-md border border-solid border-accent bg-slate-200 px-2 py-0.5 dark:bg-slate-800;
+    .file-input {
+      @apply inline-flex cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
     }
-    div {
-      @apply inline;
+    .file-icon {
+      @apply inline-flex size-5;
     }
-    input {
-      @apply mx-2 bg-accent/20;
+    div.empty-file {
+      @apply inline-flex flex-row items-center gap-1;
     }
   }
 }
