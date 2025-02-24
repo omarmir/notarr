@@ -40,7 +40,7 @@ export const filePickerPlugin: RemarkPluginRaw<{ href: string; title: string }> 
       if (node.type === 'code') return [node]
 
       const value = node.value
-      const output: Array<Node & { value: string; attributes?: { href: string | null; title: string | null } }> = []
+      const output: Array<Node & { value: string; attributes?: { href: string; title: string } }> = []
       let match
       let str = value
       while ((match = regex.exec(str))) {
@@ -54,8 +54,8 @@ export const filePickerPlugin: RemarkPluginRaw<{ href: string; title: string }> 
             ...node,
             value: fileMatch,
             attributes: {
-              href: href ?? null,
-              title: title ?? null
+              href: href ?? '',
+              title: title ?? ''
             },
             type: 'file'
           })

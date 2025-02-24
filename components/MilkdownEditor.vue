@@ -18,6 +18,7 @@ import '@milkdown/crepe/theme/nord-dark.css'
 // import { clearContentAndAddBlockType } from '~/utils/md-utils'
 // import { fileUploadSchema } from '~/utils/file-schema'
 import { filePicker } from '~/utils/milkdown-plugins/file-picker'
+// import { filePickerComponent } from '~/utils/milkdown-plugins/file-picker/component'
 
 const model = defineModel<string>({ required: true })
 const { disabled, isFocus, note, notebook } = defineProps<{
@@ -43,10 +44,9 @@ useEditor((root) => {
           advanced.addItem('file', {
             label: 'File',
             icon: '',
-            onRun: (ctx) => {
-              const view = ctx.get(editorViewCtx)
-              const { dispatch, state } = view
-
+            onRun: (_ctx) => {
+              // const view = ctx.get(editorViewCtx)
+              // const { dispatch, state } = view
               // const command = clearContentAndAddBlockType(fileSchema.type(ctx))
               // command(state, dispatch)
             }
@@ -93,6 +93,7 @@ useEditor((root) => {
     .use(upload)
     .use(emoji)
     .use(imageInlineComponent)
+    // .use(filePickerComponent)
     .use(filePicker)
   return crepe
 })
@@ -142,13 +143,13 @@ milkdown-link-preview {
   @apply mr-0.5 inline h-5;
 }
 
-.milkdown-editor .milkdown button.attachment-button {
-  @apply inline-block rounded-sm bg-accent px-2 py-0 text-white hover:bg-accent-hover;
+.milkdown-editor .milkdown a.attachment-button {
+  @apply inline-block rounded-md bg-accent px-2 py-0 text-white no-underline hover:bg-accent-hover;
   position: relative;
   padding-left: 32px; /* Adjust the padding to make space for the icon */
 }
 
-.milkdown-editor .milkdown button.attachment-button::before {
+.milkdown-editor .milkdown a.attachment-button::before {
   content: '';
   display: inline-block;
   vertical-align: middle;
