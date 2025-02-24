@@ -3,12 +3,20 @@ import type { Component } from 'atomico'
 import clsx from 'clsx'
 import type { FilePickerConfig } from './config'
 import { waitforme } from '~/server/utils'
+import { getIcon } from 'material-file-icons'
 
 export * from './config'
 
 export interface Attrs {
   href: string
   title: string
+}
+
+const getHTMLIcon = (title: string | undefined) => {
+  const icon = getIcon(title ?? '').svg
+  return html`
+    <span innerHTML=${icon}></span>
+  `
 }
 
 export type FilePickerComponentProps = Attrs & {
@@ -60,7 +68,7 @@ export const filePickerComponent: Component<FilePickerComponentProps> = ({
                 type="file" />
               ${uploading
                 ? html`
-                    <div class="file-icon">${config?.uploadingHTML()}</div>
+                    <div class="uploading-icon">${config?.uploadingHTML()}</div>
                   `
                 : ''}
             </div>
@@ -71,8 +79,9 @@ export const filePickerComponent: Component<FilePickerComponentProps> = ({
               title="Download ${title}"
               href="${href}"
               download
-              class="attachment-button flex flex-row"
+              class="attachment-button"
               contenteditable="false">
+              <div class="file-icon">${getHTMLIcon(title)}</div>
               ${title}
             </a>
           `}

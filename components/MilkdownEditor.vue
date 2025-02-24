@@ -127,7 +127,7 @@ useEditor((root) => {
 }
 
 .milkdown-editor .milkdown .ProseMirror p {
-  padding: 0px;
+  @apply p-0 align-middle;
 }
 
 milkdown-toolbar,
@@ -144,37 +144,23 @@ milkdown-link-preview {
 }
 
 .milkdown-editor .milkdown a.attachment-button {
-  @apply inline-block rounded-md bg-accent px-2 py-0 text-white no-underline hover:bg-accent-hover;
-  position: relative;
-  padding-left: 32px; /* Adjust the padding to make space for the icon */
-}
-
-.milkdown-editor .milkdown a.attachment-button::before {
-  content: '';
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 4px;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="white" d="m8 9l4-4H9V1H7v4H4zm3.636-1.636l-1.121 1.121L14.579 10L8 12.453L1.421 10l4.064-1.515l-1.121-1.121L0 9v4l8 3l8-3V9z"/></svg>');
-  width: 16px;
-  height: 16px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
+  @apply inline-flex flex-row items-center rounded-md bg-slate-600 px-2 py-0.5 text-sm text-white no-underline hover:bg-accent-hover;
 }
 
 .milkdown-editor .milkdown {
   milkdown-file-picker {
+    @apply inline align-middle;
     .file-input {
-      @apply inline-flex cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
+      @apply inline cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
     }
-    .file-icon {
-      @apply inline-flex size-5;
+    .uploading-icon {
+      @apply inline size-5;
     }
     div.empty-file {
       @apply inline-flex flex-row items-center gap-1;
+    }
+    div.file-icon {
+      @apply inline !size-5;
     }
   }
 }
