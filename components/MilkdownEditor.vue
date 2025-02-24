@@ -99,35 +99,8 @@ useEditor((root) => {
 })
 </script>
 <style lang="postcss">
-.milkdown-editor div.milkdown > div {
-  @apply px-0 py-0 text-gray-900 dark:text-gray-200;
-}
-
-.milkdown-editor div.milkdown {
-  @apply px-0 py-1;
-}
-
 .milkdown-editor.focus div.milkdown milkdown-block-handle {
   display: none;
-}
-
-.milkdown {
-  --crepe-color-background: transparent;
-}
-
-.milkdown-editor div.milkdown .ProseMirror {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 10px 0px;
-  }
-}
-
-.milkdown-editor .milkdown .ProseMirror p {
-  @apply p-0 align-middle;
 }
 
 milkdown-toolbar,
@@ -135,32 +108,54 @@ milkdown-link-preview {
   z-index: 999 !important;
 }
 
-.milkdown-editor .milkdown .image-inline {
-  @apply inline-block;
-}
-
-.milkdown-editor .milkdown img.emoji {
-  @apply mr-0.5 inline h-5;
-}
-
-.milkdown-editor .milkdown a.attachment-button {
-  @apply inline-flex flex-row items-center rounded-md bg-slate-600 px-2 py-0.5 text-sm text-white no-underline hover:bg-accent-hover;
-}
-
-.milkdown-editor .milkdown {
-  milkdown-file-picker {
-    @apply inline align-middle;
-    .file-input {
-      @apply inline cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
+.milkdown-editor {
+  .milkdown {
+    @apply px-0 py-1;
+    --crepe-color-background: transparent;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 10px 0px;
     }
-    .uploading-icon {
-      @apply inline size-5;
+
+    .ProseMirror {
+      p {
+        @apply p-0 align-middle;
+      }
     }
-    div.empty-file {
-      @apply inline-flex flex-row items-center gap-1;
+
+    > div {
+      @apply px-0 py-0 text-gray-900 dark:text-gray-200;
     }
-    div.file-icon {
-      @apply inline !size-5;
+
+    .image-inline {
+      @apply inline-block;
+    }
+
+    img.emoji {
+      @apply mr-0.5 inline h-5;
+    }
+
+    a.attachment-button {
+      @apply inline-flex flex-row items-center rounded-md bg-slate-600 px-2 py-0.5 text-sm text-white no-underline hover:bg-accent-hover;
+    }
+    milkdown-file-picker {
+      @apply inline align-middle;
+      .file-input {
+        @apply inline cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
+      }
+      .uploading-icon {
+        @apply inline size-5;
+      }
+      div.empty-file {
+        @apply inline-flex flex-row items-center gap-1;
+      }
+      div.file-icon {
+        @apply inline !size-5;
+      }
     }
   }
 }
