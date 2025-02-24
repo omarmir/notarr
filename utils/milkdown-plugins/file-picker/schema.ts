@@ -26,21 +26,6 @@ export const filePickerNode = $nodeSchema('file', () => ({
       })
     }
   ],
-  toDOM: (node) => {
-    const { href, title } = node.attrs
-    return [
-      'a',
-      {
-        type: 'button',
-        title: title,
-        download: true,
-        href: href,
-        contenteditable: false,
-        class: 'attachment-button'
-      },
-      title ?? ''
-    ]
-  },
   parseMarkdown: {
     match: ({ type }) => type === 'file',
     runner: (state, node, type) => {
@@ -72,7 +57,8 @@ export const filePickerRule = $inputRule(
 )
 
 export const filePickerNodeBlock = $nodeSchema('fileBlock', () => ({
-  group: 'paragraph',
+  content: 'block+',
+  group: 'block',
   atom: true,
   isolating: true,
   marks: '',
@@ -80,32 +66,22 @@ export const filePickerNodeBlock = $nodeSchema('fileBlock', () => ({
     href: { default: null },
     title: { default: null }
   },
-  parseDOM: [
-    {
-      tag: 'a',
-      getAttrs: (dom) => ({
-        href: dom.getAttribute('href'),
-        title: dom.getAttribute('title')
-      })
-    }
-  ],
-  toDOM: (mark) => ['a', { href: mark.attrs.href, title: mark.attrs.title }, 0],
   parseMarkdown: {
-    match: (node) => {
-      console.log(node)
-      return node.type === 'leafDirective' && node.name === 'file'
-    },
+    match: (node) => node.type === 'leafDirective' && node.name === 'fileBlock',
     runner: (state, node, type) => {
       const attrs = node.attributes as { href: string; title: string }
-
       state.addNode(type, { href: attrs.href, title: attrs.title })
     }
   },
   toMarkdown: {
-    match: (node) => node.type.name === 'file',
+    match: (node) => node.type.name === 'fileBlock',
     runner: (state, node) => {
-      const { href, title } = node.attrs
-      state.addNode('leafDirective', undefined, `::file{href="${href}" title="${title}"}`)
+      const { href = '', title = '' } = node.attrs
+      state.addNode('leafDirective', undefined, undefined, {
+        name: 'fileBlock',
+        attributes: { href, title }
+      })
+      // state.addNode('paragraph', undefined, `::fileBlock{href="${href}" title="${title}"}`)
     }
   }
 }))

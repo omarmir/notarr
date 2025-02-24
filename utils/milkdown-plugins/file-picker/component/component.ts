@@ -78,7 +78,7 @@ export const filePickerComponent: Component<FilePickerComponentProps> = ({
               type="button"
               title="Download ${title}"
               href="${href}"
-              download
+              download=${title}
               class="attachment-button"
               contenteditable="false">
               <div class="file-icon">${getHTMLIcon(title)}</div>

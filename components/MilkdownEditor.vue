@@ -138,11 +138,12 @@ milkdown-link-preview {
       @apply mr-0.5 inline h-5;
     }
 
-    a.attachment-button {
-      @apply inline-flex flex-row items-center rounded-md bg-slate-600 px-2 py-0.5 text-sm text-white no-underline hover:bg-accent-hover;
-    }
     milkdown-file-picker {
       @apply inline align-middle;
+
+      a.attachment-button {
+        @apply inline-flex flex-row items-center gap-2 rounded-md bg-slate-600 px-2 py-0.5 text-sm text-white no-underline hover:bg-accent-hover;
+      }
       .file-input {
         @apply inline cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
       }
@@ -154,6 +155,14 @@ milkdown-link-preview {
       }
       div.file-icon {
         @apply inline !size-5;
+      }
+    }
+    milkdown-file-picker[data-inline='false'] {
+      a.attachment-button {
+        @apply flex flex-col gap-1 bg-transparent;
+        div.file-icon {
+          @apply inline !size-10;
+        }
       }
     }
   }

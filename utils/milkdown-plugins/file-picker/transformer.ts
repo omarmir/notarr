@@ -37,7 +37,7 @@ export const filePickerPlugin: RemarkPluginRaw<{ href: string; title: string }> 
       if (!isLiteral(node)) return [node]
 
       // Should not convert code block
-      if (node.type === 'code') return [node]
+      if (node.type === 'code' || node.type === 'leafDirective') return [node]
 
       const value = node.value
       const output: Array<Node & { value: string; attributes?: { href: string; title: string } }> = []
