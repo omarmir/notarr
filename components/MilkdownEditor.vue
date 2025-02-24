@@ -164,4 +164,18 @@ milkdown-link-preview {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.milkdown-editor .milkdown {
+  milkdown-file-picker {
+    > div {
+      @apply inline rounded-md border border-solid border-accent bg-slate-200 px-2 py-0.5 dark:bg-slate-800;
+    }
+    div {
+      @apply inline;
+    }
+    input {
+      @apply mx-2 bg-accent/20;
+    }
+  }
+}
 </style>

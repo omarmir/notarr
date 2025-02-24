@@ -52,7 +52,12 @@ export const filePickerComponent: Component<FilePickerComponentProps> = ({
   }
 
   const onConfirmLinkInput = () => {
-    setAttr?.('href', linkInput.current?.value ?? '')
+    const url = linkInput.current?.value ?? ''
+    const match = url.match(/\/([^/]+)$/)
+    const fileName = match ? match[1] : null
+
+    setAttr?.('href', url ?? '')
+    setAttr?.('title', fileName ?? 'file')
   }
 
   const onKeydown = (e: KeyboardEvent) => {
@@ -73,8 +78,8 @@ export const filePickerComponent: Component<FilePickerComponentProps> = ({
     <host class=${clsx(selected && 'selected', !href && 'empty')}>
       ${!href
         ? html`
-            <div class="empty-image-inline">
-              <div class="image-icon">${config?.imageIcon()}</div>
+            <div class="empty-file-inline">
+              <div class="file-icon">${config?.imageIcon()}</div>
               <div class=${clsx('link-importer', focusLinkInput && 'focus')}>
                 <input
                   draggable="true"
@@ -87,7 +92,7 @@ export const filePickerComponent: Component<FilePickerComponentProps> = ({
                   onfocus=${() => setFocusLinkInput(true)}
                   onblur=${() => setFocusLinkInput(false)} />
                 <div class=${clsx('placeholder', hidePlaceholder && 'hidden')}>
-                  <input class="hidden" id=${uuid} type="file" accept="image/*" onchange=${onUpload} />
+                  <input class="hidden" id=${uuid} type="file" accept="*" onchange=${onUpload} />
                   <label onpointerdown=${onClickUploader} class="uploader" for=${uuid}>${config?.uploadButton()}</label>
                   <span class="text" onclick=${() => linkInput.current?.focus()}>${config?.uploadPlaceholderText}</span>
                 </div>
