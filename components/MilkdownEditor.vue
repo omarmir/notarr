@@ -93,7 +93,6 @@ useEditor((root) => {
     .use(upload)
     .use(emoji)
     .use(imageInlineComponent)
-    // .use(filePickerComponent)
     .use(filePicker)
   return crepe
 })

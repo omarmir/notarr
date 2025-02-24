@@ -36,7 +36,7 @@ export const filePickerNode = $nodeSchema('file', () => ({
         download: true,
         href: href,
         contenteditable: false,
-        class: 'attachment-button flex flex-row'
+        class: 'attachment-button'
       },
       title ?? ''
     ]
