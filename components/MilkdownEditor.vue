@@ -178,7 +178,7 @@ milkdown-link-preview {
         @apply my-2 file:py-1.5;
       }
       a.attachment-button {
-        @apply flex flex-col gap-1 bg-transparent font-bold text-gray-900 dark:text-white;
+        @apply flex flex-col gap-1 bg-transparent font-bold text-gray-900 hover:underline dark:text-white;
         div.file-icon {
           @apply inline !size-10;
         }
