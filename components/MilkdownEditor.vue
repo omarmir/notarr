@@ -15,10 +15,10 @@ import { createUploader, onUpload } from '~/utils/uploader'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
-// import { clearContentAndAddBlockType } from '~/utils/md-utils'
-// import { fileUploadSchema } from '~/utils/file-schema'
 import { filePicker } from '~/utils/milkdown-plugins/file-picker'
-// import { filePickerComponent } from '~/utils/milkdown-plugins/file-picker/component'
+import { filePickerNodeBlock } from '~/utils/milkdown-plugins/file-picker/schema'
+import { html } from 'atomico'
+import { filePickerConfig } from '~/utils/milkdown-plugins/file-picker/component/config'
 
 const model = defineModel<string>({ required: true })
 const { disabled, isFocus, note, notebook } = defineProps<{
@@ -42,13 +42,23 @@ useEditor((root) => {
         buildMenu: (builder) => {
           const advanced = builder.getGroup('advanced')
           advanced.addItem('file', {
-            label: 'File',
-            icon: '',
-            onRun: (_ctx) => {
-              // const view = ctx.get(editorViewCtx)
-              // const { dispatch, state } = view
-              // const command = clearContentAndAddBlockType(fileSchema.type(ctx))
-              // command(state, dispatch)
+            label: 'Attachment',
+            icon: html`
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.324 8.436L9.495 12.19c-.364.36-.564.852-.556 1.369a2 2 0 0 0 .6 1.387c.375.371.88.584 1.403.593a1.92 1.92 0 0 0 1.386-.55l3.828-3.754a3.75 3.75 0 0 0 1.112-2.738a4 4 0 0 0-1.198-2.775a4.1 4.1 0 0 0-2.808-1.185a3.85 3.85 0 0 0-2.77 1.098L6.661 9.39a5.63 5.63 0 0 0-1.667 4.107a6 6 0 0 0 1.798 4.161a6.15 6.15 0 0 0 4.21 1.778a5.77 5.77 0 0 0 4.157-1.646l3.829-3.756" />
+              </svg>
+            `,
+            onRun: (ctx) => {
+              const view = ctx.get(editorViewCtx)
+              const { dispatch, state } = view
+              const command = clearContentAndAddBlockType(filePickerNodeBlock.type(ctx))
+              command(state, dispatch)
             }
           })
         }
@@ -82,6 +92,11 @@ useEditor((root) => {
       ctx.update(uploadConfig.key, (prev) => ({
         ...prev,
         uploader: customUploader
+      }))
+
+      ctx.update(filePickerConfig.key, (prev) => ({
+        ...prev,
+        onUpload: async (file: File) => onUpload(file, notebook, note)
       }))
 
       ctx.update(editorViewOptionsCtx, (prev) => ({
@@ -163,7 +178,7 @@ milkdown-link-preview {
         @apply my-2 file:py-1.5;
       }
       a.attachment-button {
-        @apply flex flex-col gap-1 bg-transparent;
+        @apply flex flex-col gap-1 bg-transparent font-bold text-gray-900 dark:text-white;
         div.file-icon {
           @apply inline !size-10;
         }

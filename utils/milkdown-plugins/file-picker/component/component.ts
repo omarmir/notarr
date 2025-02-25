@@ -2,7 +2,6 @@ import { c, html, useRef, useState } from 'atomico'
 import type { Component } from 'atomico'
 import clsx from 'clsx'
 import type { FilePickerConfig } from './config'
-import { waitforme } from '~/server/utils'
 import { getIcon } from 'material-file-icons'
 
 export * from './config'
@@ -40,7 +39,6 @@ export const filePickerComponent: Component<FilePickerComponentProps> = ({
     const file = (e.target as HTMLInputElement).files?.[0]
     if (!file) return
     setUploading(true)
-    await waitforme(2000)
     const url = await config?.onUpload(file)
     setUploading(false)
     if (!url) return
