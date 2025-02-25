@@ -2,6 +2,8 @@ import type { Node, RemarkPluginRaw } from '@milkdown/transformer'
 import { $remark } from '@milkdown/utils'
 
 export const regex = /::file\{href="(?<href>[^"]+)?"? title="(?<title>[^"]+)?"?\}/
+export const shortRegex = /::file\s/
+export const shortBlockRegex = /::fileBlock\s/
 
 const isParent = (node: Node): node is Node & { children: Node[] } => !!(node as Node & { children: Node[] }).children
 const isLiteral = (node: Node): node is Node & { value: string } => !!(node as Node & { value: string }).value

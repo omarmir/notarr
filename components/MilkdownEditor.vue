@@ -158,6 +158,10 @@ milkdown-link-preview {
       }
     }
     milkdown-file-picker[data-inline='false'] {
+      @apply block;
+      .file-input {
+        @apply my-2 file:py-1.5;
+      }
       a.attachment-button {
         @apply flex flex-col gap-1 bg-transparent;
         div.file-icon {

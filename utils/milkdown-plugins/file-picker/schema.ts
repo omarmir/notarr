@@ -1,6 +1,6 @@
 import { $inputRule, $nodeAttr, $nodeSchema } from '@milkdown/kit/utils'
 import { InputRule } from '@milkdown/prose/inputrules'
-import { regex } from './transformer'
+import { regex, shortBlockRegex, shortRegex } from './transformer'
 
 export const fileAttr = $nodeAttr('file', () => ({
   href: {},
@@ -42,20 +42,6 @@ export const filePickerNode = $nodeSchema('file', () => ({
   }
 }))
 
-export const filePickerRule = $inputRule(
-  (ctx) =>
-    new InputRule(regex, (state, match, start, end) => {
-      const [_full = '', href = '', title = ''] = match
-      const { tr } = state
-
-      if (href) {
-        tr.replaceWith(start - 1, end, filePickerNode.type(ctx).create({ href, title }))
-      }
-
-      return tr
-    })
-)
-
 export const filePickerNodeBlock = $nodeSchema('fileBlock', () => ({
   content: 'block+',
   group: 'block',
@@ -81,7 +67,44 @@ export const filePickerNodeBlock = $nodeSchema('fileBlock', () => ({
         name: 'fileBlock',
         attributes: { href, title }
       })
-      // state.addNode('paragraph', undefined, `::fileBlock{href="${href}" title="${title}"}`)
     }
   }
 }))
+
+export const filePickerRule = $inputRule(
+  (ctx) =>
+    new InputRule(regex, (state, match, start, end) => {
+      const [_full = '', href = '', title = ''] = match
+      const { tr } = state
+
+      if (href) {
+        tr.replaceWith(start - 1, end, filePickerNode.type(ctx).create({ href, title }))
+      }
+
+      return tr
+    })
+)
+
+export const filePickerTextRule = $inputRule(
+  (ctx) =>
+    new InputRule(shortRegex, (state, match, start, end) => {
+      const [_full = '', href = '', title = ''] = match
+      const { tr } = state
+
+      tr.replaceWith(start - 1, end, filePickerNode.type(ctx).create({ href, title }))
+
+      return tr
+    })
+)
+
+export const filePickerBlockTextRule = $inputRule(
+  (ctx) =>
+    new InputRule(shortBlockRegex, (state, match, start, end) => {
+      const [_full = '', href = '', title = ''] = match
+      const { tr } = state
+
+      tr.replaceWith(start - 1, end, filePickerNodeBlock.type(ctx).create({ href, title }))
+
+      return tr
+    })
+)
