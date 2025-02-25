@@ -6,29 +6,64 @@
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { Crepe } from '@milkdown/crepe'
 import { listener, listenerCtx } from '@milkdown/kit/plugin/listener'
-import { upload } from '@milkdown/kit/plugin/upload'
+import { upload, uploadConfig } from '@milkdown/kit/plugin/upload'
+import { imageInlineComponent, inlineImageConfig } from '@milkdown/kit/component/image-inline'
 import { imageBlockConfig } from '@milkdown/kit/component/image-block'
 import { editorViewOptionsCtx, editorViewCtx } from '@milkdown/kit/core'
 import { emoji } from '@milkdown/plugin-emoji'
+import { createUploader, onUpload } from '~/utils/uploader'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
+import { filePicker } from '~/utils/milkdown-plugins/file-picker'
+import { filePickerNodeBlock } from '~/utils/milkdown-plugins/file-picker/schema'
+import { html } from 'atomico'
+import { filePickerConfig } from '~/utils/milkdown-plugins/file-picker/component/config'
 
 const model = defineModel<string>({ required: true })
-const { disabled, isFocus } = defineProps<{ disabled: boolean; isFocus: boolean }>()
+const { disabled, isFocus, note, notebook } = defineProps<{
+  disabled: boolean
+  isFocus: boolean
+  note: string
+  notebook: string
+}>()
 
-const toBase64 = (file: Blob): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result as string)
-    reader.onerror = (error) => reject(error)
-  })
+const customUploader = createUploader(notebook, note)
 
 useEditor((root) => {
   const crepe = new Crepe({
     root,
-    defaultValue: model.value
+    defaultValue: model.value,
+    features: {
+      [Crepe.Feature.Latex]: true
+    },
+    featureConfigs: {
+      'block-edit': {
+        buildMenu: (builder) => {
+          const advanced = builder.getGroup('advanced')
+          advanced.addItem('file', {
+            label: 'Attachment',
+            icon: html`
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.324 8.436L9.495 12.19c-.364.36-.564.852-.556 1.369a2 2 0 0 0 .6 1.387c.375.371.88.584 1.403.593a1.92 1.92 0 0 0 1.386-.55l3.828-3.754a3.75 3.75 0 0 0 1.112-2.738a4 4 0 0 0-1.198-2.775a4.1 4.1 0 0 0-2.808-1.185a3.85 3.85 0 0 0-2.77 1.098L6.661 9.39a5.63 5.63 0 0 0-1.667 4.107a6 6 0 0 0 1.798 4.161a6.15 6.15 0 0 0 4.21 1.778a5.77 5.77 0 0 0 4.157-1.646l3.829-3.756" />
+              </svg>
+            `,
+            onRun: (ctx) => {
+              const view = ctx.get(editorViewCtx)
+              const { dispatch, state } = view
+              const command = clearContentAndAddBlockType(filePickerNodeBlock.type(ctx))
+              command(state, dispatch)
+            }
+          })
+        }
+      }
+    }
   })
 
   crepe.editor
@@ -46,7 +81,22 @@ useEditor((root) => {
 
       ctx.update(imageBlockConfig.key, (defaultConfig) => ({
         ...defaultConfig,
-        onUpload: async (file) => await toBase64(file)
+        onUpload: async (file: File) => onUpload(file, notebook, note)
+      }))
+
+      ctx.update(inlineImageConfig.key, (prev) => ({
+        ...prev,
+        onUpload: async (file: File) => onUpload(file, notebook, note)
+      }))
+
+      ctx.update(uploadConfig.key, (prev) => ({
+        ...prev,
+        uploader: customUploader
+      }))
+
+      ctx.update(filePickerConfig.key, (prev) => ({
+        ...prev,
+        onUpload: async (file: File) => onUpload(file, notebook, note)
       }))
 
       ctx.update(editorViewOptionsCtx, (prev) => ({
@@ -57,38 +107,83 @@ useEditor((root) => {
     .use(listener)
     .use(upload)
     .use(emoji)
+    .use(imageInlineComponent)
+    .use(filePicker)
   return crepe
 })
 </script>
 <style lang="postcss">
-.milkdown-editor div.milkdown > div {
-  @apply px-0 py-0 text-gray-900 dark:text-gray-200;
-}
-
-.milkdown-editor div.milkdown {
-  @apply px-0 py-1;
-}
-
 .milkdown-editor.focus div.milkdown milkdown-block-handle {
   display: none;
 }
 
-.milkdown {
-  --crepe-color-background: transparent;
+milkdown-toolbar,
+milkdown-link-preview {
+  z-index: 999 !important;
 }
 
-.milkdown-editor div.milkdown .ProseMirror {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 10px 0px;
+.milkdown-editor {
+  .milkdown {
+    @apply px-0 py-1;
+    --crepe-color-background: transparent;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 10px 0px;
+    }
+
+    .ProseMirror {
+      p {
+        @apply p-0 align-middle;
+      }
+    }
+
+    > div {
+      @apply px-0 py-0 text-gray-900 dark:text-gray-200;
+    }
+
+    .image-inline {
+      @apply inline-block;
+    }
+
+    img.emoji {
+      @apply mr-0.5 inline h-5;
+    }
+
+    milkdown-file-picker {
+      @apply inline align-middle;
+
+      a.attachment-button {
+        @apply inline-flex flex-row items-center gap-2 rounded-md bg-slate-600 px-2 py-0.5 text-sm text-white no-underline hover:bg-accent-hover;
+      }
+      .file-input {
+        @apply inline cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
+      }
+      .uploading-icon {
+        @apply inline size-5;
+      }
+      div.empty-file {
+        @apply inline-flex flex-row items-center gap-1;
+      }
+      div.file-icon {
+        @apply inline !size-5;
+      }
+    }
+    milkdown-file-picker[data-inline='false'] {
+      @apply block;
+      .file-input {
+        @apply my-2 file:py-1.5;
+      }
+      a.attachment-button {
+        @apply flex flex-col gap-1 bg-transparent font-bold text-gray-900 hover:underline dark:text-white;
+        div.file-icon {
+          @apply inline !size-10;
+        }
+      }
+    }
   }
-}
-
-.milkdown-editor .milkdown .ProseMirror p {
-  padding: 0px;
 }
 </style>

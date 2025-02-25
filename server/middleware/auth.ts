@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import SECRET_KEY from '~/server/key'
 
 export default defineEventHandler((event) => {
+  // return // bypass for dev
   if (!event.path.startsWith('/api/') || event.path === '/api/auth/login' || event.path === '/api/health') return
 
   const cookie = getCookie(event, 'token')
