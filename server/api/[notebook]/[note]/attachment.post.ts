@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { writeFile, mkdir, constants } from 'node:fs/promises'
 import path from 'node:path'
 import { access, existsSync } from 'node:fs'
-import { waitforme } from '~/server/utils'
+// import { waitforme } from '~/server/utils'
 
 export default defineEventHandlerWithNotebookAndNote(
   async (event, cleanNotebook, cleanNote, _fullPath, notebookPath): Promise<string> => {
@@ -17,7 +17,7 @@ export default defineEventHandlerWithNotebookAndNote(
         })
       }
 
-      await waitforme(5000)
+      // await waitforme(5000)
 
       // Find file in form data
       const fileEntry = formData.find((entry) => entry.name === 'file')

@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  mdast-util-gfm-autolink-literal: github:omarmir/mdast-util-gfm-autolink-literal
+
 importers:
 
   .:
@@ -3624,8 +3627,9 @@ packages:
   mdast-util-from-markdown@2.0.2:
     resolution: {integrity: sha512-uZhTV/8NBuw0WHkPTrCqDOl0zVe1BIng5ZtHoDk49ME1qqcjYmmLmOf0gELgcRMxN4w2iuIeVso5/6QymSrgmA==}
 
-  mdast-util-gfm-autolink-literal@2.0.1:
-    resolution: {integrity: sha512-5HVP2MKaP6L+G6YaxPNjuL0BPrq9orG3TsrZ9YXbA3vDw/ACI4MEsnoDpn6ZNm7GnZgtAcONJyPhOP8tNJQavQ==}
+  mdast-util-gfm-autolink-literal@https://codeload.github.com/omarmir/mdast-util-gfm-autolink-literal/tar.gz/da4c3a93b7c0dcc60bdcd7aa59153066b6dd4a3c:
+    resolution: {tarball: https://codeload.github.com/omarmir/mdast-util-gfm-autolink-literal/tar.gz/da4c3a93b7c0dcc60bdcd7aa59153066b6dd4a3c}
+    version: 2.0.1
 
   mdast-util-gfm-footnote@2.1.0:
     resolution: {integrity: sha512-sqpDWlsHn7Ac9GNZQMeUzPQSMzR6Wv0WKRNvQRg0KqHh02fpTz69Qc1QSseNX29bhz1ROIyNyxExfawVKTm1GQ==}
@@ -9989,7 +9993,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  mdast-util-gfm-autolink-literal@2.0.1:
+  mdast-util-gfm-autolink-literal@https://codeload.github.com/omarmir/mdast-util-gfm-autolink-literal/tar.gz/da4c3a93b7c0dcc60bdcd7aa59153066b6dd4a3c:
     dependencies:
       '@types/mdast': 4.0.4
       ccount: 2.0.1
@@ -10037,7 +10041,7 @@ snapshots:
   mdast-util-gfm@3.1.0:
     dependencies:
       mdast-util-from-markdown: 2.0.2
-      mdast-util-gfm-autolink-literal: 2.0.1
+      mdast-util-gfm-autolink-literal: https://codeload.github.com/omarmir/mdast-util-gfm-autolink-literal/tar.gz/da4c3a93b7c0dcc60bdcd7aa59153066b6dd4a3c
       mdast-util-gfm-footnote: 2.1.0
       mdast-util-gfm-strikethrough: 2.0.0
       mdast-util-gfm-table: 2.0.0
