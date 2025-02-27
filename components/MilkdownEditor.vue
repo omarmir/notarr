@@ -15,10 +15,8 @@ import { createUploader, onUpload } from '~/utils/uploader'
 import '@milkdown/crepe/theme/common/style.css'
 import '@milkdown/crepe/theme/nord.css'
 import '@milkdown/crepe/theme/nord-dark.css'
-import { filePicker } from '~/utils/milkdown-plugins/file-picker'
-import { filePickerNodeBlock } from '~/utils/milkdown-plugins/file-picker/schema'
+import { filePicker, filePickerNodeBlock, filePickerConfig, clearContentAndAddBlockType } from 'milkdown-plugin-file'
 import { html } from 'atomico'
-import { filePickerConfig } from '~/utils/milkdown-plugins/file-picker/component/config'
 
 const model = defineModel<string>({ required: true })
 const { disabled, isFocus, note, notebook } = defineProps<{
@@ -158,6 +156,9 @@ milkdown-link-preview {
 
       a.attachment-button {
         @apply inline-flex flex-row items-center gap-2 rounded-md bg-slate-600 px-2 py-0.5 text-sm text-white no-underline hover:bg-accent-hover;
+        div.file-icon {
+          @apply inline-flex size-5;
+        }
       }
       .file-input {
         @apply inline cursor-pointer items-center rounded-md border border-gray-300 bg-gray-50 text-sm text-gray-900 file:cursor-pointer file:rounded-l-md file:border-none file:bg-accent file:py-0.5 file:text-white file:hover:bg-accent-hover focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400;
@@ -168,9 +169,6 @@ milkdown-link-preview {
       div.empty-file {
         @apply inline-flex flex-row items-center gap-1;
       }
-      div.file-icon {
-        @apply inline !size-5;
-      }
     }
     milkdown-file-picker[data-inline='false'] {
       @apply block;
@@ -180,7 +178,7 @@ milkdown-link-preview {
       a.attachment-button {
         @apply flex flex-col gap-1 bg-transparent font-bold text-gray-900 hover:underline dark:text-white;
         div.file-icon {
-          @apply inline !size-10;
+          @apply size-10;
         }
       }
     }
